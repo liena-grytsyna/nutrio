@@ -11,7 +11,7 @@ const MONTH_YEAR_FORMATTER = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
 });
 
-const LONG_DATE_FORMATTER = new Intl.DateTimeFormat('ru-RU', {
+const LONG_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
   weekday: 'long',
   day: 'numeric',
   month: 'long',

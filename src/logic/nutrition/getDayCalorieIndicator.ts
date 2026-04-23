@@ -1,8 +1,10 @@
 import { startOfDay } from '../date/calendar';
 import type { DayCalorieIndicator, DayEntry } from '../../types/nutrition';
-
-const IDEAL_MIN_PROGRESS = 0.95;
-const IDEAL_MAX_PROGRESS = 1.05;
+import {
+  getCalorieBalanceStatus,
+  getCalorieProgressRatio,
+  getClampedProgress,
+} from './calorieBalance';
 
 export function getDateKey(date: Date) {
   const normalized = startOfDay(date);
@@ -17,37 +19,21 @@ export function getDayCalorieIndicator(
   calories: number,
   targetCalories: number,
 ): DayCalorieIndicator {
-  if (targetCalories <= 0) {
-    return {
-      calories,
-      progress: 0,
-      status: 'under',
-    };
-  }
+  const rawProgress = getCalorieProgressRatio(calories, targetCalories);
+  const status = getCalorieBalanceStatus(rawProgress);
 
-  const rawProgress = calories / targetCalories;
-  const clampedProgress = Math.min(Math.max(rawProgress, 0), 1);
-
-  if (rawProgress > IDEAL_MAX_PROGRESS) {
+  if (status !== 'under') {
     return {
       calories,
       progress: 1,
-      status: 'over',
-    };
-  }
-
-  if (rawProgress >= IDEAL_MIN_PROGRESS) {
-    return {
-      calories,
-      progress: 1,
-      status: 'ideal',
+      status,
     };
   }
 
   return {
     calories,
-    progress: clampedProgress,
-    status: 'under',
+    progress: getClampedProgress(rawProgress),
+    status,
   };
 }
 

@@ -2,24 +2,31 @@
 @use '../../styles/tokens' as *;
 
 .nutrition-summary-card {
-  padding: 18px 16px 14px;
-  border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid rgba(31, 41, 55, 0.06);
-  box-shadow:
-    0 14px 34px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --nutrition-calorie-color: #f3b649;
+  position: relative;
+  padding: 8px 0 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+
+  &--ideal {
+    --nutrition-calorie-color: #53c57a;
+  }
+
+  &--over {
+    --nutrition-calorie-color: #e8695f;
+  }
 
   &__header {
     display: grid;
-    grid-template-columns: 88px 1fr auto;
-    align-items: center;
-    gap: 12px;
+    justify-items: center;
+    gap: 14px;
   }
 
   &__chart {
-    width: 88px;
-    height: 88px;
+    position: relative;
+    width: 204px;
+    height: 204px;
   }
 
   &__ring {
@@ -27,38 +34,70 @@
     height: 100%;
   }
 
+  &__center {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    line-height: 1;
+    padding-top: 8px;
+  }
+
   &__main {
     min-width: 0;
+    text-align: center;
   }
 
   &__title {
-    margin: 0 0 4px;
-    color: #67c85f;
-    font-size: 0.82rem;
+    margin: 0 0 6px;
+    color: var(--nutrition-calorie-color);
+    font-size: 0.92rem;
     font-weight: 700;
   }
 
   &__value {
     margin: 0;
     color: #22242a;
-    font-size: 1.85rem;
+    font-size: 2.5rem;
     line-height: 1;
     font-weight: 700;
     letter-spacing: -0.04em;
   }
 
-  &__left {
-    margin: 4px 0 0;
+  &__unit {
+    margin: 6px 0 0;
     color: #8c93a3;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__percent {
+    margin: 8px 0 0;
+    color: var(--nutrition-calorie-color);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  &__left {
+    margin: 0;
+    color: #8c93a3;
+    font-size: 0.88rem;
     font-weight: 500;
   }
 
   &__info {
     @include reset-button;
+    position: absolute;
+    top: 8px;
+    right: 0;
     width: 20px;
     height: 20px;
-    align-self: start;
     border: 1px solid rgba(140, 147, 163, 0.28);
     border-radius: 50%;
     background: #fafbff;
@@ -67,54 +106,104 @@
     line-height: 1;
   }
 
-  &__macros {
-    margin-top: 14px;
-    padding-top: 14px;
+  &__panel {
+    width: 100%;
+    margin-top: 18px;
+    border-radius: 28px;
+    background: #ffffff;
+    border: 1px solid rgba(31, 41, 55, 0.06);
+    box-shadow:
+      0 14px 34px rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+  }
+
+  &__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 22px 18px;
+    border-bottom: 1px solid rgba(140, 147, 163, 0.14);
+  }
+
+  &__panel-title {
+    margin: 0;
+    color: #262933;
+    font-size: 1.08rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  &__panel-chevron {
+    color: #7fc15e;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  &__panel-grid {
+    padding: 18px 16px 20px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    border-top: 1px solid rgba(140, 147, 163, 0.14);
+    gap: 20px 10px;
   }
 
-  &__macro {
+  &__panel-item {
     min-width: 0;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    text-align: center;
   }
 
-  &__macro-label,
-  &__macro-value,
-  &__macro-left {
+  &__panel-item-label,
+  &__panel-item-value,
+  &__panel-item-target {
     margin: 0;
   }
 
-  &__macro-label {
-    font-size: 0.82rem;
-    font-weight: 700;
-
-    &--protein {
-      color: #bf6be5;
-    }
-
-    &--fat {
-      color: #f4b248;
-    }
-
-    &--carbs {
-      color: #4dc4ee;
-    }
-  }
-
-  &__macro-value {
-    margin-top: 3px;
+  &__panel-item-label {
     color: #262933;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    letter-spacing: -0.03em;
   }
 
-  &__macro-left {
-    margin-top: 2px;
-    color: #959cab;
+  &__panel-item-value {
+    margin-top: 6px;
+    color: #262933;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  &__mini-ring {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+  }
+
+  &__mini-ring-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__mini-ring-label {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #7f8799;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  &__panel-item-target {
+    margin-top: 8px;
+    color: #969dac;
     font-size: 0.78rem;
     font-weight: 500;
+    line-height: 1.25;
   }
 }

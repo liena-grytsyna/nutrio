@@ -17,12 +17,7 @@ body {
   line-height: 1.5;
   font-weight: 400;
   color: $color-text;
-  background: radial-gradient(
-    circle at top,
-    $color-shell-start 0%,
-    $color-shell-mid 40%,
-    $color-shell-end 100%
-  );
+  background: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

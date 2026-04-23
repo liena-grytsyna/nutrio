@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import { TopCalendar } from '../components';
+import { TopCalendar } from '../components/TopCalendar';
 import { dailyTargets } from '../data/dailyTargets';
 import { mockEntries, mockProducts } from '../data/mockProducts';
 import { isSameDay, startOfDay } from '../logic/date/calendar';
 import { calculateDayTotals } from '../logic/nutrition/calculateDayTotals';
 import { buildDailyCalorieIndicators } from '../logic/nutrition/getDayCalorieIndicator';
-import { AddProductScreen, ProductListScreen, TodayScreen } from '../screens';
+import { AddProductScreen } from '../screens/AddProductScreen';
+import { ProductListScreen } from '../screens/ProductListScreen';
+import { TodayScreen } from '../screens/TodayScreen';
 import type { AppScreen } from '../types/navigation';
 import './App.scss';
 
 const tabs: Array<{ id: AppScreen; label: string }> = [
-  { id: 'today', label: 'Сегодня' },
-  { id: 'add', label: 'Добавить' },
-  { id: 'products', label: 'Продукты' },
+  { id: 'today', label: 'Today' },
+  { id: 'add', label: 'Add' },
+  { id: 'products', label: 'Products' },
 ];
 
 export default function App() {
@@ -43,7 +45,7 @@ export default function App() {
             <TodayScreen
               totals={totals}
               selectedDate={selectedDate}
-              entryCount={selectedEntries.length}
+              entries={selectedEntries}
             />
           )}
           {activeScreen === 'add' && <AddProductScreen />}
@@ -52,7 +54,7 @@ export default function App() {
           )}
         </main>
 
-        <nav className="app-shell__tabbar" aria-label="Навигация">
+        <nav className="app-shell__tabbar" aria-label="Navigation">
           {tabs.map((tab) => (
             <button
               key={tab.id}

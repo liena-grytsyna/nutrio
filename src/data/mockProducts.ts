@@ -10,8 +10,8 @@ function createDayTimestamp(dayOffset: number, hours: number, minutes = 0) {
 export const mockProducts: Product[] = [
   {
     id: '1',
-    name: 'Греческий йогурт',
-    servingSize: '100 г',
+    name: 'Greek Yogurt',
+    servingSize: '100 g',
     calories: 73,
     protein: 10,
     fat: 2,
@@ -19,8 +19,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: '2',
-    name: 'Банан',
-    servingSize: '100 г',
+    name: 'Banana',
+    servingSize: '100 g',
     calories: 89,
     protein: 1.1,
     fat: 0.3,
@@ -31,7 +31,7 @@ export const mockProducts: Product[] = [
 export const mockEntries: DayEntry[] = [
   {
     id: '101',
-    name: 'Овсянка с бананом',
+    name: 'Oatmeal with Banana',
     amount: 320,
     calories: 312,
     protein: 24,
@@ -42,7 +42,7 @@ export const mockEntries: DayEntry[] = [
   },
   {
     id: '102',
-    name: 'Куриный салат',
+    name: 'Chicken Salad',
     amount: 280,
     calories: 418,
     protein: 38,
@@ -53,7 +53,7 @@ export const mockEntries: DayEntry[] = [
   },
   {
     id: '103',
-    name: 'Протеиновый батончик',
+    name: 'Protein Bar',
     amount: 75,
     calories: 298,
     protein: 15,
@@ -64,7 +64,7 @@ export const mockEntries: DayEntry[] = [
   },
   {
     id: '104',
-    name: 'Омлет с тостом',
+    name: 'Omelet with Toast',
     amount: 240,
     calories: 356,
     protein: 21,
@@ -75,7 +75,7 @@ export const mockEntries: DayEntry[] = [
   },
   {
     id: '105',
-    name: 'Творог с ягодами',
+    name: 'Cottage Cheese with Berries',
     amount: 180,
     calories: 214,
     protein: 19,

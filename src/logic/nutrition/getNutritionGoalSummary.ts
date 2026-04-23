@@ -1,18 +1,13 @@
 import type { NutritionValues } from '../../types/nutrition';
-
-type NutritionGoalSummary = {
-  consumed: NutritionValues;
-  target: NutritionValues;
-  remaining: NutritionValues;
-  progress: NutritionValues;
-};
+import {
+  getCalorieBalanceStatus,
+  getCalorieProgressRatio,
+  getClampedProgress,
+} from './calorieBalance';
+import type { NutritionGoalSummary } from './nutritionSummary.types';
 
 function getProgress(value: number, target: number) {
-  if (target <= 0) {
-    return 0;
-  }
-
-  return Math.min(value / target, 1);
+  return getClampedProgress(getCalorieProgressRatio(value, target));
 }
 
 function getRemaining(value: number, target: number) {
@@ -23,6 +18,11 @@ export function getNutritionGoalSummary(
   consumed: NutritionValues,
   target: NutritionValues,
 ): NutritionGoalSummary {
+  const calorieProgressRatio = getCalorieProgressRatio(
+    consumed.calories,
+    target.calories,
+  );
+
   return {
     consumed,
     target,
@@ -38,5 +38,7 @@ export function getNutritionGoalSummary(
       fat: getProgress(consumed.fat, target.fat),
       carbs: getProgress(consumed.carbs, target.carbs),
     },
+    calorieStatus: getCalorieBalanceStatus(calorieProgressRatio),
+    calorieProgressRatio,
   };
 }

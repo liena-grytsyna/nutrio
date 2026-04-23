@@ -9,9 +9,10 @@ export function ProductListScreen({ products }: ProductListScreenProps) {
   return (
     <section className="screen product-list-screen">
       <div className="product-list-screen__intro">
-        <h2 className="product-list-screen__title">Список продуктов</h2>
+        <h2 className="product-list-screen__title">Product List</h2>
         <p className="product-list-screen__hint">
-          Пока тут мок-данные. Дальше подключим сохранение в `localStorage`.
+          This screen uses mock data for now. LocalStorage persistence comes
+          next.
         </p>
       </div>
 
@@ -22,7 +23,7 @@ export function ProductListScreen({ products }: ProductListScreenProps) {
               {product.name}
             </strong>
             <p className="product-list-screen__item-meta">
-              {product.calories} ккал • Б {product.protein} • Ж {product.fat} • У{' '}
+              {product.calories} kcal • P {product.protein} • F {product.fat} • C{' '}
               {product.carbs}
             </p>
             <p className="product-list-screen__item-serving">
