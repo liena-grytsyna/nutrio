@@ -1,5 +1,12 @@
 import type { DayEntry, Product } from '../types/nutrition';
 
+function createDayTimestamp(dayOffset: number, hours: number, minutes = 0) {
+  const date = new Date();
+  date.setDate(date.getDate() + dayOffset);
+  date.setHours(hours, minutes, 0, 0);
+  return date.toISOString();
+}
+
 export const mockProducts: Product[] = [
   {
     id: '1',
@@ -24,24 +31,57 @@ export const mockProducts: Product[] = [
 export const mockEntries: DayEntry[] = [
   {
     id: '101',
-    name: 'Греческий йогурт',
-    amount: 150,
-    calories: 109.5,
-    protein: 15,
-    fat: 3,
-    carbs: 5.25,
+    name: 'Овсянка с бананом',
+    amount: 320,
+    calories: 312,
+    protein: 24,
+    fat: 8,
+    carbs: 42,
     source: 'search',
-    eatenAt: new Date().toISOString(),
+    eatenAt: createDayTimestamp(0, 8, 30),
   },
   {
     id: '102',
-    name: 'Банан',
-    amount: 120,
-    calories: 106.8,
-    protein: 1.32,
-    fat: 0.36,
-    carbs: 27.36,
+    name: 'Куриный салат',
+    amount: 280,
+    calories: 418,
+    protein: 38,
+    fat: 17,
+    carbs: 18,
     source: 'manual',
-    eatenAt: new Date().toISOString(),
+    eatenAt: createDayTimestamp(0, 13, 0),
+  },
+  {
+    id: '103',
+    name: 'Протеиновый батончик',
+    amount: 75,
+    calories: 298,
+    protein: 15,
+    fat: 10,
+    carbs: 46,
+    source: 'ocr',
+    eatenAt: createDayTimestamp(0, 17, 45),
+  },
+  {
+    id: '104',
+    name: 'Омлет с тостом',
+    amount: 240,
+    calories: 356,
+    protein: 21,
+    fat: 19,
+    carbs: 22,
+    source: 'manual',
+    eatenAt: createDayTimestamp(-1, 9, 15),
+  },
+  {
+    id: '105',
+    name: 'Творог с ягодами',
+    amount: 180,
+    calories: 214,
+    protein: 19,
+    fat: 6,
+    carbs: 14,
+    source: 'search',
+    eatenAt: createDayTimestamp(-2, 7, 50),
   },
 ];

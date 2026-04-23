@@ -1,0 +1,120 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/tokens' as *;
+
+.nutrition-summary-card {
+  padding: 18px 16px 14px;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(31, 41, 55, 0.06);
+  box-shadow:
+    0 14px 34px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  &__header {
+    display: grid;
+    grid-template-columns: 88px 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__chart {
+    width: 88px;
+    height: 88px;
+  }
+
+  &__ring {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0 0 4px;
+    color: #67c85f;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  &__value {
+    margin: 0;
+    color: #22242a;
+    font-size: 1.85rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  &__left {
+    margin: 4px 0 0;
+    color: #8c93a3;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  &__info {
+    @include reset-button;
+    width: 20px;
+    height: 20px;
+    align-self: start;
+    border: 1px solid rgba(140, 147, 163, 0.28);
+    border-radius: 50%;
+    background: #fafbff;
+    color: #a0a7b5;
+    font-size: 0.72rem;
+    line-height: 1;
+  }
+
+  &__macros {
+    margin-top: 14px;
+    padding-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    border-top: 1px solid rgba(140, 147, 163, 0.14);
+  }
+
+  &__macro {
+    min-width: 0;
+  }
+
+  &__macro-label,
+  &__macro-value,
+  &__macro-left {
+    margin: 0;
+  }
+
+  &__macro-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    &--protein {
+      color: #bf6be5;
+    }
+
+    &--fat {
+      color: #f4b248;
+    }
+
+    &--carbs {
+      color: #4dc4ee;
+    }
+  }
+
+  &__macro-value {
+    margin-top: 3px;
+    color: #262933;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  &__macro-left {
+    margin-top: 2px;
+    color: #959cab;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+}
