@@ -12,14 +12,26 @@ type ErrorResponse = {
   error?: string;
 };
 
+function getDefaultErrorMessage(status: number) {
+  if (status >= 500) {
+    return 'Server is temporarily unavailable. Please try again later.';
+  }
+
+  if (status === 404) {
+    return 'Requested resource was not found.';
+  }
+
+  return `Request failed with status ${status}.`;
+}
+
 async function readJsonResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const contentType = response.headers.get('content-type') ?? '';
     const message = contentType.includes('application/json')
       ? ((await response.json()) as ErrorResponse).error
-      : await response.text();
+      : null;
 
-    throw new Error(message || `Request failed with status ${response.status}`);
+    throw new Error(message || getDefaultErrorMessage(response.status));
   }
 
   return response.json() as Promise<T>;
