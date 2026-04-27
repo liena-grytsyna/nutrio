@@ -1,107 +1,72 @@
 import express from 'express';
-import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 
-const connectionString = process.env.DATABASE_URL;
-
-if (!connectionString) {
-  throw new Error('DATABASE_URL is required to start the API.');
-}
-
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
 const app = express();
-const port = Number(process.env.PORT ?? 3000);
+const prisma = new PrismaClient();
+const port = Number(process.env.PORT || 3000);
 
 app.use(express.json({ limit: '1mb' }));
 
-function normalizeText(value) {
-  return typeof value === 'string' ? value.trim() : '';
-}
+const text = (value) => (typeof value === 'string' ? value.trim() : '');
+const optionalText = (value) => text(value) || null;
 
-function normalizeOptionalText(value) {
-  const text = normalizeText(value);
-  return text.length > 0 ? text : null;
-}
+const number = (value) => {
+  const n = Number(value);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+};
 
-function normalizeNumber(value) {
-  const number = Number(value);
-  return Number.isFinite(number) && number >= 0 ? number : null;
-}
-
-function toProductResponse(product) {
-  return {
-    id: product.id,
-    name: product.name,
-    brand: product.brand,
-    barcode: product.barcode,
-    servingSize: product.servingSize,
-    calories: product.calories,
-    protein: product.protein,
-    fat: product.fat,
-    carbs: product.carbs,
-    createdAt: product.createdAt,
-    updatedAt: product.updatedAt,
-  };
-}
-
-app.get('/api/health', async (_request, response) => {
+app.get('/api/health', async (_req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
-    response.json({ status: 'ok' });
+    res.json({ status: 'ok' });
   } catch {
-    response.status(503).json({ status: 'error' });
+    res.status(503).json({ status: 'error' });
   }
 });
 
-app.get('/api/products', async (request, response, next) => {
+app.get('/api/products', async (req, res, next) => {
   try {
-    const search = normalizeText(request.query.search);
+    const search = text(req.query.search);
+
     const products = await prisma.product.findMany({
-      where:
-        search.length > 0
-          ? {
-              name: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            }
-          : undefined,
-      orderBy: {
-        name: 'asc',
-      },
+      where: search
+        ? {
+            name: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          }
+        : undefined,
+      orderBy: { name: 'asc' },
       take: 100,
     });
 
-    response.json({ products: products.map(toProductResponse) });
+    res.json({ products });
   } catch (error) {
     next(error);
   }
 });
 
-app.post('/api/products', async (request, response, next) => {
+app.post('/api/products', async (req, res, next) => {
   try {
-    const body = request.body ?? {};
-    const name = normalizeText(body.name);
-    const servingSize = normalizeText(body.servingSize) || '100 g';
-    const calories = normalizeNumber(body.calories);
-    const protein = normalizeNumber(body.protein);
-    const fat = normalizeNumber(body.fat);
-    const carbs = normalizeNumber(body.carbs);
+    const name = text(req.body.name);
+    const calories = number(req.body.calories);
+    const protein = number(req.body.protein);
+    const fat = number(req.body.fat);
+    const carbs = number(req.body.carbs);
 
     if (!name || calories === null || protein === null || fat === null || carbs === null) {
-      response.status(400).json({
-        error: 'Product name and non-negative nutrition values are required.',
+      return res.status(400).json({
+        error: 'Name and non-negative nutrition values are required.',
       });
-      return;
     }
 
     const product = await prisma.product.create({
       data: {
         name,
-        brand: normalizeOptionalText(body.brand),
-        barcode: normalizeOptionalText(body.barcode),
-        servingSize,
+        brand: optionalText(req.body.brand),
+        barcode: optionalText(req.body.barcode),
+        servingSize: text(req.body.servingSize) || '100 g',
         calories,
         protein,
         fat,
@@ -109,24 +74,21 @@ app.post('/api/products', async (request, response, next) => {
       },
     });
 
-    response.status(201).json({ product: toProductResponse(product) });
+    res.status(201).json({ product });
   } catch (error) {
     next(error);
   }
 });
 
-app.use((error, _request, response, _next) => {
+app.use((error, _req, res, _next) => {
   if (error?.code === 'P2002') {
-    const target = Array.isArray(error.meta?.target)
-      ? error.meta.target.join(', ')
-      : 'unique value';
-
-    response.status(409).json({ error: `Product with this ${target} already exists.` });
-    return;
+    return res.status(409).json({
+      error: 'Product with this unique value already exists.',
+    });
   }
 
   console.error(error);
-  response.status(500).json({ error: 'Internal server error.' });
+  res.status(500).json({ error: 'Internal server error.' });
 });
 
 process.on('SIGINT', async () => {
@@ -139,6 +101,6 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, () => {
   console.log(`Nutrio API listening on port ${port}`);
 });

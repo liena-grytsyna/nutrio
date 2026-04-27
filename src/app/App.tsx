@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TopCalendar } from '../components/TopCalendar';
 import { BottomNavigation } from '../components/BottomNavigation';
 import {
@@ -20,7 +20,7 @@ import { isSameDay, startOfDay } from '../shared/utils/date';
 import type { AppScreen } from '../types/navigation';
 import './App.scss';
 
-const tabs: Array<{ id: AppScreen; label: string }> = [
+const tabs: { id: AppScreen; label: string }[] = [
   { id: 'today', label: 'Today' },
   { id: 'add', label: 'Add' },
   { id: 'products', label: 'Products' },
@@ -40,17 +40,14 @@ export default function App() {
   useEffect(() => {
     const controller = new AbortController();
 
-    setProductsLoading(true);
     setProductsError(null);
 
     fetchProducts(controller.signal)
       .then(setProducts)
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === 'AbortError') {
-          return;
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setProductsError('Products could not be loaded.');
         }
-
-        setProductsError('Products could not be loaded.');
       })
       .finally(() => {
         if (!controller.signal.aborted) {
@@ -61,16 +58,18 @@ export default function App() {
     return () => controller.abort();
   }, []);
 
-  const handleCreateProduct = useCallback(async (input: CreateProductInput) => {
+  async function handleCreateProduct(input: CreateProductInput) {
     const product = await createProduct(input);
+
     setProducts((currentProducts) =>
-      [...currentProducts, product].sort((firstProduct, secondProduct) =>
-        firstProduct.name.localeCompare(secondProduct.name),
+      [...currentProducts, product].sort((first, second) =>
+        first.name.localeCompare(second.name),
       ),
     );
     setProductsError(null);
+
     return product;
-  }, []);
+  }
 
   const selectedEntries = mockEntries.filter((entry) =>
     isSameDay(new Date(entry.eatenAt), selectedDate),
