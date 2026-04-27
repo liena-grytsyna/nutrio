@@ -36,7 +36,7 @@ export const NUTRITION_SUMMARY_COLORS = {
   outerTrack: 'rgba(132, 141, 170, 0.12)',
   miniTrack: 'rgba(132, 141, 170, 0.14)',
   protein: '#bf6be5',
-  fat: '#f4b248',
+  fat: '#5f8dff',
   carbs: '#4dc4ee',
   fiber: '#7cc58f',
   salt: '#96a0b4',
@@ -48,8 +48,8 @@ export const CALORIE_RING_STYLES: Record<
   { fill: string; track: string }
 > = {
   under: {
-    fill: '#f3b649',
-    track: 'rgba(243, 182, 73, 0.14)',
+    fill: '#5f8dff',
+    track: 'rgba(95, 141, 255, 0.14)',
   },
   ideal: {
     fill: '#53c57a',

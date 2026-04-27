@@ -9,6 +9,8 @@ export function ProductSearch({
   resultCount,
   onChange,
 }: ProductSearchProps) {
+  const resultLabel = resultCount === 1 ? '1 product' : `${resultCount} products`;
+
   return (
     <label className="product-list-screen__search">
       <span className="product-list-screen__search-label">Search products</span>
@@ -16,11 +18,11 @@ export function ProductSearch({
         className="product-list-screen__search-input"
         type="search"
         value={value}
-        placeholder="Greek yogurt, banana..."
+        placeholder="Name, brand or barcode..."
         onChange={(event) => onChange(event.target.value)}
       />
       <span className="product-list-screen__search-count">
-        {resultCount} found
+        {resultLabel}
       </span>
     </label>
   );

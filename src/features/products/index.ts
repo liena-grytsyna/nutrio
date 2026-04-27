@@ -1,5 +1,9 @@
 export { createProduct, fetchProducts } from './api/productsApi';
-export { getStoredProducts, saveProducts } from './lib/productStorage';
+export {
+  getProductNutritionForAmount,
+  searchProducts,
+  sortProductsByName,
+} from './lib/productCatalog';
 export { ProductCard } from './ui/ProductCard';
 export { ProductSearch } from './ui/ProductSearch';
 export { extractNutritionFromText } from './ocr/extractNutrition';

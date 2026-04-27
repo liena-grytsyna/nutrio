@@ -1,4 +1,3 @@
-import type { ButtonHTMLAttributes } from 'react';
 import type { DayEntry, MealSectionId } from '../../../features/nutrition';
 import {
   TIME_FORMATTER,
@@ -6,9 +5,7 @@ import {
 } from '../constants';
 import {
   ChevronIcon,
-  InfoIcon,
   MealSectionIcon,
-  MoreIcon,
   PlusIcon,
 } from './TodayIcons';
 
@@ -19,8 +16,6 @@ type TodayMealCardProps = {
   onAdd: (sectionId: MealSectionId) => void;
   onToggle: (sectionId: MealSectionId) => void;
 };
-
-type MealActionButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 function getMealCardClassName(hasEntries: boolean, isCollapsed: boolean) {
   if (!hasEntries) {
@@ -40,23 +35,6 @@ function getToggleButtonClassName(isCollapsed: boolean) {
     : 'today-screen__meal-action today-screen__meal-action--toggle';
 }
 
-function MealActionButton({
-  children,
-  className,
-  type = 'button',
-  ...props
-}: MealActionButtonProps) {
-  const buttonClassName = ['today-screen__meal-action', className]
-    .filter(Boolean)
-    .join(' ');
-
-  return (
-    <button className={buttonClassName} type={type} {...props}>
-      {children}
-    </button>
-  );
-}
-
 function MealEntryRow({ entry }: { entry: DayEntry }) {
   return (
     <div className="today-screen__meal-item">
@@ -72,14 +50,6 @@ function MealEntryRow({ entry }: { entry: DayEntry }) {
           <span>{TIME_FORMATTER.format(new Date(entry.eatenAt))}</span>
         </p>
       </div>
-
-      <button
-        type="button"
-        className="today-screen__meal-item-action"
-        aria-label={`More details for ${entry.name}`}
-      >
-        <InfoIcon />
-      </button>
     </div>
   );
 }
@@ -131,20 +101,14 @@ export function TodayMealCard({
             </button>
           )}
 
-          <MealActionButton
-            className="today-screen__meal-action--more"
-            aria-label={`${section.title} options`}
-          >
-            <MoreIcon />
-          </MealActionButton>
-
-          <MealActionButton
-            className="today-screen__meal-action--add"
+          <button
+            type="button"
+            className="today-screen__meal-action today-screen__meal-action--add"
             aria-label={`Add item to ${section.title}`}
             onClick={() => onAdd(section.id)}
           >
             <PlusIcon />
-          </MealActionButton>
+          </button>
         </div>
       </div>
 

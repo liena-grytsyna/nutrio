@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import {
   ProductCard,
   ProductSearch,
+  searchProducts,
   type Product,
 } from '../../features/products';
 import './ProductsPage.scss';
@@ -18,46 +19,42 @@ export function ProductsPage({
   products,
 }: ProductsPageProps) {
   const [query, setQuery] = useState('');
-  const normalizedQuery = query.trim().toLowerCase();
-  const visibleProducts = useMemo(() => {
-    if (!normalizedQuery) {
-      return products;
-    }
-
-    return products.filter((product) =>
-      product.name.toLowerCase().includes(normalizedQuery),
-    );
-  }, [normalizedQuery, products]);
+  const hasProducts = products.length > 0;
+  const visibleProducts = useMemo(() => searchProducts(products, query), [products, query]);
 
   return (
     <section className="screen product-list-screen">
       <div className="product-list-screen__intro">
-        <h2 className="product-list-screen__title">Product List</h2>
+        <h2 className="product-list-screen__title">Products</h2>
         <p className="product-list-screen__hint">
-          Products are loaded from PostgreSQL through the API.
+          Your saved product catalog from the API.
         </p>
       </div>
 
       {error && <p className="product-list-screen__status">{error}</p>}
 
-      <ProductSearch
-        value={query}
-        resultCount={visibleProducts.length}
-        onChange={setQuery}
-      />
+      {hasProducts && (
+        <ProductSearch
+          value={query}
+          resultCount={visibleProducts.length}
+          onChange={setQuery}
+        />
+      )}
 
       {isLoading ? (
         <p className="product-list-screen__status">Loading products...</p>
-      ) : (
+      ) : visibleProducts.length > 0 ? (
         <ul className="product-list-screen__list">
           {visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </ul>
-      )}
+      ) : null}
 
       {!isLoading && visibleProducts.length === 0 && (
-        <p className="product-list-screen__empty">No products found.</p>
+        <p className="product-list-screen__empty">
+          {query ? 'No products match this search.' : 'No saved products yet.'}
+        </p>
       )}
     </section>
   );

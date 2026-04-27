@@ -14,7 +14,7 @@
   border-radius: $radius;
   background: $background;
   border: 1px solid $color-border;
-  box-shadow: 0 8px 20px rgba(72, 52, 22, 0.06);
+  box-shadow: 0 10px 24px rgba(30, 45, 75, 0.06);
 }
 
 @mixin section-stack($gap: 16px) {

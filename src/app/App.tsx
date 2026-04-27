@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { TopCalendar } from '../widgets/TopCalendar';
 import { BottomNavigation } from '../widgets/BottomNavigation';
 import {
   createProduct,
   fetchProducts,
+  getProductNutritionForAmount,
+  sortProductsByName,
   type CreateProductInput,
   type Product,
 } from '../features/products';
@@ -14,14 +16,13 @@ import {
   getMealSectionId,
   getStoredDayEntries,
   saveDayEntries,
-  type DayCalorieIndicator,
   type DayEntry,
   type MealSectionId,
 } from '../features/nutrition';
 import { AddProductPage } from '../pages/add-product/AddProductPage';
 import { ProductsPage } from '../pages/products/ProductsPage';
 import { TodayPage } from '../pages/today/TodayPage';
-import { startOfDay } from '../shared/lib/date';
+import { isSameDay, startOfDay } from '../shared/lib/date';
 import type { AppScreen } from '../features/navigation/types';
 import './App.scss';
 
@@ -40,16 +41,16 @@ const MEAL_SECTION_HOURS: Record<MealSectionId, number> = {
   thirdSnack: 22,
 };
 
-function roundNutritionValue(value: number) {
-  return Math.round(value * 10) / 10;
-}
-
 function createEntryId() {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
     return crypto.randomUUID();
   }
 
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function getErrorMessage(error: unknown, fallbackMessage: string) {
+  return error instanceof Error ? error.message : fallbackMessage;
 }
 
 export default function App() {
@@ -66,10 +67,12 @@ export default function App() {
     setProductsError(null);
 
     fetchProducts(controller.signal)
-      .then(setProducts)
-      .catch(() => {
+      .then((nextProducts) => setProducts(sortProductsByName(nextProducts)))
+      .catch((error) => {
         if (!controller.signal.aborted) {
-          setProductsError('Products could not be loaded.');
+          setProductsError(
+            getErrorMessage(error, 'Products could not be loaded.'),
+          );
         }
       })
       .finally(() => {
@@ -85,9 +88,7 @@ export default function App() {
     const product = await createProduct(input);
 
     setProducts((currentProducts) =>
-      [...currentProducts, product].sort((first, second) =>
-        first.name.localeCompare(second.name),
-      ),
+      sortProductsByName([...currentProducts, product]),
     );
     setProductsError(null);
 
@@ -112,10 +113,7 @@ export default function App() {
     const sameSectionCount = entries.filter((entry) => {
       const eatenAt = new Date(entry.eatenAt);
 
-      return (
-        startOfDay(eatenAt).getTime() === selectedDate.getTime() &&
-        getMealSectionId(eatenAt) === sectionId
-      );
+      return isSameDay(eatenAt, selectedDate) && getMealSectionId(eatenAt) === sectionId;
     }).length;
 
     const eatenAt = new Date(selectedDate);
@@ -126,7 +124,7 @@ export default function App() {
       0,
     );
 
-    const amountRatio = amount / 100;
+    const nutrition = getProductNutritionForAmount(product, amount);
 
     setEntries((currentEntries) => [
       ...currentEntries,
@@ -134,22 +132,25 @@ export default function App() {
         id: createEntryId(),
         name: product.name,
         amount,
-        calories: roundNutritionValue(product.calories * amountRatio),
-        protein: roundNutritionValue(product.protein * amountRatio),
-        fat: roundNutritionValue(product.fat * amountRatio),
-        carbs: roundNutritionValue(product.carbs * amountRatio),
+        ...nutrition,
         source: 'search',
         eatenAt: eatenAt.toISOString(),
       },
     ]);
   }
 
-  const dailyCalorieIndicators: Record<string, DayCalorieIndicator> =
-    buildDailyCalorieIndicators(entries, dailyTargets.calories);
-  const entriesForSelectedDate = entries.filter(
-    (entry) => startOfDay(new Date(entry.eatenAt)).getTime() === selectedDate.getTime(),
+  const dailyCalorieIndicators = useMemo(
+    () => buildDailyCalorieIndicators(entries, dailyTargets.calories),
+    [entries],
   );
-  const totals = calculateDayTotals(entriesForSelectedDate);
+  const entriesForSelectedDate = useMemo(
+    () => entries.filter((entry) => isSameDay(new Date(entry.eatenAt), selectedDate)),
+    [entries, selectedDate],
+  );
+  const totals = useMemo(
+    () => calculateDayTotals(entriesForSelectedDate),
+    [entriesForSelectedDate],
+  );
 
   return (
     <div className="app-shell">
@@ -166,6 +167,7 @@ export default function App() {
             <TodayPage
               key={selectedDate.getTime()}
               isProductsLoading={productsLoading}
+              productsError={productsError}
               products={products}
               totals={totals}
               entries={entriesForSelectedDate}

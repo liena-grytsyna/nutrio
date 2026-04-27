@@ -42,6 +42,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
   const updateField =
     (field: keyof ProductFormValues) =>
     (event: ChangeEvent<HTMLInputElement>) => {
+      setStatusMessage(null);
       setFormValues((currentValues) => ({
         ...currentValues,
         [field]: event.target.value,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Product } from '../../features/products';
 import { NutritionSummaryCard } from '../../widgets/NutritionSummaryCard';
 import {
@@ -19,6 +19,7 @@ import './TodayPage.scss';
 
 type TodayPageProps = {
   isProductsLoading: boolean;
+  productsError?: string | null;
   products: Product[];
   totals: NutritionValues;
   entries: DayEntry[];
@@ -31,12 +32,14 @@ type TodayPageProps = {
 
 export function TodayPage({
   isProductsLoading,
+  productsError = null,
   products,
   totals,
   entries,
   onAddEntry,
 }: TodayPageProps) {
-  const mealGroups = buildMealEntryGroups(entries);
+  const mealGroups = useMemo(() => buildMealEntryGroups(entries), [entries]);
+  const hasEntries = entries.length > 0;
   const entryCount = entries.length;
   const [activeSectionId, setActiveSectionId] = useState<MealSectionId | null>(null);
   const [collapsedSections, setCollapsedSections] =
@@ -55,8 +58,10 @@ export function TodayPage({
     }));
   }
 
-  const activeSection =
-    MEAL_SECTIONS.find((section) => section.id === activeSectionId) ?? null;
+  const activeSection = useMemo(
+    () => MEAL_SECTIONS.find((section) => section.id === activeSectionId) ?? null,
+    [activeSectionId],
+  );
 
   return (
     <section className="screen today-screen">
@@ -64,6 +69,11 @@ export function TodayPage({
 
       <div className="today-screen__meals-section">
         <h2 className="today-screen__meals-title">Meals</h2>
+        {!hasEntries && (
+          <p className="today-screen__meals-empty">
+            No meals for this day yet. Use + to add a saved product.
+          </p>
+        )}
 
         <div className="today-screen__meals">
           {MEAL_SECTIONS.map((section) => (
@@ -81,6 +91,7 @@ export function TodayPage({
 
       <TodayAddEntryDialog
         isLoadingProducts={isProductsLoading}
+        productsError={productsError}
         isOpen={activeSection !== null}
         products={products}
         section={activeSection}

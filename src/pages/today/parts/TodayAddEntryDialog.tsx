@@ -1,11 +1,23 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import type { Product } from '../../../features/products';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+} from 'react';
+import {
+  getProductNutritionForAmount,
+  searchProducts,
+  type Product,
+} from '../../../features/products';
+import { formatNumber } from '../../../shared/lib/formatNumber';
 import { Button } from '../../../shared/ui/Button';
 import type { MealSectionConfig } from '../constants';
 
 type TodayAddEntryDialogProps = {
   isLoadingProducts: boolean;
   isOpen: boolean;
+  productsError?: string | null;
   products: Product[];
   section: MealSectionConfig | null;
   onClose: () => void;
@@ -15,6 +27,7 @@ type TodayAddEntryDialogProps = {
 export function TodayAddEntryDialog({
   isLoadingProducts,
   isOpen,
+  productsError = null,
   products,
   section,
   onClose,
@@ -25,18 +38,22 @@ export function TodayAddEntryDialog({
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const visibleProducts = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-
-    if (!normalizedQuery) {
-      return products;
-    }
-
-    return products.filter((product) =>
-      product.name.toLowerCase().includes(normalizedQuery),
-    );
-  }, [products, query]);
+  const visibleProducts = useMemo(
+    () => searchProducts(products, query),
+    [products, query],
+  );
+  const selectedProduct = useMemo(
+    () => visibleProducts.find((product) => product.id === selectedProductId) ?? null,
+    [selectedProductId, visibleProducts],
+  );
+  const parsedAmount = Number(amount);
+  const previewNutrition =
+    selectedProduct && Number.isFinite(parsedAmount) && parsedAmount > 0
+      ? getProductNutritionForAmount(selectedProduct, parsedAmount)
+      : null;
+  const canSubmit = Boolean(selectedProduct) && Number.isFinite(parsedAmount) && parsedAmount > 0;
 
   useEffect(() => {
     if (!isOpen) {
@@ -55,6 +72,37 @@ export function TodayAddEntryDialog({
     }
   }, [selectedProductId, visibleProducts]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    searchInputRef.current?.focus();
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen || !section) {
     return null;
   }
@@ -64,7 +112,7 @@ export function TodayAddEntryDialog({
 
     const parsedAmount = Number(amount);
 
-    if (!selectedProductId) {
+    if (!selectedProduct) {
       setStatusMessage('Choose a product first.');
       return;
     }
@@ -78,7 +126,7 @@ export function TodayAddEntryDialog({
     setStatusMessage(null);
 
     try {
-      await onSubmit(selectedProductId, parsedAmount);
+      await onSubmit(selectedProduct.id, parsedAmount);
       onClose();
     } catch (error) {
       setStatusMessage(
@@ -96,6 +144,7 @@ export function TodayAddEntryDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="today-add-entry-title"
+        aria-describedby="today-add-entry-hint"
         onClick={(event) => event.stopPropagation()}
         onSubmit={handleSubmit}
       >
@@ -104,7 +153,7 @@ export function TodayAddEntryDialog({
             <h3 id="today-add-entry-title" className="today-screen__dialog-title">
               Add to {section.title}
             </h3>
-            <p className="today-screen__dialog-hint">
+            <p id="today-add-entry-hint" className="today-screen__dialog-hint">
               Choose a saved product and set the amount in grams.
             </p>
           </div>
@@ -121,6 +170,8 @@ export function TodayAddEntryDialog({
 
         {isLoadingProducts ? (
           <p className="today-screen__dialog-status">Loading products...</p>
+        ) : productsError ? (
+          <p className="today-screen__dialog-status">{productsError}</p>
         ) : products.length === 0 ? (
           <p className="today-screen__dialog-status">
             No products yet. Create one on the Add screen first.
@@ -130,30 +181,41 @@ export function TodayAddEntryDialog({
             <label className="today-screen__dialog-field">
               <span>Search product</span>
               <input
+                ref={searchInputRef}
                 type="search"
                 value={query}
-                placeholder="Banana, yogurt..."
-                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Name, brand or barcode..."
+                onChange={(event) => {
+                  setStatusMessage(null);
+                  setQuery(event.target.value);
+                }}
               />
             </label>
 
-            <div className="today-screen__dialog-products" role="list">
+            <div className="today-screen__dialog-products" role="listbox">
               {visibleProducts.map((product) => (
                 <button
                   key={product.id}
                   type="button"
+                  role="option"
+                  aria-selected={product.id === selectedProductId}
                   className={
                     product.id === selectedProductId
                       ? 'today-screen__dialog-product today-screen__dialog-product--active'
                       : 'today-screen__dialog-product'
                   }
-                  onClick={() => setSelectedProductId(product.id)}
+                  onClick={() => {
+                    setStatusMessage(null);
+                    setSelectedProductId(product.id);
+                  }}
                 >
                   <strong>{product.name}</strong>
                   <span>{product.servingSize}</span>
                   <span>
-                    {product.calories} kcal • P {product.protein} • F {product.fat}{' '}
-                    • C {product.carbs}
+                    {formatNumber(product.calories, 1)} kcal • P{' '}
+                    {formatNumber(product.protein, 1)} • F{' '}
+                    {formatNumber(product.fat, 1)} • C{' '}
+                    {formatNumber(product.carbs, 1)}
                   </span>
                 </button>
               ))}
@@ -170,23 +232,43 @@ export function TodayAddEntryDialog({
                 min="1"
                 inputMode="decimal"
                 value={amount}
-                onChange={(event) => setAmount(event.target.value)}
+                disabled={!selectedProductId}
+                onChange={(event) => {
+                  setStatusMessage(null);
+                  setAmount(event.target.value);
+                }}
               />
             </label>
+
+            {previewNutrition && selectedProduct && (
+              <div className="today-screen__dialog-preview">
+                <strong className="today-screen__dialog-preview-title">
+                  {selectedProduct.name} • {formatNumber(parsedAmount, 1)} g
+                </strong>
+                <p className="today-screen__dialog-preview-meta">
+                  {formatNumber(previewNutrition.calories, 1)} kcal • P{' '}
+                  {formatNumber(previewNutrition.protein, 1)} • F{' '}
+                  {formatNumber(previewNutrition.fat, 1)} • C{' '}
+                  {formatNumber(previewNutrition.carbs, 1)}
+                </p>
+              </div>
+            )}
 
             <div className="today-screen__dialog-actions">
               <Button type="button" variant="ghost" onClick={onClose}>
                 Cancel
               </Button>
-              <Button disabled={isSaving || !selectedProductId} type="submit">
-                {isSaving ? 'Adding...' : 'Add Product'}
+              <Button disabled={isSaving || !canSubmit} type="submit">
+                {isSaving ? 'Adding...' : 'Add to Meal'}
               </Button>
             </div>
           </>
         )}
 
         {statusMessage && (
-          <p className="today-screen__dialog-status">{statusMessage}</p>
+          <p className="today-screen__dialog-status" role="status">
+            {statusMessage}
+          </p>
         )}
       </form>
     </div>

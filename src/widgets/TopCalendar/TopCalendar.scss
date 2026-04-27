@@ -52,8 +52,8 @@
       color 180ms ease;
 
     &:hover {
-      background: rgba(228, 133, 60, 0.08);
-      color: #8c4b18;
+      background: rgba(96, 128, 255, 0.08);
+      color: #4f69d7;
     }
 
     svg {
@@ -98,7 +98,7 @@
     &--today {
       color: #7b766f;
       background: rgba(255, 255, 255, 0.52);
-      box-shadow: inset 0 0 0 1px rgba(228, 133, 60, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(96, 128, 255, 0.16);
     }
   }
 
@@ -192,7 +192,7 @@
 
     &:hover {
       transform: translateY(-1px);
-      background: rgba(255, 240, 222, 0.86);
+      background: rgba(237, 243, 255, 0.86);
     }
 
     &--outside {
@@ -200,8 +200,8 @@
     }
 
     &--today {
-      color: #8c4b18;
-      background: rgba(255, 247, 233, 0.92);
+      color: #4f69d7;
+      background: rgba(237, 243, 255, 0.92);
     }
 
     &--selected {
@@ -232,8 +232,8 @@
     }
 
     &--under {
-      --calendar-ring-color: #f3b649;
-      --calendar-ring-track: rgba(243, 182, 73, 0.22);
+      --calendar-ring-color: #5f8dff;
+      --calendar-ring-track: rgba(95, 141, 255, 0.22);
     }
 
     &--ideal {
@@ -292,8 +292,8 @@
     @include reset-button;
     padding: 8px 14px;
     border-radius: 999px;
-    background: #fff0de;
-    color: #8c4b18;
+    background: #edf3ff;
+    color: #4f69d7;
     font-weight: 700;
   }
 }
