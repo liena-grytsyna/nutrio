@@ -3,6 +3,7 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
+ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
 RUN npm ci
 
 COPY . .

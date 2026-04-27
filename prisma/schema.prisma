@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  brand       String?
+  barcode     String?  @unique
+  servingSize String   @default("100 g") @map("serving_size")
+  calories    Float
+  protein     Float
+  fat         Float
+  carbs       Float
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("products")
+}

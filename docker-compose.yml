@@ -5,8 +5,32 @@ services:
       dockerfile: Dockerfile
     container_name: nutrio-frontend
     restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_started
     ports:
       - "8080:80"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: nutrio-api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-nutrio}:${POSTGRES_PASSWORD:-nutrio_dev_password}@db:5432/${POSTGRES_DB:-nutrio}?schema=public
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/api/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   db:
     image: postgres:16-alpine
