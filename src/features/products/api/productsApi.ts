@@ -1,4 +1,4 @@
-import type { CreateProductInput, Product } from '../types';
+import type { CreateProductInput, Product } from '../model/types';
 
 type ProductsResponse = {
   products: Product[];

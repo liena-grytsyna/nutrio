@@ -1,4 +1,4 @@
-import type { NutritionValues } from '../../nutrition/types';
+import type { NutritionValues } from '../../nutrition';
 
 function extractNumber(pattern: RegExp, text: string) {
   const match = text.match(pattern);

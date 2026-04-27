@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { TopCalendar } from '../components/TopCalendar';
-import { BottomNavigation } from '../components/BottomNavigation';
+import { TopCalendar } from '../widgets/TopCalendar';
+import { BottomNavigation } from '../widgets/BottomNavigation';
 import {
-  AddProductScreen,
   createProduct,
   fetchProducts,
   mockEntries,
-  ProductListScreen,
   type CreateProductInput,
   type Product,
 } from '../features/products';
@@ -15,16 +13,23 @@ import {
   calculateDayTotals,
   dailyTargets,
 } from '../features/nutrition';
-import { TodayScreen } from '../features/today';
-import { isSameDay, startOfDay } from '../shared/utils/date';
-import type { AppScreen } from '../types/navigation';
+import { AddProductPage } from '../pages/add-product/AddProductPage';
+import { ProductsPage } from '../pages/products/ProductsPage';
+import { TodayPage } from '../pages/today/TodayPage';
+import { isSameDay, startOfDay } from '../shared/lib/date';
+import type { AppScreen } from '../features/navigation/types';
 import './App.scss';
 
-const tabs: { id: AppScreen; label: string }[] = [
+const tabs = [
   { id: 'today', label: 'Today' },
   { id: 'add', label: 'Add' },
   { id: 'products', label: 'Products' },
-];
+] satisfies ReadonlyArray<{ id: AppScreen; label: string }>;
+
+const dailyCalorieIndicators = buildDailyCalorieIndicators(
+  mockEntries,
+  dailyTargets.calories,
+);
 
 export default function App() {
   const [activeScreen, setActiveScreen] = useState<AppScreen>('today');
@@ -32,10 +37,6 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [productsError, setProductsError] = useState<string | null>(null);
-  const dailyCalorieIndicators = buildDailyCalorieIndicators(
-    mockEntries,
-    dailyTargets.calories,
-  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -71,10 +72,10 @@ export default function App() {
     return product;
   }
 
-  const selectedEntries = mockEntries.filter((entry) =>
+  const entriesForSelectedDate = mockEntries.filter((entry) =>
     isSameDay(new Date(entry.eatenAt), selectedDate),
   );
-  const totals = calculateDayTotals(selectedEntries);
+  const totals = calculateDayTotals(entriesForSelectedDate);
 
   return (
     <div className="app-shell">
@@ -88,17 +89,17 @@ export default function App() {
 
         <main className="app-shell__content">
           {activeScreen === 'today' && (
-            <TodayScreen
+            <TodayPage
+              key={selectedDate.getTime()}
               totals={totals}
-              selectedDate={selectedDate}
-              entries={selectedEntries}
+              entries={entriesForSelectedDate}
             />
           )}
           {activeScreen === 'add' && (
-            <AddProductScreen onCreateProduct={handleCreateProduct} />
+            <AddProductPage onCreateProduct={handleCreateProduct} />
           )}
           {activeScreen === 'products' && (
-            <ProductListScreen
+            <ProductsPage
               error={productsError}
               isLoading={productsLoading}
               products={products}

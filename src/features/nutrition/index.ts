@@ -1,21 +1,21 @@
-export { dailyTargets } from './data/dailyTargets';
+export { dailyTargets } from './model/dailyTargets';
 export {
   getCalorieBalanceStatus,
   getCalorieProgressRatio,
   getClampedProgress,
-} from './logic/calorieBalance';
-export { calculateDayTotals } from './logic/calculateDayTotals';
+} from './lib/calorieBalance';
+export { calculateDayTotals } from './lib/calculateDayTotals';
 export {
   buildDailyCalorieIndicators,
   getDateKey,
   getDayCalorieIndicator,
-} from './logic/getDayCalorieIndicator';
+} from './lib/getDayCalorieIndicator';
 export {
   buildMealEntryGroups,
   getMealSectionId,
   type MealSectionId,
-} from './logic/getMealEntryGroups';
-export { getNutritionGoalSummary } from './logic/getNutritionGoalSummary';
+} from './lib/getMealEntryGroups';
+export { getNutritionGoalSummary } from './lib/getNutritionGoalSummary';
 export type {
   CalorieBalanceStatus,
   DayCalorieIndicator,
@@ -23,4 +23,4 @@ export type {
   NutritionGoalSummary,
   NutritionValues,
   ProductSource,
-} from './types';
+} from './model/types';

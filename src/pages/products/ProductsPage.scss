@@ -1,0 +1,92 @@
+@use '../../shared/styles/mixins' as *;
+@use '../../shared/styles/tokens' as *;
+
+.product-list-screen {
+  @include section-stack;
+
+  &__intro {
+    @include surface-card;
+  }
+
+  &__title {
+    margin: 0 0 8px;
+    color: $color-text;
+  }
+
+  &__hint {
+    margin: 0;
+    color: $color-muted;
+  }
+
+  &__search {
+    @include surface-card(18px, $color-panel-strong);
+    display: grid;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  &__search-label,
+  &__search-count {
+    color: $color-muted;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  &__search-input {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid $color-border;
+    border-radius: 14px;
+    padding: 10px 12px;
+    background: #ffffff;
+    color: $color-text;
+    font: inherit;
+    outline: none;
+
+    &:focus {
+      border-color: rgba(228, 133, 60, 0.48);
+      box-shadow: 0 0 0 3px rgba(228, 133, 60, 0.12);
+    }
+  }
+
+  &__list {
+    @include section-stack(12px);
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    @include surface-card(18px, $color-panel-strong);
+    padding: 14px;
+  }
+
+  &__item-name,
+  &__item-meta,
+  &__item-serving {
+    display: block;
+  }
+
+  &__item-name {
+    color: $color-text;
+  }
+
+  &__item-meta,
+  &__item-serving {
+    margin: 6px 0 0;
+    color: $color-muted;
+  }
+
+  &__empty {
+    margin: 0;
+    color: $color-muted;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  &__status {
+    @include surface-card(18px, $color-panel-strong);
+    margin: 0;
+    color: $color-muted;
+    font-weight: 700;
+  }
+}

@@ -1,8 +1,7 @@
-export { AddProductScreen } from './screens/AddProductScreen';
-export { ProductListScreen } from './screens/ProductListScreen';
-export { ProductCard } from './components/ProductCard';
-export { ProductSearch } from './components/ProductSearch';
 export { createProduct, fetchProducts } from './api/productsApi';
-export { mockEntries, mockProducts } from './data/mockProducts';
+export { getStoredProducts, saveProducts } from './lib/productStorage';
+export { mockEntries, mockProducts } from './model/mockProducts';
+export { ProductCard } from './ui/ProductCard';
+export { ProductSearch } from './ui/ProductSearch';
 export { extractNutritionFromText } from './ocr/extractNutrition';
-export type { CreateProductInput, Product } from './types';
+export type { CreateProductInput, Product } from './model/types';

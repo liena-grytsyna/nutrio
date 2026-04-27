@@ -1,5 +1,4 @@
-@use '../styles/mixins' as *;
-@use '../styles/tokens' as *;
+@use '../shared/styles/tokens' as *;
 
 .app-shell {
   min-height: 100vh;
