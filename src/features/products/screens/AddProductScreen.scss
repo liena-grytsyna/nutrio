@@ -1,0 +1,27 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/tokens' as *;
+
+.add-product-screen {
+  @include section-stack;
+
+  &__card {
+    @include surface-card;
+  }
+
+  &__title,
+  &__subtitle {
+    margin: 0 0 8px;
+    color: $color-text;
+  }
+
+  &__hint {
+    margin: 0;
+    color: $color-muted;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: 18px;
+    color: $color-muted;
+  }
+}

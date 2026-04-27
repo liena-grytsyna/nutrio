@@ -1,4 +1,4 @@
-import type { CalorieBalanceStatus } from '../../types/nutrition';
+import type { CalorieBalanceStatus } from '../../features/nutrition';
 import type {
   MacroNutrientKey,
   NutrientPanelItemConfig,
@@ -9,7 +9,7 @@ const OUTER_CIRCUMFERENCE = 2 * Math.PI * OUTER_RADIUS;
 const CALORIE_RADIUS = 36;
 const MINI_RING_RADIUS = 18;
 
-export const NUTRITION_SUMMARY_RING = {
+export const NUTRITION_SUMMARY_RING = { 
   outerRadius: OUTER_RADIUS,
   outerCircumference: OUTER_CIRCUMFERENCE,
   outerArcWindow: OUTER_CIRCUMFERENCE * 0.18,

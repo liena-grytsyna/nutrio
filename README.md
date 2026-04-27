@@ -18,7 +18,7 @@ This is not the final app yet, but a clean foundation for the MVP.
 - `React` is easy to use for the web version
 - `TypeScript` helps keep product and macro data consistent
 - `Vite` is beginner-friendly and starts quickly
-- the business logic can later be moved into `React Native / Expo`
+- the business logic can later be adapted for a mobile app if needed
 
 ## Step 3. Project Structure
 

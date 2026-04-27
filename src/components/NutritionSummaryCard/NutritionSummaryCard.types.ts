@@ -1,4 +1,4 @@
-import type { NutritionValues } from '../../types/nutrition';
+import type { NutritionValues } from '../../features/nutrition';
 
 export type NutritionSummaryCardProps = {
   totals: NutritionValues;

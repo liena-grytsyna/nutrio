@@ -10,12 +10,12 @@ import {
   isSameMonth,
   startOfDay,
   startOfMonth,
-} from '../../logic/date/calendar';
+} from '../../shared/utils/date';
 import {
   getDateKey,
   getDayCalorieIndicator,
-} from '../../logic/nutrition/getDayCalorieIndicator';
-import type { DayCalorieIndicator } from '../../types/nutrition';
+} from '../../features/nutrition';
+import type { DayCalorieIndicator } from '../../features/nutrition';
 import './TopCalendar.scss';
 
 type TopCalendarProps = {

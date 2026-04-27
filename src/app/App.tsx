@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { TopCalendar } from '../components/TopCalendar';
-import { dailyTargets } from '../data/dailyTargets';
-import { mockEntries, mockProducts } from '../data/mockProducts';
-import { isSameDay, startOfDay } from '../logic/date/calendar';
-import { calculateDayTotals } from '../logic/nutrition/calculateDayTotals';
-import { buildDailyCalorieIndicators } from '../logic/nutrition/getDayCalorieIndicator';
-import { AddProductScreen } from '../screens/AddProductScreen';
-import { ProductListScreen } from '../screens/ProductListScreen';
-import { TodayScreen } from '../screens/TodayScreen';
+import { BottomNavigation } from '../components/BottomNavigation';
+import { mockEntries, mockProducts } from '../features/products';
+import { AddProductScreen, ProductListScreen } from '../features/products';
+import {
+  buildDailyCalorieIndicators,
+  calculateDayTotals,
+  dailyTargets,
+} from '../features/nutrition';
+import { TodayScreen } from '../features/today';
+import { isSameDay, startOfDay } from '../shared/utils/date';
 import type { AppScreen } from '../types/navigation';
 import './App.scss';
 
@@ -54,22 +56,11 @@ export default function App() {
           )}
         </main>
 
-        <nav className="app-shell__tabbar" aria-label="Navigation">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              className={
-                tab.id === activeScreen
-                  ? 'app-shell__tab app-shell__tab--active'
-                  : 'app-shell__tab'
-              }
-              onClick={() => setActiveScreen(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </nav>
+        <BottomNavigation
+          activeScreen={activeScreen}
+          tabs={tabs}
+          onSelectScreen={setActiveScreen}
+        />
       </div>
     </div>
   );

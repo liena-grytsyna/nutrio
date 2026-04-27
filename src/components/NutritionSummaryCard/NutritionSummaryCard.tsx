@@ -1,6 +1,6 @@
-import { getNutritionGoalSummary } from '../../logic/nutrition/getNutritionGoalSummary';
-import { NutritionSummaryCardChart } from './NutritionSummaryCardChart';
-import { NutritionSummaryCardPanel } from './NutritionSummaryCardPanel';
+import { getNutritionGoalSummary } from '../../features/nutrition';
+import { NutritionSummaryCardChart } from './parts/NutritionSummaryCardChart';
+import { NutritionSummaryCardPanel } from './parts/NutritionSummaryCardPanel';
 import type { NutritionSummaryCardProps } from './NutritionSummaryCard.types';
 import './NutritionSummaryCard.scss';
 

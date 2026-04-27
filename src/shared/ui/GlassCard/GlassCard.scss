@@ -1,0 +1,9 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/tokens' as *;
+
+.glass-card {
+  @include surface-card;
+  border-color: rgba(32, 29, 24, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px);
+}

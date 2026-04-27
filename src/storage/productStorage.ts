@@ -1,4 +1,4 @@
-import type { Product } from '../types/nutrition';
+import type { Product } from '../features/products';
 
 const PRODUCTS_STORAGE_KEY = 'nutrio-products';
 
