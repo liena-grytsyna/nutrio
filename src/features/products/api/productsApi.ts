@@ -8,9 +8,17 @@ type ProductResponse = {
   product: Product;
 };
 
+type ErrorResponse = {
+  error?: string;
+};
+
 async function readJsonResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
-    const message = await response.text();
+    const contentType = response.headers.get('content-type') ?? '';
+    const message = contentType.includes('application/json')
+      ? ((await response.json()) as ErrorResponse).error
+      : await response.text();
+
     throw new Error(message || `Request failed with status ${response.status}`);
   }
 

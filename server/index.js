@@ -117,7 +117,11 @@ app.post('/api/products', async (request, response, next) => {
 
 app.use((error, _request, response, _next) => {
   if (error?.code === 'P2002') {
-    response.status(409).json({ error: 'Product with this unique value already exists.' });
+    const target = Array.isArray(error.meta?.target)
+      ? error.meta.target.join(', ')
+      : 'unique value';
+
+    response.status(409).json({ error: `Product with this ${target} already exists.` });
     return;
   }
 

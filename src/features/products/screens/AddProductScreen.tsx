@@ -80,8 +80,10 @@ export function AddProductScreen({ onCreateProduct }: AddProductScreenProps) {
 
       setFormValues(initialFormValues);
       setStatusMessage('Product saved.');
-    } catch {
-      setStatusMessage('Product could not be saved.');
+    } catch (error) {
+      setStatusMessage(
+        error instanceof Error ? error.message : 'Product could not be saved.',
+      );
     } finally {
       setIsSaving(false);
     }
