@@ -4,19 +4,19 @@ import { BottomNavigation } from '../widgets/BottomNavigation';
 import {
   createProduct,
   fetchProducts,
-  mockEntries,
   type CreateProductInput,
   type Product,
 } from '../features/products';
 import {
-  buildDailyCalorieIndicators,
   calculateDayTotals,
   dailyTargets,
+  type DayCalorieIndicator,
+  type DayEntry,
 } from '../features/nutrition';
 import { AddProductPage } from '../pages/add-product/AddProductPage';
 import { ProductsPage } from '../pages/products/ProductsPage';
 import { TodayPage } from '../pages/today/TodayPage';
-import { isSameDay, startOfDay } from '../shared/lib/date';
+import { startOfDay } from '../shared/lib/date';
 import type { AppScreen } from '../features/navigation/types';
 import './App.scss';
 
@@ -26,10 +26,7 @@ const tabs = [
   { id: 'products', label: 'Products' },
 ] satisfies ReadonlyArray<{ id: AppScreen; label: string }>;
 
-const dailyCalorieIndicators = buildDailyCalorieIndicators(
-  mockEntries,
-  dailyTargets.calories,
-);
+const dailyCalorieIndicators: Record<string, DayCalorieIndicator> = {};
 
 export default function App() {
   const [activeScreen, setActiveScreen] = useState<AppScreen>('today');
@@ -72,9 +69,7 @@ export default function App() {
     return product;
   }
 
-  const entriesForSelectedDate = mockEntries.filter((entry) =>
-    isSameDay(new Date(entry.eatenAt), selectedDate),
-  );
+  const entriesForSelectedDate: DayEntry[] = [];
   const totals = calculateDayTotals(entriesForSelectedDate);
 
   return (
