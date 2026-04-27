@@ -5,6 +5,7 @@ export {
   getClampedProgress,
 } from './lib/calorieBalance';
 export { calculateDayTotals } from './lib/calculateDayTotals';
+export { getStoredDayEntries, saveDayEntries } from './lib/dayEntryStorage';
 export {
   buildDailyCalorieIndicators,
   getDateKey,

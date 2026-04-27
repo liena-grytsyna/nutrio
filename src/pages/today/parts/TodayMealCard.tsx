@@ -16,6 +16,7 @@ type TodayMealCardProps = {
   section: MealSectionConfig;
   entries: DayEntry[];
   isCollapsed: boolean;
+  onAdd: (sectionId: MealSectionId) => void;
   onToggle: (sectionId: MealSectionId) => void;
 };
 
@@ -87,6 +88,7 @@ export function TodayMealCard({
   section,
   entries,
   isCollapsed,
+  onAdd,
   onToggle,
 }: TodayMealCardProps) {
   const hasEntries = entries.length > 0;
@@ -139,6 +141,7 @@ export function TodayMealCard({
           <MealActionButton
             className="today-screen__meal-action--add"
             aria-label={`Add item to ${section.title}`}
+            onClick={() => onAdd(section.id)}
           >
             <PlusIcon />
           </MealActionButton>
