@@ -5,10 +5,16 @@ import type { Product } from '../types';
 import './ProductListScreen.scss';
 
 type ProductListScreenProps = {
+  error?: string | null;
+  isLoading?: boolean;
   products: Product[];
 };
 
-export function ProductListScreen({ products }: ProductListScreenProps) {
+export function ProductListScreen({
+  error = null,
+  isLoading = false,
+  products,
+}: ProductListScreenProps) {
   const [query, setQuery] = useState('');
   const normalizedQuery = query.trim().toLowerCase();
   const visibleProducts = useMemo(() => {
@@ -26,10 +32,11 @@ export function ProductListScreen({ products }: ProductListScreenProps) {
       <div className="product-list-screen__intro">
         <h2 className="product-list-screen__title">Product List</h2>
         <p className="product-list-screen__hint">
-          This screen uses mock data for now. LocalStorage persistence comes
-          next.
+          Products are loaded from PostgreSQL through the API.
         </p>
       </div>
+
+      {error && <p className="product-list-screen__status">{error}</p>}
 
       <ProductSearch
         value={query}
@@ -37,13 +44,17 @@ export function ProductListScreen({ products }: ProductListScreenProps) {
         onChange={setQuery}
       />
 
-      <ul className="product-list-screen__list">
-        {visibleProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </ul>
+      {isLoading ? (
+        <p className="product-list-screen__status">Loading products...</p>
+      ) : (
+        <ul className="product-list-screen__list">
+          {visibleProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </ul>
+      )}
 
-      {visibleProducts.length === 0 && (
+      {!isLoading && visibleProducts.length === 0 && (
         <p className="product-list-screen__empty">No products found.</p>
       )}
     </section>

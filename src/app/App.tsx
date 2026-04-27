@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { TopCalendar } from '../components/TopCalendar';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { mockEntries, mockProducts } from '../features/products';
-import { AddProductScreen, ProductListScreen } from '../features/products';
+import {
+  AddProductScreen,
+  createProduct,
+  fetchProducts,
+  mockEntries,
+  ProductListScreen,
+  type CreateProductInput,
+  type Product,
+} from '../features/products';
 import {
   buildDailyCalorieIndicators,
   calculateDayTotals,
@@ -22,10 +29,48 @@ const tabs: Array<{ id: AppScreen; label: string }> = [
 export default function App() {
   const [activeScreen, setActiveScreen] = useState<AppScreen>('today');
   const [selectedDate, setSelectedDate] = useState(() => startOfDay(new Date()));
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsLoading, setProductsLoading] = useState(true);
+  const [productsError, setProductsError] = useState<string | null>(null);
   const dailyCalorieIndicators = buildDailyCalorieIndicators(
     mockEntries,
     dailyTargets.calories,
   );
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    setProductsLoading(true);
+    setProductsError(null);
+
+    fetchProducts(controller.signal)
+      .then(setProducts)
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          return;
+        }
+
+        setProductsError('Products could not be loaded.');
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setProductsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const handleCreateProduct = useCallback(async (input: CreateProductInput) => {
+    const product = await createProduct(input);
+    setProducts((currentProducts) =>
+      [...currentProducts, product].sort((firstProduct, secondProduct) =>
+        firstProduct.name.localeCompare(secondProduct.name),
+      ),
+    );
+    setProductsError(null);
+    return product;
+  }, []);
 
   const selectedEntries = mockEntries.filter((entry) =>
     isSameDay(new Date(entry.eatenAt), selectedDate),
@@ -50,9 +95,15 @@ export default function App() {
               entries={selectedEntries}
             />
           )}
-          {activeScreen === 'add' && <AddProductScreen />}
+          {activeScreen === 'add' && (
+            <AddProductScreen onCreateProduct={handleCreateProduct} />
+          )}
           {activeScreen === 'products' && (
-            <ProductListScreen products={mockProducts} />
+            <ProductListScreen
+              error={productsError}
+              isLoading={productsLoading}
+              products={products}
+            />
           )}
         </main>
 
