@@ -24,9 +24,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-button,
+button {
+  font: inherit;
+}
+
 input,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
