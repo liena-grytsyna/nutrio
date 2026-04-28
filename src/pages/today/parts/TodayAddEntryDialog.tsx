@@ -1,7 +1,6 @@
 import {
   useEffect,
   useMemo,
-  useRef,
   useState,
   type FormEvent,
 } from 'react';
@@ -39,7 +38,6 @@ export function TodayAddEntryDialog({
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const visibleProducts = useMemo(
     () => searchProducts(products, query),
@@ -72,14 +70,6 @@ export function TodayAddEntryDialog({
       setSelectedProductId(visibleProducts[0]?.id ?? null);
     }
   }, [selectedProductId, visibleProducts]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    searchInputRef.current?.focus();
-  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -182,7 +172,6 @@ export function TodayAddEntryDialog({
             <label className="today-screen__dialog-field">
               <span>Search product</span>
               <input
-                ref={searchInputRef}
                 type="search"
                 value={query}
                 placeholder="Name, brand or barcode..."
