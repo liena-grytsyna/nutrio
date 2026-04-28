@@ -5,6 +5,7 @@ import {
   useState,
   type FormEvent,
 } from 'react';
+import { createPortal } from 'react-dom';
 import {
   getProductNutritionForAmount,
   searchProducts,
@@ -137,7 +138,7 @@ export function TodayAddEntryDialog({
     }
   }
 
-  return (
+  const dialog = (
     <div className="today-screen__dialog-backdrop" onClick={onClose}>
       <form
         className="today-screen__dialog"
@@ -273,4 +274,6 @@ export function TodayAddEntryDialog({
       </form>
     </div>
   );
+
+  return createPortal(dialog, document.body);
 }
