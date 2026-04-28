@@ -124,6 +124,15 @@ export function TopCalendar({
     setVisibleMonth(startOfMonth(selectedDate));
   }, [selectedDate]);
 
+  function closeDatePicker() {
+    setIsDatePickerOpen(false);
+  }
+
+  function openDatePicker() {
+    setVisibleMonth(startOfMonth(selectedDate));
+    setIsDatePickerOpen(true);
+  }
+
   useEffect(() => {
     if (!isDatePickerOpen) {
       return;
@@ -143,7 +152,7 @@ export function TopCalendar({
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        setIsDatePickerOpen(false);
+        closeDatePicker();
       }
     }
 
@@ -157,22 +166,27 @@ export function TopCalendar({
   }, [isDatePickerOpen]);
 
   function toggleDatePicker() {
-    if (!isDatePickerOpen) {
-      setVisibleMonth(startOfMonth(selectedDate));
+    if (isDatePickerOpen) {
+      closeDatePicker();
+      return;
     }
 
-    setIsDatePickerOpen(!isDatePickerOpen);
+    openDatePicker();
+  }
+
+  function changeVisibleMonth(amount: number) {
+    setVisibleMonth((currentMonth) => addMonths(currentMonth, amount));
   }
 
   function handleSelectDay(day: Date) {
     onSelectDate(startOfDay(day));
-    setIsDatePickerOpen(false);
+    closeDatePicker();
   }
 
   function handleSelectToday() {
     onSelectDate(today);
     setVisibleMonth(startOfMonth(today));
-    setIsDatePickerOpen(false);
+    closeDatePicker();
   }
 
   function getIndicatorForDay(day: Date) {
@@ -180,6 +194,10 @@ export function TopCalendar({
   }
 
   const monthDays = getMonthDays(visibleMonth);
+  const calendarActionLabel = isDatePickerOpen ? 'Close calendar' : 'Open calendar';
+  const monthChevronClassName = isDatePickerOpen
+    ? 'top-calendar__month-chevron top-calendar__month-chevron--open'
+    : 'top-calendar__month-chevron';
 
   return (
     <header className="top-calendar" ref={rootRef}>
@@ -194,14 +212,7 @@ export function TopCalendar({
           <span className="top-calendar__month">
             {formatCalendarMonth(selectedDate)}
           </span>
-          <span
-            className={
-              isDatePickerOpen
-                ? 'top-calendar__month-chevron top-calendar__month-chevron--open'
-                : 'top-calendar__month-chevron'
-            }
-            aria-hidden="true"
-          >
+          <span className={monthChevronClassName} aria-hidden="true">
             ▾
           </span>
         </button>
@@ -209,7 +220,7 @@ export function TopCalendar({
         <button
           type="button"
           className="top-calendar__icon-button"
-          aria-label={isDatePickerOpen ? 'Close calendar' : 'Open calendar'}
+          aria-label={calendarActionLabel}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"
           onClick={toggleDatePicker}
@@ -270,7 +281,7 @@ export function TopCalendar({
               type="button"
               className="top-calendar__picker-nav"
               aria-label="Previous month"
-              onClick={() => setVisibleMonth(addMonths(visibleMonth, -1))}
+              onClick={() => changeVisibleMonth(-1)}
             >
               ‹
             </button>
@@ -283,7 +294,7 @@ export function TopCalendar({
               type="button"
               className="top-calendar__picker-nav"
               aria-label="Next month"
-              onClick={() => setVisibleMonth(addMonths(visibleMonth, 1))}
+              onClick={() => changeVisibleMonth(1)}
             >
               ›
             </button>

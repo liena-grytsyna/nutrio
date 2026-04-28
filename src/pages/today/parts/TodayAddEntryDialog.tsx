@@ -49,6 +49,12 @@ export function TodayAddEntryDialog({
     selectedProduct && isAmountValid
       ? getProductNutritionForAmount(selectedProduct, parsedAmount)
       : null;
+  const dialogStatusMessage = isLoadingProducts
+    ? 'Loading products...'
+    : productsError ||
+      (products.length === 0
+        ? 'No products yet. Create one on the Add screen first.'
+        : null);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -68,6 +74,12 @@ export function TodayAddEntryDialog({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+
+  function getNutritionLabel(
+    nutrition: Pick<Product, 'calories' | 'protein' | 'fat' | 'carbs'>,
+  ) {
+    return `${formatNumber(nutrition.calories, 1)} kcal • P ${formatNumber(nutrition.protein, 1)} • F ${formatNumber(nutrition.fat, 1)} • C ${formatNumber(nutrition.carbs, 1)}`;
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -128,14 +140,8 @@ export function TodayAddEntryDialog({
           </Button>
         </div>
 
-        {isLoadingProducts ? (
-          <p className="today-screen__dialog-status">Loading products...</p>
-        ) : productsError ? (
-          <p className="today-screen__dialog-status">{productsError}</p>
-        ) : products.length === 0 ? (
-          <p className="today-screen__dialog-status">
-            No products yet. Create one on the Add screen first.
-          </p>
+        {dialogStatusMessage ? (
+          <p className="today-screen__dialog-status">{dialogStatusMessage}</p>
         ) : (
           <>
             <label className="today-screen__dialog-field">
@@ -154,9 +160,6 @@ export function TodayAddEntryDialog({
             <div className="today-screen__dialog-products" role="listbox">
               {visibleProducts.map((product) => {
                 const isSelected = product.id === selectedProduct?.id;
-                const productClassName = isSelected
-                  ? 'today-screen__dialog-product today-screen__dialog-product--active'
-                  : 'today-screen__dialog-product';
 
                 return (
                   <button
@@ -164,7 +167,11 @@ export function TodayAddEntryDialog({
                     type="button"
                     role="option"
                     aria-selected={isSelected}
-                    className={productClassName}
+                    className={
+                      isSelected
+                        ? 'today-screen__dialog-product today-screen__dialog-product--active'
+                        : 'today-screen__dialog-product'
+                    }
                     onClick={() => {
                       setStatusMessage(null);
                       setSelectedProductId(product.id);
@@ -172,12 +179,7 @@ export function TodayAddEntryDialog({
                   >
                     <strong>{product.name}</strong>
                     <span>{product.servingSize}</span>
-                    <span>
-                      {formatNumber(product.calories, 1)} kcal • P{' '}
-                      {formatNumber(product.protein, 1)} • F{' '}
-                      {formatNumber(product.fat, 1)} • C{' '}
-                      {formatNumber(product.carbs, 1)}
-                    </span>
+                    <span>{getNutritionLabel(product)}</span>
                   </button>
                 );
               })}
@@ -208,10 +210,7 @@ export function TodayAddEntryDialog({
                   {selectedProduct.name} • {formatNumber(parsedAmount, 1)} g
                 </strong>
                 <p className="today-screen__dialog-preview-meta">
-                  {formatNumber(previewNutrition.calories, 1)} kcal • P{' '}
-                  {formatNumber(previewNutrition.protein, 1)} • F{' '}
-                  {formatNumber(previewNutrition.fat, 1)} • C{' '}
-                  {formatNumber(previewNutrition.carbs, 1)}
+                  {getNutritionLabel(previewNutrition)}
                 </p>
               </div>
             )}
