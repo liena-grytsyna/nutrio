@@ -21,18 +21,11 @@ export function getDayCalorieIndicator(
 ): DayCalorieIndicator {
   const rawProgress = getCalorieProgressRatio(calories, targetCalories);
   const status = getCalorieBalanceStatus(rawProgress);
-
-  if (status !== 'under') {
-    return {
-      calories,
-      progress: 1,
-      status,
-    };
-  }
+  const progress = status === 'under' ? getClampedProgress(rawProgress) : 1;
 
   return {
     calories,
-    progress: getClampedProgress(rawProgress),
+    progress,
     status,
   };
 }

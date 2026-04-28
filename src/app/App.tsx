@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TopCalendar } from '../widgets/TopCalendar';
 import { BottomNavigation } from '../widgets/BottomNavigation';
 import {
@@ -42,11 +42,7 @@ const MEAL_SECTION_HOURS: Record<MealSectionId, number> = {
 };
 
 function createEntryId() {
-  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
-    return crypto.randomUUID();
-  }
-
-  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  return crypto.randomUUID();
 }
 
 function getErrorMessage(error: unknown, fallbackMessage: string) {
@@ -64,22 +60,26 @@ export default function App() {
   useEffect(() => {
     const controller = new AbortController();
 
-    setProductsError(null);
+    async function loadProducts() {
+      setProductsError(null);
 
-    fetchProducts(controller.signal)
-      .then((nextProducts) => setProducts(sortProductsByName(nextProducts)))
-      .catch((error) => {
+      try {
+        const nextProducts = await fetchProducts(controller.signal);
+        setProducts(sortProductsByName(nextProducts));
+      } catch (error) {
         if (!controller.signal.aborted) {
           setProductsError(
             getErrorMessage(error, 'Products could not be loaded.'),
           );
         }
-      })
-      .finally(() => {
+      } finally {
         if (!controller.signal.aborted) {
           setProductsLoading(false);
         }
-      });
+      }
+    }
+
+    loadProducts();
 
     return () => controller.abort();
   }, []);
@@ -139,18 +139,14 @@ export default function App() {
     ]);
   }
 
-  const dailyCalorieIndicators = useMemo(
-    () => buildDailyCalorieIndicators(entries, dailyTargets.calories),
-    [entries],
+  const dailyCalorieIndicators = buildDailyCalorieIndicators(
+    entries,
+    dailyTargets.calories,
   );
-  const entriesForSelectedDate = useMemo(
-    () => entries.filter((entry) => isSameDay(new Date(entry.eatenAt), selectedDate)),
-    [entries, selectedDate],
+  const entriesForSelectedDate = entries.filter((entry) =>
+    isSameDay(new Date(entry.eatenAt), selectedDate),
   );
-  const totals = useMemo(
-    () => calculateDayTotals(entriesForSelectedDate),
-    [entriesForSelectedDate],
-  );
+  const totals = calculateDayTotals(entriesForSelectedDate);
 
   return (
     <div className="app-shell">

@@ -17,24 +17,6 @@ type TodayMealCardProps = {
   onToggle: (sectionId: MealSectionId) => void;
 };
 
-function getMealCardClassName(hasEntries: boolean, isCollapsed: boolean) {
-  if (!hasEntries) {
-    return 'today-screen__meal-card';
-  }
-
-  if (isCollapsed) {
-    return 'today-screen__meal-card today-screen__meal-card--filled';
-  }
-
-  return 'today-screen__meal-card today-screen__meal-card--filled today-screen__meal-card--expanded';
-}
-
-function getToggleButtonClassName(isCollapsed: boolean) {
-  return isCollapsed
-    ? 'today-screen__meal-action today-screen__meal-action--toggle today-screen__meal-action--toggle-collapsed'
-    : 'today-screen__meal-action today-screen__meal-action--toggle';
-}
-
 function MealEntryRow({ entry }: { entry: DayEntry }) {
   return (
     <div className="today-screen__meal-item">
@@ -67,9 +49,22 @@ export function TodayMealCard({
   const summaryText = hasEntries
     ? `${totalCalories.toFixed(0)} kcal`
     : section.emptyHint;
+  let mealCardClassName = 'today-screen__meal-card';
+
+  if (hasEntries) {
+    mealCardClassName += ' today-screen__meal-card--filled';
+  }
+
+  if (hasEntries && !isCollapsed) {
+    mealCardClassName += ' today-screen__meal-card--expanded';
+  }
+
+  const toggleButtonClassName = isCollapsed
+    ? 'today-screen__meal-action today-screen__meal-action--toggle today-screen__meal-action--toggle-collapsed'
+    : 'today-screen__meal-action today-screen__meal-action--toggle';
 
   return (
-    <article className={getMealCardClassName(hasEntries, isCollapsed)}>
+    <article className={mealCardClassName}>
       <div className="today-screen__meal-header">
         <span className="today-screen__meal-status" aria-hidden="true" />
 
@@ -91,7 +86,7 @@ export function TodayMealCard({
           {hasEntries && (
             <button
               type="button"
-              className={getToggleButtonClassName(isCollapsed)}
+              className={toggleButtonClassName}
               aria-label={isCollapsed ? `Expand ${section.title}` : `Collapse ${section.title}`}
               aria-expanded={!isCollapsed}
               aria-controls={contentId}

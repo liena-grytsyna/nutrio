@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Product } from '../../features/products';
 import { NutritionSummaryCard } from '../../widgets/NutritionSummaryCard';
 import {
@@ -38,9 +38,8 @@ export function TodayPage({
   entries,
   onAddEntry,
 }: TodayPageProps) {
-  const mealGroups = useMemo(() => buildMealEntryGroups(entries), [entries]);
+  const mealGroups = buildMealEntryGroups(entries);
   const hasEntries = entries.length > 0;
-  const entryCount = entries.length;
   const [activeSectionId, setActiveSectionId] = useState<MealSectionId | null>(null);
   const [collapsedSections, setCollapsedSections] =
     useState<CollapsedMealSections>(() =>
@@ -49,7 +48,7 @@ export function TodayPage({
 
   useEffect(() => {
     setCollapsedSections(createCollapsedMealSections(mealGroups));
-  }, [entryCount]);
+  }, [entries]);
 
   function toggleMealSection(sectionId: MealSectionId) {
     setCollapsedSections((previousState) => ({
@@ -58,9 +57,8 @@ export function TodayPage({
     }));
   }
 
-  const activeSection = useMemo(
-    () => MEAL_SECTIONS.find((section) => section.id === activeSectionId) ?? null,
-    [activeSectionId],
+  const activeSection = MEAL_SECTIONS.find(
+    (section) => section.id === activeSectionId,
   );
 
   return (
@@ -89,21 +87,18 @@ export function TodayPage({
         </div>
       </div>
 
-      <TodayAddEntryDialog
-        isLoadingProducts={isProductsLoading}
-        productsError={productsError}
-        isOpen={activeSection !== null}
-        products={products}
-        section={activeSection}
-        onClose={() => setActiveSectionId(null)}
-        onSubmit={(productId, amount) => {
-          if (!activeSectionId) {
-            return;
+      {activeSection && (
+        <TodayAddEntryDialog
+          isLoadingProducts={isProductsLoading}
+          productsError={productsError}
+          products={products}
+          section={activeSection}
+          onClose={() => setActiveSectionId(null)}
+          onSubmit={(productId, amount) =>
+            onAddEntry(activeSection.id, productId, amount)
           }
-
-          return onAddEntry(activeSectionId, productId, amount);
-        }}
-      />
+        />
+      )}
     </section>
   );
 }

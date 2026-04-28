@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
   ProductCard,
   ProductSearch,
@@ -19,8 +19,9 @@ export function ProductsPage({
   products,
 }: ProductsPageProps) {
   const [query, setQuery] = useState('');
-  const hasProducts = products.length > 0;
-  const visibleProducts = useMemo(() => searchProducts(products, query), [products, query]);
+  const visibleProducts = searchProducts(products, query);
+  const showSearch = products.length > 0;
+  const showEmptyState = !isLoading && visibleProducts.length === 0;
 
   return (
     <section className="screen product-list-screen">
@@ -33,7 +34,7 @@ export function ProductsPage({
 
       {error && <p className="product-list-screen__status">{error}</p>}
 
-      {hasProducts && (
+      {showSearch && (
         <ProductSearch
           value={query}
           resultCount={visibleProducts.length}
@@ -51,7 +52,7 @@ export function ProductsPage({
         </ul>
       ) : null}
 
-      {!isLoading && visibleProducts.length === 0 && (
+      {showEmptyState && (
         <p className="product-list-screen__empty">
           {query ? 'No products match this search.' : 'No saved products yet.'}
         </p>

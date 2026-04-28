@@ -1,7 +1,5 @@
 import {
   useEffect,
-  useMemo,
-  useRef,
   useState,
   type FormEvent,
 } from 'react';
@@ -17,17 +15,15 @@ import type { MealSectionConfig } from '../constants';
 
 type TodayAddEntryDialogProps = {
   isLoadingProducts: boolean;
-  isOpen: boolean;
   productsError?: string | null;
   products: Product[];
-  section: MealSectionConfig | null;
+  section: MealSectionConfig;
   onClose: () => void;
   onSubmit: (productId: string, amount: number) => Promise<void> | void;
 };
 
 export function TodayAddEntryDialog({
   isLoadingProducts,
-  isOpen,
   productsError = null,
   products,
   section,
@@ -36,58 +32,25 @@ export function TodayAddEntryDialog({
 }: TodayAddEntryDialogProps) {
   const [amount, setAmount] = useState('100');
   const [query, setQuery] = useState('');
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    products[0]?.id ?? null,
+  );
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const dialogRef = useRef<HTMLFormElement>(null);
 
-  const visibleProducts = useMemo(
-    () => searchProducts(products, query),
-    [products, query],
-  );
-  const selectedProduct = useMemo(
-    () => visibleProducts.find((product) => product.id === selectedProductId) ?? null,
-    [selectedProductId, visibleProducts],
-  );
+  const visibleProducts = searchProducts(products, query);
+  const selectedProduct =
+    visibleProducts.find((product) => product.id === selectedProductId) ??
+    visibleProducts[0] ??
+    null;
   const parsedAmount = Number(amount);
+  const isAmountValid = Number.isFinite(parsedAmount) && parsedAmount > 0;
   const previewNutrition =
-    selectedProduct && Number.isFinite(parsedAmount) && parsedAmount > 0
+    selectedProduct && isAmountValid
       ? getProductNutritionForAmount(selectedProduct, parsedAmount)
       : null;
-  const canSubmit = Boolean(selectedProduct) && Number.isFinite(parsedAmount) && parsedAmount > 0;
 
   useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    setAmount('100');
-    setQuery('');
-    setStatusMessage(null);
-    setSelectedProductId(products[0]?.id ?? null);
-  }, [isOpen, products]);
-
-  useEffect(() => {
-    if (!visibleProducts.some((product) => product.id === selectedProductId)) {
-      setSelectedProductId(visibleProducts[0]?.id ?? null);
-    }
-  }, [selectedProductId, visibleProducts]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    const activeElement = document.activeElement;
-
-    if (activeElement instanceof HTMLElement) {
-      activeElement.blur();
-    }
-
-    const focusDialog = window.setTimeout(() => {
-      dialogRef.current?.focus({ preventScroll: true });
-    }, 0);
-
     const previousOverflow = document.body.style.overflow;
 
     document.body.style.overflow = 'hidden';
@@ -101,27 +64,20 @@ export function TodayAddEntryDialog({
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      window.clearTimeout(focusDialog);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onClose]);
-
-  if (!isOpen || !section) {
-    return null;
-  }
+  }, [onClose]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    const parsedAmount = Number(amount);
 
     if (!selectedProduct) {
       setStatusMessage('Choose a product first.');
       return;
     }
 
-    if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) {
+    if (!isAmountValid) {
       setStatusMessage('Enter a valid amount in grams.');
       return;
     }
@@ -144,13 +100,11 @@ export function TodayAddEntryDialog({
   const dialog = (
     <div className="today-screen__dialog-backdrop" onClick={onClose}>
       <form
-        ref={dialogRef}
         className="today-screen__dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="today-add-entry-title"
         aria-describedby="today-add-entry-hint"
-        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
         onSubmit={handleSubmit}
       >
@@ -198,32 +152,35 @@ export function TodayAddEntryDialog({
             </label>
 
             <div className="today-screen__dialog-products" role="listbox">
-              {visibleProducts.map((product) => (
-                <button
-                  key={product.id}
-                  type="button"
-                  role="option"
-                  aria-selected={product.id === selectedProductId}
-                  className={
-                    product.id === selectedProductId
-                      ? 'today-screen__dialog-product today-screen__dialog-product--active'
-                      : 'today-screen__dialog-product'
-                  }
-                  onClick={() => {
-                    setStatusMessage(null);
-                    setSelectedProductId(product.id);
-                  }}
-                >
-                  <strong>{product.name}</strong>
-                  <span>{product.servingSize}</span>
-                  <span>
-                    {formatNumber(product.calories, 1)} kcal • P{' '}
-                    {formatNumber(product.protein, 1)} • F{' '}
-                    {formatNumber(product.fat, 1)} • C{' '}
-                    {formatNumber(product.carbs, 1)}
-                  </span>
-                </button>
-              ))}
+              {visibleProducts.map((product) => {
+                const isSelected = product.id === selectedProduct?.id;
+                const productClassName = isSelected
+                  ? 'today-screen__dialog-product today-screen__dialog-product--active'
+                  : 'today-screen__dialog-product';
+
+                return (
+                  <button
+                    key={product.id}
+                    type="button"
+                    role="option"
+                    aria-selected={isSelected}
+                    className={productClassName}
+                    onClick={() => {
+                      setStatusMessage(null);
+                      setSelectedProductId(product.id);
+                    }}
+                  >
+                    <strong>{product.name}</strong>
+                    <span>{product.servingSize}</span>
+                    <span>
+                      {formatNumber(product.calories, 1)} kcal • P{' '}
+                      {formatNumber(product.protein, 1)} • F{' '}
+                      {formatNumber(product.fat, 1)} • C{' '}
+                      {formatNumber(product.carbs, 1)}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             {visibleProducts.length === 0 && (
@@ -237,7 +194,7 @@ export function TodayAddEntryDialog({
                 min="1"
                 inputMode="decimal"
                 value={amount}
-                disabled={!selectedProductId}
+                disabled={!selectedProduct}
                 onChange={(event) => {
                   setStatusMessage(null);
                   setAmount(event.target.value);
@@ -245,7 +202,7 @@ export function TodayAddEntryDialog({
               />
             </label>
 
-            {previewNutrition && selectedProduct && (
+            {previewNutrition && (
               <div className="today-screen__dialog-preview">
                 <strong className="today-screen__dialog-preview-title">
                   {selectedProduct.name} • {formatNumber(parsedAmount, 1)} g
@@ -263,7 +220,10 @@ export function TodayAddEntryDialog({
               <Button type="button" variant="ghost" onClick={onClose}>
                 Cancel
               </Button>
-              <Button disabled={isSaving || !canSubmit} type="submit">
+              <Button
+                disabled={isSaving || !selectedProduct || !isAmountValid}
+                type="submit"
+              >
                 {isSaving ? 'Adding...' : 'Add to Meal'}
               </Button>
             </div>

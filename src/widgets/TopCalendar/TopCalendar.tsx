@@ -37,6 +37,38 @@ type DayProgressRingProps = {
     | 'top-calendar__progress-ring--month';
 };
 
+function getWeekDayClassName(isSelected: boolean, isToday: boolean) {
+  if (isSelected) {
+    return 'top-calendar__day top-calendar__day--active';
+  }
+
+  if (isToday) {
+    return 'top-calendar__day top-calendar__day--today';
+  }
+
+  return 'top-calendar__day';
+}
+
+function getPickerDayClassName(
+  isSelected: boolean,
+  isToday: boolean,
+  isOutsideMonth: boolean,
+) {
+  if (isSelected) {
+    return 'top-calendar__picker-day top-calendar__picker-day--selected';
+  }
+
+  if (isToday) {
+    return 'top-calendar__picker-day top-calendar__picker-day--today';
+  }
+
+  if (isOutsideMonth) {
+    return 'top-calendar__picker-day top-calendar__picker-day--outside';
+  }
+
+  return 'top-calendar__picker-day';
+}
+
 function DayProgressRing({
   children,
   indicator,
@@ -81,6 +113,7 @@ export function TopCalendar({
 }: TopCalendarProps) {
   const rootRef = useRef<HTMLElement | null>(null);
   const today = startOfDay(new Date());
+  const emptyIndicator = getDayCalorieIndicator(0, calorieTarget);
   const weekDays = getWeekDays(selectedDate);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [visibleMonth, setVisibleMonth] = useState(() =>
@@ -124,14 +157,11 @@ export function TopCalendar({
   }, [isDatePickerOpen]);
 
   function toggleDatePicker() {
-    setIsDatePickerOpen((previousValue) => {
-      if (previousValue) {
-        return false;
-      }
-
+    if (!isDatePickerOpen) {
       setVisibleMonth(startOfMonth(selectedDate));
-      return true;
-    });
+    }
+
+    setIsDatePickerOpen(!isDatePickerOpen);
   }
 
   function handleSelectDay(day: Date) {
@@ -146,10 +176,7 @@ export function TopCalendar({
   }
 
   function getIndicatorForDay(day: Date) {
-    return (
-      dailyCalorieIndicators[getDateKey(day)] ??
-      getDayCalorieIndicator(0, calorieTarget)
-    );
+    return dailyCalorieIndicators[getDateKey(day)] ?? emptyIndicator;
   }
 
   const monthDays = getMonthDays(visibleMonth);
@@ -214,13 +241,7 @@ export function TopCalendar({
             <button
               key={day.toISOString()}
               type="button"
-              className={
-                isSelected
-                  ? 'top-calendar__day top-calendar__day--active'
-                  : isToday
-                    ? 'top-calendar__day top-calendar__day--today'
-                    : 'top-calendar__day'
-              }
+              className={getWeekDayClassName(isSelected, isToday)}
               aria-pressed={isSelected}
               onClick={() => onSelectDate(day)}
             >
@@ -287,15 +308,11 @@ export function TopCalendar({
                 <button
                   key={day.getTime()}
                   type="button"
-                  className={
-                    isSelected
-                      ? 'top-calendar__picker-day top-calendar__picker-day--selected'
-                      : isToday
-                        ? 'top-calendar__picker-day top-calendar__picker-day--today'
-                        : isOutsideMonth
-                          ? 'top-calendar__picker-day top-calendar__picker-day--outside'
-                          : 'top-calendar__picker-day'
-                  }
+                  className={getPickerDayClassName(
+                    isSelected,
+                    isToday,
+                    isOutsideMonth,
+                  )}
                   onClick={() => handleSelectDay(day)}
                 >
                   <DayProgressRing

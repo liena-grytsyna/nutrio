@@ -10,21 +10,26 @@ if (!databaseUrl) {
   throw new Error('DATABASE_URL is required.');
 }
 
-const adapter = new PrismaPg({
-  connectionString: databaseUrl,
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({
+    connectionString: databaseUrl,
+  }),
 });
-
-const prisma = new PrismaClient({ adapter });
 
 app.use(express.json({ limit: '1mb' }));
 
-const text = (value) => (typeof value === 'string' ? value.trim() : '');
-const optionalText = (value) => text(value) || null;
+function readText(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
 
-const number = (value) => {
-  const n = Number(value);
-  return Number.isFinite(n) && n >= 0 ? n : null;
-};
+function readOptionalText(value) {
+  return readText(value) || null;
+}
+
+function readNonNegativeNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) && number >= 0 ? number : null;
+}
 
 app.get('/api/health', async (_req, res) => {
   try {
@@ -35,60 +40,54 @@ app.get('/api/health', async (_req, res) => {
   }
 });
 
-app.get('/api/products', async (req, res, next) => {
-  try {
-    const search = text(req.query.search);
+app.get('/api/products', async (req, res) => {
+  const search = readText(req.query.search);
+  const where = search
+    ? {
+        name: {
+          contains: search,
+          mode: 'insensitive',
+        },
+      }
+    : undefined;
 
-    const products = await prisma.product.findMany({
-      where: search
-        ? {
-            name: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          }
-        : undefined,
-      orderBy: { name: 'asc' },
-      take: 100,
-    });
+  const products = await prisma.product.findMany({
+    where,
+    orderBy: { name: 'asc' },
+    take: 100,
+  });
 
-    res.json({ products });
-  } catch (error) {
-    next(error);
-  }
+  res.json({ products });
 });
 
-app.post('/api/products', async (req, res, next) => {
-  try {
-    const name = text(req.body.name);
-    const calories = number(req.body.calories);
-    const protein = number(req.body.protein);
-    const fat = number(req.body.fat);
-    const carbs = number(req.body.carbs);
+app.post('/api/products', async (req, res) => {
+  const name = readText(req.body.name);
+  const calories = readNonNegativeNumber(req.body.calories);
+  const protein = readNonNegativeNumber(req.body.protein);
+  const fat = readNonNegativeNumber(req.body.fat);
+  const carbs = readNonNegativeNumber(req.body.carbs);
 
-    if (!name || calories === null || protein === null || fat === null || carbs === null) {
-      return res.status(400).json({
-        error: 'Name and non-negative nutrition values are required.',
-      });
-    }
-
-    const product = await prisma.product.create({
-      data: {
-        name,
-        brand: optionalText(req.body.brand),
-        barcode: optionalText(req.body.barcode),
-        servingSize: text(req.body.servingSize) || '100 g',
-        calories,
-        protein,
-        fat,
-        carbs,
-      },
+  if (!name || calories === null || protein === null || fat === null || carbs === null) {
+    res.status(400).json({
+      error: 'Name and non-negative nutrition values are required.',
     });
-
-    res.status(201).json({ product });
-  } catch (error) {
-    next(error);
+    return;
   }
+
+  const product = await prisma.product.create({
+    data: {
+      name,
+      brand: readOptionalText(req.body.brand),
+      barcode: readOptionalText(req.body.barcode),
+      servingSize: readText(req.body.servingSize) || '100 g',
+      calories,
+      protein,
+      fat,
+      carbs,
+    },
+  });
+
+  res.status(201).json({ product });
 });
 
 app.use((error, _req, res, _next) => {
@@ -102,15 +101,13 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ error: 'Internal server error.' });
 });
 
-process.on('SIGINT', async () => {
+async function disconnectAndExit() {
   await prisma.$disconnect();
   process.exit(0);
-});
+}
 
-process.on('SIGTERM', async () => {
-  await prisma.$disconnect();
-  process.exit(0);
-});
+process.on('SIGINT', disconnectAndExit);
+process.on('SIGTERM', disconnectAndExit);
 
 app.listen(port, () => {
   console.log(`Nutrio API listening on port ${port}`);
