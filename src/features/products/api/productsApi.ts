@@ -26,8 +26,9 @@ function getDefaultErrorMessage(status: number) {
 
 async function readJsonResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
-    const contentType = response.headers.get('content-type') ?? '';
-    const message = contentType.includes('application/json')
+    const message = (response.headers.get('content-type') ?? '').includes(
+      'application/json',
+    )
       ? ((await response.json()) as ErrorResponse).error
       : null;
 
@@ -39,8 +40,7 @@ async function readJsonResponse<T>(response: Response): Promise<T> {
 
 export async function fetchProducts(signal?: AbortSignal): Promise<Product[]> {
   const response = await fetch('/api/products', { signal });
-  const data = await readJsonResponse<ProductsResponse>(response);
-  return data.products;
+  return (await readJsonResponse<ProductsResponse>(response)).products;
 }
 
 export async function createProduct(input: CreateProductInput): Promise<Product> {
@@ -51,6 +51,5 @@ export async function createProduct(input: CreateProductInput): Promise<Product>
     },
     body: JSON.stringify(input),
   });
-  const data = await readJsonResponse<ProductResponse>(response);
-  return data.product;
+  return (await readJsonResponse<ProductResponse>(response)).product;
 }

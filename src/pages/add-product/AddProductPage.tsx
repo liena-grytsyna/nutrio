@@ -39,15 +39,15 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  const updateField =
-    (field: keyof ProductFormValues) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setStatusMessage(null);
-      setFormValues((currentValues) => ({
-        ...currentValues,
-        [field]: event.target.value,
-      }));
-    };
+  function handleFieldChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+
+    setStatusMessage(null);
+    setFormValues((currentValues) => ({
+      ...currentValues,
+      [name]: value,
+    }));
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -103,8 +103,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
         <label className="add-product-screen__field">
           <span>Name</span>
           <input
+            name="name"
             value={formValues.name}
-            onChange={updateField('name')}
+            onChange={handleFieldChange}
             placeholder="Banana"
             required
           />
@@ -114,8 +115,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           <label className="add-product-screen__field">
             <span>Brand</span>
             <input
+              name="brand"
               value={formValues.brand}
-              onChange={updateField('brand')}
+              onChange={handleFieldChange}
               placeholder="Optional"
             />
           </label>
@@ -123,8 +125,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           <label className="add-product-screen__field">
             <span>Barcode</span>
             <input
+              name="barcode"
               value={formValues.barcode}
-              onChange={updateField('barcode')}
+              onChange={handleFieldChange}
               placeholder="Optional"
               inputMode="numeric"
             />
@@ -134,8 +137,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
         <label className="add-product-screen__field">
           <span>Serving</span>
           <input
+            name="servingSize"
             value={formValues.servingSize}
-            onChange={updateField('servingSize')}
+            onChange={handleFieldChange}
             placeholder="100 g"
           />
         </label>
@@ -144,8 +148,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           <label className="add-product-screen__field">
             <span>Kcal</span>
             <input
+              name="calories"
               value={formValues.calories}
-              onChange={updateField('calories')}
+              onChange={handleFieldChange}
               inputMode="decimal"
               min="0"
               placeholder="89"
@@ -157,8 +162,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           <label className="add-product-screen__field">
             <span>Protein</span>
             <input
+              name="protein"
               value={formValues.protein}
-              onChange={updateField('protein')}
+              onChange={handleFieldChange}
               inputMode="decimal"
               min="0"
               placeholder="1.1"
@@ -171,8 +177,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           <label className="add-product-screen__field">
             <span>Fat</span>
             <input
+              name="fat"
               value={formValues.fat}
-              onChange={updateField('fat')}
+              onChange={handleFieldChange}
               inputMode="decimal"
               min="0"
               placeholder="0.3"
@@ -185,8 +192,9 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           <label className="add-product-screen__field">
             <span>Carbs</span>
             <input
+              name="carbs"
               value={formValues.carbs}
-              onChange={updateField('carbs')}
+              onChange={handleFieldChange}
               inputMode="decimal"
               min="0"
               placeholder="22.8"

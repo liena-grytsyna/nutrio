@@ -54,7 +54,11 @@ export const TIME_FORMATTER = new Intl.DateTimeFormat('en-GB', {
 export function createCollapsedMealSections(
   mealGroups: MealGroups,
 ): CollapsedMealSections {
-  return Object.fromEntries(
-    MEAL_SECTIONS.map(({ id }) => [id, mealGroups[id].length === 0]),
-  ) as CollapsedMealSections;
+  const collapsedSections = {} as CollapsedMealSections;
+
+  for (const { id } of MEAL_SECTIONS) {
+    collapsedSections[id] = mealGroups[id].length === 0;
+  }
+
+  return collapsedSections;
 }

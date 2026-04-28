@@ -13,9 +13,9 @@ export function Button({
   variant = 'primary',
   ...props
 }: ButtonProps) {
-  const buttonClassName = ['button', `button--${variant}`, className]
-    .filter(Boolean)
-    .join(' ');
+  const buttonClassName = className
+    ? `button button--${variant} ${className}`
+    : `button button--${variant}`;
 
   return <button className={buttonClassName} type={type} {...props} />;
 }
