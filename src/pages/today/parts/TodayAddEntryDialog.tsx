@@ -1,6 +1,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
   type FormEvent,
 } from 'react';
@@ -38,6 +39,7 @@ export function TodayAddEntryDialog({
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const dialogRef = useRef<HTMLFormElement>(null);
 
   const visibleProducts = useMemo(
     () => searchProducts(products, query),
@@ -76,6 +78,16 @@ export function TodayAddEntryDialog({
       return;
     }
 
+    const activeElement = document.activeElement;
+
+    if (activeElement instanceof HTMLElement) {
+      activeElement.blur();
+    }
+
+    const focusDialog = window.setTimeout(() => {
+      dialogRef.current?.focus({ preventScroll: true });
+    }, 0);
+
     const previousOverflow = document.body.style.overflow;
 
     document.body.style.overflow = 'hidden';
@@ -89,6 +101,7 @@ export function TodayAddEntryDialog({
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      window.clearTimeout(focusDialog);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener('keydown', handleKeyDown);
     };
@@ -131,11 +144,13 @@ export function TodayAddEntryDialog({
   const dialog = (
     <div className="today-screen__dialog-backdrop" onClick={onClose}>
       <form
+        ref={dialogRef}
         className="today-screen__dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="today-add-entry-title"
         aria-describedby="today-add-entry-hint"
+        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
         onSubmit={handleSubmit}
       >
