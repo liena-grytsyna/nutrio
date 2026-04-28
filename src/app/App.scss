@@ -1,7 +1,7 @@
 @use '../shared/styles/tokens' as *;
 
 .app-shell {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: 24px;
@@ -9,9 +9,10 @@
   &__phone {
     width: 100%;
     max-width: 430px;
-    min-height: calc(100vh - 48px);
+    height: calc(100dvh - 48px);
+    max-height: calc(100dvh - 48px);
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto minmax(0, 1fr) auto;
     border: 1px solid rgba(32, 29, 24, 0.08);
     border-radius: 32px;
     overflow: hidden;
@@ -23,6 +24,9 @@
   }
 
   &__content {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 16px 20px 20px;
   }
 }
@@ -33,7 +37,8 @@
 
     &__phone {
       max-width: none;
-      min-height: 100vh;
+      height: 100dvh;
+      max-height: 100dvh;
       border: 0;
       border-radius: 0;
     }
