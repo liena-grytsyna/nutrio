@@ -104,6 +104,7 @@ export default function App() {
           activeScreen={activeScreen}
           tabs={tabs}
           onSelectScreen={setActiveScreen}
+          onDeleteEntry={handleDeleteEntry}
         />
       </div>
     </div>

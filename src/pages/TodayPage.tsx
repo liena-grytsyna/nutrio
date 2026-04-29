@@ -44,7 +44,7 @@ export function TodayPage({
   summary,
   entries,
   onAddEntry,
-  onDeleteEntry,
+  onDeleteEntry
 }: TodayPageProps) {
   const mealGroups = buildMealEntryGroups(entries);
   const hasEntries = entries.length > 0;
