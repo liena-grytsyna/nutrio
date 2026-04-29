@@ -193,7 +193,6 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ error: "Internal server error." });
 });
 
-// Optional: delete day-entry endpoint (guarded by deviceId)
 
 async function disconnectAndExit() {
   await prisma.$disconnect();
