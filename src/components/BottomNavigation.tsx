@@ -26,8 +26,7 @@ export function BottomNavigation({
           type="button"
           className={cn(
             styles["bottom-navigation__tab"],
-            tab.id === activeScreen &&
-              styles["bottom-navigation__tab--active"],
+            tab.id === activeScreen && styles["bottom-navigation__tab--active"],
           )}
           onClick={() => onSelectScreen(tab.id)}
         >

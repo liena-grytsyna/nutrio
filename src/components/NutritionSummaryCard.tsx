@@ -76,14 +76,10 @@ export function NutritionSummaryCard({ summary }: NutritionSummaryCardProps) {
               key={nutrient.key}
               className={styles["nutrition-summary-card__panel-item"]}
             >
-              <p
-                className={styles["nutrition-summary-card__panel-item-label"]}
-              >
+              <p className={styles["nutrition-summary-card__panel-item-label"]}>
                 {nutrient.label}
               </p>
-              <p
-                className={styles["nutrition-summary-card__panel-item-value"]}
-              >
+              <p className={styles["nutrition-summary-card__panel-item-value"]}>
                 {formatGramValue(summary.consumed[nutrient.key])}
               </p>
               <p
