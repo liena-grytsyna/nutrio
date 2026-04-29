@@ -193,32 +193,6 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ error: "Internal server error." });
 });
 
-// Optional: delete day-entry endpoint (guarded by deviceId)
-app.delete('/api/day-entries/:id', async (req, res) => {
-  const id = readText(req.params.id);
-  const deviceId = readDeviceId(req.query.deviceId || req.body.deviceId);
-
-  if (!id || !deviceId) {
-    res.status(400).json({ error: 'id and deviceId are required.' });
-    return;
-  }
-
-  try {
-    const deleted = await prisma.dayEntry.deleteMany({
-      where: { id, deviceId },
-    });
-
-    if (deleted.count === 0) {
-      res.status(404).json({ error: 'Entry not found.' });
-      return;
-    }
-
-    res.json({ ok: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Could not delete entry.' });
-  }
-});
 
 async function disconnectAndExit() {
   await prisma.$disconnect();
