@@ -13,15 +13,7 @@ export function searchProducts(products: Product[], query: string) {
     return products;
   }
 
-  return products.filter((product) => {
-    const name = product.name.toLowerCase();
-    const brand = (product.brand ?? '').toLowerCase();
-    const barcode = (product.barcode ?? '').toLowerCase();
-
-    return (
-      name.includes(normalizedQuery) ||
-      brand.includes(normalizedQuery) ||
-      barcode.includes(normalizedQuery)
-    );
-  });
+  return products.filter((product) =>
+    product.name.toLowerCase().includes(normalizedQuery),
+  );
 }

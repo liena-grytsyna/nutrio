@@ -25,14 +25,9 @@
     gap: 14px;
   }
 
-  &__row,
   &__macro-grid {
     display: grid;
     gap: 12px;
-  }
-
-  &__row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   &__macro-grid {
@@ -75,7 +70,6 @@
   }
 
   @media (max-width: 420px) {
-    &__row,
     &__macro-grid {
       grid-template-columns: 1fr;
     }

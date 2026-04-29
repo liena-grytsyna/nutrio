@@ -18,5 +18,4 @@ export type {
   NutritionOverview,
   NutritionValues,
   PreviewDayEntryNutritionInput,
-  ProductSource,
 } from './model/types';

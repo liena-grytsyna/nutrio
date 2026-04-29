@@ -181,7 +181,7 @@ export function TodayAddEntryDialog({
               <input
                 type="search"
                 value={query}
-                placeholder="Name, brand or barcode..."
+                placeholder="Name..."
                 onChange={(event) => {
                   setStatusMessage(null);
                   setQuery(event.target.value);

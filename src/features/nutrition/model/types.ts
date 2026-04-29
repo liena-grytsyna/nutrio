@@ -21,13 +21,10 @@ export type MealSectionId =
   | 'dinner'
   | 'thirdSnack';
 
-export type ProductSource = 'manual' | 'search';
-
 export type DayEntry = NutritionValues & {
   id: string;
   name: string;
   amount: number;
-  source: ProductSource;
   eatenAt: string;
 };
 

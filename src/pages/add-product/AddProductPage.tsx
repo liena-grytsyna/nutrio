@@ -9,8 +9,6 @@ type AddProductPageProps = {
 
 type ProductFormValues = {
   name: string;
-  brand: string;
-  barcode: string;
   servingSize: string;
   calories: string;
   protein: string;
@@ -20,8 +18,6 @@ type ProductFormValues = {
 
 const initialFormValues: ProductFormValues = {
   name: '',
-  brand: '',
-  barcode: '',
   servingSize: '100 g',
   calories: '',
   protein: '',
@@ -70,8 +66,6 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
     try {
       await onCreateProduct({
         name,
-        brand: formValues.brand.trim() || null,
-        barcode: formValues.barcode.trim() || null,
         servingSize,
         calories,
         protein,
@@ -110,29 +104,6 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
             required
           />
         </label>
-
-        <div className="add-product-screen__row">
-          <label className="add-product-screen__field">
-            <span>Brand</span>
-            <input
-              name="brand"
-              value={formValues.brand}
-              onChange={handleFieldChange}
-              placeholder="Optional"
-            />
-          </label>
-
-          <label className="add-product-screen__field">
-            <span>Barcode</span>
-            <input
-              name="barcode"
-              value={formValues.barcode}
-              onChange={handleFieldChange}
-              placeholder="Optional"
-              inputMode="numeric"
-            />
-          </label>
-        </div>
 
         <label className="add-product-screen__field">
           <span>Serving</span>

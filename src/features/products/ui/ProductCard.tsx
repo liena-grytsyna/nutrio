@@ -6,10 +6,6 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product }: ProductCardProps) {
-  const servingLabel = product.brand
-    ? `${product.brand} • ${product.servingSize}`
-    : product.servingSize;
-
   return (
     <li className="product-list-screen__item">
       <strong className="product-list-screen__item-name">{product.name}</strong>
@@ -18,7 +14,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {formatNumber(product.protein, 1)} | F {formatNumber(product.fat, 1)} | C{' '}
         {formatNumber(product.carbs, 1)}
       </p>
-      <p className="product-list-screen__item-serving">{servingLabel}</p>
+      <p className="product-list-screen__item-serving">{product.servingSize}</p>
     </li>
   );
 }

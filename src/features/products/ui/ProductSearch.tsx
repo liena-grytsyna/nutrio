@@ -18,7 +18,7 @@ export function ProductSearch({
         className="product-list-screen__search-input"
         type="search"
         value={value}
-        placeholder="Name, brand or barcode..."
+        placeholder="Name..."
         onChange={(event) => onChange(event.target.value)}
       />
       <span className="product-list-screen__search-count">

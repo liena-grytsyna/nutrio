@@ -29,16 +29,11 @@ const dayEntrySelect = {
   protein: true,
   fat: true,
   carbs: true,
-  source: true,
   eatenAt: true,
 };
 
 function readText(value) {
   return typeof value === 'string' ? value.trim() : '';
-}
-
-function readOptionalText(value) {
-  return readText(value) || null;
 }
 
 function readNonNegativeNumber(value) {
@@ -130,8 +125,6 @@ app.post('/api/products', async (req, res) => {
   const product = await prisma.product.create({
     data: {
       name,
-      brand: readOptionalText(req.body.brand),
-      barcode: readOptionalText(req.body.barcode),
       servingSize: readText(req.body.servingSize) || '100 g',
       calories,
       protein,
@@ -177,7 +170,6 @@ app.post('/api/day-entries', async (req, res) => {
       name: product.name,
       amount,
       ...nutrition,
-      source: 'search',
       eatenAt,
     },
     select: dayEntrySelect,
