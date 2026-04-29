@@ -28,10 +28,12 @@ model DayEntry {
   protein   Float
   fat       Float
   carbs     Float
+  deviceId  String   @map("device_id")
   eatenAt   DateTime @map("eaten_at")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@index([eatenAt])
+  @@index([deviceId, eatenAt])
   @@map("day_entries")
 }

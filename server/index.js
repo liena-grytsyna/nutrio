@@ -58,6 +58,10 @@ function readInteger(value) {
   return Number.isInteger(number) ? number : null;
 }
 
+function readDeviceId(value) {
+  return readText(value);
+}
+
 app.get("/api/health", async (_req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
@@ -78,6 +82,7 @@ app.get("/api/products", async (_req, res) => {
 
 app.get("/api/nutrition-overview", async (req, res) => {
   const timezoneOffsetMinutes = readInteger(req.query.timezoneOffsetMinutes);
+  const deviceId = readDeviceId(req.query.deviceId);
 
   if (timezoneOffsetMinutes === null) {
     res.status(400).json({
@@ -86,8 +91,14 @@ app.get("/api/nutrition-overview", async (req, res) => {
     return;
   }
 
+  if (!deviceId) {
+    res.status(400).json({ error: "deviceId is required." });
+    return;
+  }
+
   const dayEntries = await prisma.dayEntry.findMany({
     select: dayEntrySelect,
+    where: { deviceId },
     orderBy: [{ eatenAt: "asc" }, { createdAt: "asc" }],
     take: 1000,
   });
@@ -135,8 +146,9 @@ app.post("/api/day-entries", async (req, res) => {
   const productId = readText(req.body.productId);
   const amount = readNonNegativeNumber(req.body.amount);
   const eatenAt = readDate(req.body.eatenAt);
+  const deviceId = readDeviceId(req.body.deviceId);
 
-  if (!productId || amount === null || !eatenAt) {
+  if (!productId || amount === null || !eatenAt || !deviceId) {
     res.status(400).json({
       error: "Day entry requires valid productId, amount, and eatenAt.",
     });
@@ -162,6 +174,7 @@ app.post("/api/day-entries", async (req, res) => {
       amount,
       ...nutrition,
       eatenAt,
+      deviceId,
     },
     select: dayEntrySelect,
   });
@@ -178,6 +191,33 @@ app.use((error, _req, res, _next) => {
 
   console.error(error);
   res.status(500).json({ error: "Internal server error." });
+});
+
+// Optional: delete day-entry endpoint (guarded by deviceId)
+app.delete('/api/day-entries/:id', async (req, res) => {
+  const id = readText(req.params.id);
+  const deviceId = readDeviceId(req.query.deviceId || req.body.deviceId);
+
+  if (!id || !deviceId) {
+    res.status(400).json({ error: 'id and deviceId are required.' });
+    return;
+  }
+
+  try {
+    const deleted = await prisma.dayEntry.deleteMany({
+      where: { id, deviceId },
+    });
+
+    if (deleted.count === 0) {
+      res.status(404).json({ error: 'Entry not found.' });
+      return;
+    }
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Could not delete entry.' });
+  }
 });
 
 async function disconnectAndExit() {

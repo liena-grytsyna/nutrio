@@ -35,6 +35,8 @@ Main API endpoints
 - POST /api/products             — create product (name, calories, protein, fat, carbs, servingSize)
 - POST /api/day-entries          — create a day entry (productId, amount, eatenAt)
 - GET  /api/nutrition-overview   — get aggregated per-day nutrition overview (requires timezoneOffsetMinutes query param)
+  
+Note: For the MVP Nutrio separates day entries per device using a generated deviceId stored in the browser's localStorage. The frontend includes this deviceId with requests so each device only sees its own entries.
 
 Notes / removed features
 ------------------------
