@@ -1,0 +1,50 @@
+@use '../mixins' as *;
+
+.today-screen {
+  @include section-stack(18px);
+
+  &__meals-section {
+    @include section-stack(14px);
+  }
+
+  &__meals-title {
+    margin: 0;
+    padding: 0 4px;
+    color: #1e232c;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  &__status {
+    margin: 0;
+    padding: 14px 18px;
+    border: 1px solid rgba(91, 107, 145, 0.1);
+    border-radius: 20px;
+    background: #ffffff;
+    color: #6f7b8f;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 16px 30px rgba(47, 65, 102, 0.08);
+  }
+
+  &__meals-empty {
+    margin: -4px 4px 0;
+    color: #6f7b8f;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  &__meals {
+    display: grid;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .today-screen {
+    &__meals-title {
+      font-size: 1.8rem;
+    }
+  }
+}
