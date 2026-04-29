@@ -43,24 +43,21 @@ function getClampedProgress(progress) {
 
 function getCalorieBalanceStatus(progress) {
   if (progress > IDEAL_MAX_PROGRESS) {
-    return 'over';
+    return "over";
   }
 
   if (progress >= IDEAL_MIN_PROGRESS) {
-    return 'ideal';
+    return "ideal";
   }
 
-  return 'under';
+  return "under";
 }
 
 function getRemaining(value, target) {
   return Math.max(target - value, 0);
 }
 
-export function getNutritionGoalSummary(
-  consumed,
-  target = DAILY_TARGETS,
-) {
+export function getNutritionGoalSummary(consumed, target = DAILY_TARGETS) {
   const calorieProgressRatio = getCalorieProgressRatio(
     consumed.calories,
     target.calories,
@@ -100,7 +97,7 @@ export function getDayCalorieIndicator(
 ) {
   const rawProgress = getCalorieProgressRatio(calories, targetCalories);
   const status = getCalorieBalanceStatus(rawProgress);
-  const progress = status === 'under' ? getClampedProgress(rawProgress) : 1;
+  const progress = status === "under" ? getClampedProgress(rawProgress) : 1;
 
   return {
     calories,
@@ -165,7 +162,10 @@ export function buildNutritionOverview(entries, timezoneOffsetMinutes) {
   const dailyCalorieIndicators = Object.fromEntries(
     Object.entries(days).map(([dayKey, dayOverview]) => [
       dayKey,
-      getDayCalorieIndicator(dayOverview.totals.calories, DAILY_TARGETS.calories),
+      getDayCalorieIndicator(
+        dayOverview.totals.calories,
+        DAILY_TARGETS.calories,
+      ),
     ]),
   );
 
