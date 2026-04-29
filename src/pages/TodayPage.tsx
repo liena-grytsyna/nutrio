@@ -31,7 +31,6 @@ type TodayPageProps = {
     productId: string,
     amount: number,
   ) => Promise<void> | void;
-  onDeleteEntry?: (entryId: string) => Promise<void> | void;
 };
 
 // Main screen for today's meals and nutrition summary
@@ -44,7 +43,6 @@ export function TodayPage({
   summary,
   entries,
   onAddEntry,
-  onDeleteEntry
 }: TodayPageProps) {
   const mealGroups = buildMealEntryGroups(entries);
   const hasEntries = entries.length > 0;
@@ -100,7 +98,6 @@ export function TodayPage({
               isCollapsed={collapsedSections[section.id]}
               onAdd={setActiveSectionId}
               onToggle={toggleMealSection}
-              onDeleteEntry={onDeleteEntry}
             />
           ))}
         </div>

@@ -50,7 +50,6 @@ export default function App() {
     entriesError,
     selectedDayOverview,
     handleAddEntry,
-    handleDeleteEntry
   } = useNutritionOverview({
     products,
     selectedDate,
@@ -80,7 +79,6 @@ export default function App() {
               summary={selectedDayOverview.summary}
               entries={selectedDayOverview.entries}
               onAddEntry={handleAddEntry}
-              onDeleteEntry={handleDeleteEntry}
             />
           )}
 
@@ -104,7 +102,6 @@ export default function App() {
           activeScreen={activeScreen}
           tabs={tabs}
           onSelectScreen={setActiveScreen}
-          onDeleteEntry={handleDeleteEntry}
         />
       </div>
     </div>
