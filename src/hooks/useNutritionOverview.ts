@@ -127,6 +127,6 @@ export function useNutritionOverview({
     selectedDayOverview,
     refreshNutritionOverview,
     handleAddEntry,
-    handleDeleteEntry
+    handleDeleteEntry,
   };
 }

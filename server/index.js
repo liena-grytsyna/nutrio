@@ -192,10 +192,13 @@ app.use((error, _req, res, _next) => {
   console.error(error);
   res.status(500).json({ error: "Internal server error." });
 });
-
+//
 app.delete("/api/day-entries/:id", async (req, res) => {
-  await prisma.dayEntry.delete({ where: { id: req.params.id } });
-  res.status(204).end();
+  await prisma.dayEntry.delete({
+    where: { id: req.params.id },
+  });
+
+  res.status(204).send();
 });
 
 async function disconnectAndExit() {

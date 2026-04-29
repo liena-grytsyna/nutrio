@@ -40,13 +40,9 @@ export async function createDayEntry(
 
   return (await readJsonResponse<{ dayEntry: DayEntry }>(response)).dayEntry;
 }
-
+//
 export async function deleteDayEntry(entryId: string): Promise<void> {
-  const response = await fetch(`/api/day-entries/${entryId}`, {
+  await fetch(`/api/day-entries/${entryId}`, {
     method: "DELETE",
   });
-  
-  if (!response.ok) {
-    throw new Error(`Failed to delete entry with id ${entryId}`);
-  }
-  };
+}
