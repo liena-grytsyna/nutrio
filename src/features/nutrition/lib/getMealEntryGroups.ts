@@ -1,12 +1,4 @@
-import type { DayEntry } from '../model/types';
-
-export type MealSectionId =
-  | 'breakfast'
-  | 'snack'
-  | 'lunch'
-  | 'secondSnack'
-  | 'dinner'
-  | 'thirdSnack';
+import type { DayEntry, MealSectionId } from '../model/types';
 
 type MealEntryGroups = Record<MealSectionId, DayEntry[]>;
 

@@ -1,6 +1,5 @@
 export { createProduct, fetchProducts } from './api/productsApi';
 export {
-  getProductNutritionForAmount,
   searchProducts,
   sortProductsByName,
 } from './lib/productCatalog';

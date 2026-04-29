@@ -3,10 +3,9 @@ import type { Product } from '../../features/products';
 import { NutritionSummaryCard } from '../../widgets/NutritionSummaryCard';
 import {
   buildMealEntryGroups,
-  dailyTargets,
   type DayEntry,
   type MealSectionId,
-  type NutritionValues,
+  type NutritionGoalSummary,
 } from '../../features/nutrition';
 import {
   createCollapsedMealSections,
@@ -23,7 +22,7 @@ type TodayPageProps = {
   isProductsLoading: boolean;
   productsError?: string | null;
   products: Product[];
-  totals: NutritionValues;
+  summary: NutritionGoalSummary;
   entries: DayEntry[];
   onAddEntry: (
     sectionId: MealSectionId,
@@ -38,7 +37,7 @@ export function TodayPage({
   isProductsLoading,
   productsError = null,
   products,
-  totals,
+  summary,
   entries,
   onAddEntry,
 }: TodayPageProps) {
@@ -68,7 +67,7 @@ export function TodayPage({
 
   return (
     <section className="screen today-screen">
-      <NutritionSummaryCard totals={totals} targets={dailyTargets} />
+      <NutritionSummaryCard summary={summary} />
 
       <div className="today-screen__meals-section">
         <h2 className="today-screen__meals-title">Meals</h2>

@@ -1,6 +1,10 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import {
+  buildNutritionOverview,
+  getProductNutritionForAmount,
+} from './nutrition.js';
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
@@ -17,8 +21,6 @@ const prisma = new PrismaClient({
 });
 
 app.use(express.json({ limit: '1mb' }));
-
-const PRODUCT_SOURCES = new Set(['manual', 'search']);
 const dayEntrySelect = {
   id: true,
   name: true,
@@ -56,9 +58,9 @@ function readDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function readProductSource(value) {
-  const source = readText(value);
-  return PRODUCT_SOURCES.has(source) ? source : null;
+function readInteger(value) {
+  const number = Number(value);
+  return Number.isInteger(number) ? number : null;
 }
 
 app.get('/api/health', async (_req, res) => {
@@ -90,14 +92,25 @@ app.get('/api/products', async (req, res) => {
   res.json({ products });
 });
 
-app.get('/api/day-entries', async (_req, res) => {
+app.get('/api/nutrition-overview', async (req, res) => {
+  const timezoneOffsetMinutes = readInteger(req.query.timezoneOffsetMinutes);
+
+  if (timezoneOffsetMinutes === null) {
+    res.status(400).json({
+      error: 'timezoneOffsetMinutes must be a valid integer.',
+    });
+    return;
+  }
+
   const dayEntries = await prisma.dayEntry.findMany({
     select: dayEntrySelect,
     orderBy: [{ eatenAt: 'asc' }, { createdAt: 'asc' }],
     take: 1000,
   });
 
-  res.json({ dayEntries });
+  res.json({
+    overview: buildNutritionOverview(dayEntries, timezoneOffsetMinutes),
+  });
 });
 
 app.post('/api/products', async (req, res) => {
@@ -131,46 +144,73 @@ app.post('/api/products', async (req, res) => {
 });
 
 app.post('/api/day-entries', async (req, res) => {
-  const name = readText(req.body.name);
+  const productId = readText(req.body.productId);
   const amount = readNonNegativeNumber(req.body.amount);
-  const calories = readNonNegativeNumber(req.body.calories);
-  const protein = readNonNegativeNumber(req.body.protein);
-  const fat = readNonNegativeNumber(req.body.fat);
-  const carbs = readNonNegativeNumber(req.body.carbs);
-  const source = readProductSource(req.body.source);
   const eatenAt = readDate(req.body.eatenAt);
 
   if (
-    !name ||
+    !productId ||
     amount === null ||
-    calories === null ||
-    protein === null ||
-    fat === null ||
-    carbs === null ||
-    !source ||
     !eatenAt
   ) {
     res.status(400).json({
-      error: 'Day entry requires valid name, amount, nutrition values, source, and eatenAt.',
+      error: 'Day entry requires valid productId, amount, and eatenAt.',
     });
     return;
   }
 
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+  });
+
+  if (!product) {
+    res.status(404).json({
+      error: 'Selected product was not found.',
+    });
+    return;
+  }
+
+  const nutrition = getProductNutritionForAmount(product, amount);
+
   const dayEntry = await prisma.dayEntry.create({
     data: {
-      name,
+      name: product.name,
       amount,
-      calories,
-      protein,
-      fat,
-      carbs,
-      source,
+      ...nutrition,
+      source: 'search',
       eatenAt,
     },
     select: dayEntrySelect,
   });
 
   res.status(201).json({ dayEntry });
+});
+
+app.post('/api/day-entries/preview', async (req, res) => {
+  const productId = readText(req.body.productId);
+  const amount = readNonNegativeNumber(req.body.amount);
+
+  if (!productId || amount === null) {
+    res.status(400).json({
+      error: 'Preview requires valid productId and amount.',
+    });
+    return;
+  }
+
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+  });
+
+  if (!product) {
+    res.status(404).json({
+      error: 'Selected product was not found.',
+    });
+    return;
+  }
+
+  res.json({
+    nutrition: getProductNutritionForAmount(product, amount),
+  });
 });
 
 app.use((error, _req, res, _next) => {

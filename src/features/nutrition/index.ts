@@ -1,28 +1,22 @@
-export { createDayEntry, fetchDayEntries } from './api/dayEntriesApi';
-export { dailyTargets } from './model/dailyTargets';
 export {
-  getCalorieBalanceStatus,
-  getCalorieProgressRatio,
-  getClampedProgress,
-} from './lib/calorieBalance';
-export { calculateDayTotals } from './lib/calculateDayTotals';
-export {
-  buildDailyCalorieIndicators,
-  getDateKey,
-  getDayCalorieIndicator,
-} from './lib/getDayCalorieIndicator';
+  createDayEntry,
+  fetchNutritionOverview,
+  previewDayEntryNutrition,
+} from './api/dayEntriesApi';
 export {
   buildMealEntryGroups,
   getMealSectionId,
-  type MealSectionId,
 } from './lib/getMealEntryGroups';
-export { getNutritionGoalSummary } from './lib/getNutritionGoalSummary';
 export type {
   CalorieBalanceStatus,
   CreateDayEntryInput,
+  DayNutritionOverview,
   DayCalorieIndicator,
   DayEntry,
+  MealSectionId,
   NutritionGoalSummary,
+  NutritionOverview,
   NutritionValues,
+  PreviewDayEntryNutritionInput,
   ProductSource,
 } from './model/types';

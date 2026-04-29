@@ -3,6 +3,7 @@ import {
   addMonths,
   formatCalendarMonth,
   formatCalendarMonthYear,
+  getDateKey,
   formatWeekdayLabel,
   getMonthDays,
   getWeekDays,
@@ -11,16 +12,12 @@ import {
   startOfDay,
   startOfMonth,
 } from '../../shared/lib/date';
-import {
-  getDateKey,
-  getDayCalorieIndicator,
-} from '../../features/nutrition';
 import type { DayCalorieIndicator } from '../../features/nutrition';
 import './TopCalendar.scss';
 
 type TopCalendarProps = {
-  calorieTarget: number;
   dailyCalorieIndicators: Record<string, DayCalorieIndicator>;
+  defaultIndicator: DayCalorieIndicator;
   selectedDate: Date;
   onSelectDate: (date: Date) => void;
 };
@@ -106,14 +103,13 @@ function DayProgressRing({
 }
 
 export function TopCalendar({
-  calorieTarget,
   dailyCalorieIndicators,
+  defaultIndicator,
   selectedDate,
   onSelectDate,
 }: TopCalendarProps) {
   const rootRef = useRef<HTMLElement | null>(null);
   const today = startOfDay(new Date());
-  const emptyIndicator = getDayCalorieIndicator(0, calorieTarget);
   const weekDays = getWeekDays(selectedDate);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [visibleMonth, setVisibleMonth] = useState(() =>
@@ -176,7 +172,7 @@ export function TopCalendar({
   }
 
   function getIndicatorForDay(day: Date) {
-    return dailyCalorieIndicators[getDateKey(day)] ?? emptyIndicator;
+    return dailyCalorieIndicators[getDateKey(day)] ?? defaultIndicator;
   }
 
   const monthDays = getMonthDays(visibleMonth);

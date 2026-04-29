@@ -13,6 +13,14 @@ export type DayCalorieIndicator = {
   status: CalorieBalanceStatus;
 };
 
+export type MealSectionId =
+  | 'breakfast'
+  | 'snack'
+  | 'lunch'
+  | 'secondSnack'
+  | 'dinner'
+  | 'thirdSnack';
+
 export type ProductSource = 'manual' | 'search';
 
 export type DayEntry = NutritionValues & {
@@ -23,7 +31,16 @@ export type DayEntry = NutritionValues & {
   eatenAt: string;
 };
 
-export type CreateDayEntryInput = Omit<DayEntry, 'id'>;
+export type CreateDayEntryInput = {
+  productId: string;
+  amount: number;
+  eatenAt: string;
+};
+
+export type PreviewDayEntryNutritionInput = {
+  productId: string;
+  amount: number;
+};
 
 export type NutritionGoalSummary = {
   consumed: NutritionValues;
@@ -32,4 +49,17 @@ export type NutritionGoalSummary = {
   progress: NutritionValues;
   calorieStatus: CalorieBalanceStatus;
   calorieProgressRatio: number;
+};
+
+export type DayNutritionOverview = {
+  entries: DayEntry[];
+  totals: NutritionValues;
+  summary: NutritionGoalSummary;
+};
+
+export type NutritionOverview = {
+  days: Record<string, DayNutritionOverview>;
+  dailyCalorieIndicators: Record<string, DayCalorieIndicator>;
+  defaultDay: DayNutritionOverview;
+  defaultIndicator: DayCalorieIndicator;
 };

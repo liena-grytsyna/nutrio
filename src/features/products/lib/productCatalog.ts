@@ -1,9 +1,4 @@
-import type { NutritionValues } from '../../nutrition';
 import type { Product } from '../model/types';
-
-function roundNutritionValue(value: number) {
-  return Math.round(value * 10) / 10;
-}
 
 export function sortProductsByName(products: Product[]) {
   return [...products].sort((first, second) =>
@@ -29,18 +24,4 @@ export function searchProducts(products: Product[], query: string) {
       barcode.includes(normalizedQuery)
     );
   });
-}
-
-export function getProductNutritionForAmount(
-  product: Pick<Product, keyof NutritionValues>,
-  amount: number,
-): NutritionValues {
-  const amountRatio = amount / 100;
-
-  return {
-    calories: roundNutritionValue(product.calories * amountRatio),
-    protein: roundNutritionValue(product.protein * amountRatio),
-    fat: roundNutritionValue(product.fat * amountRatio),
-    carbs: roundNutritionValue(product.carbs * amountRatio),
-  };
 }

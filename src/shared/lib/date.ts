@@ -38,6 +38,15 @@ export function startOfMonth(date: Date) {
   return d;
 }
 
+export function getDateKey(date: Date) {
+  const normalized = startOfDay(date);
+  const year = normalized.getFullYear();
+  const month = String(normalized.getMonth() + 1).padStart(2, '0');
+  const day = String(normalized.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
 export function getWeekDays(date: Date) {
   const start = getStartOfWeek(date);
   return Array.from({ length: 7 }, (_, i) => addDays(start, i));

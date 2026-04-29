@@ -5,10 +5,13 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import {
-  getProductNutritionForAmount,
   searchProducts,
   type Product,
 } from '../../../features/products';
+import {
+  previewDayEntryNutrition,
+  type NutritionValues,
+} from '../../../features/nutrition';
 import { formatNumber } from '../../../shared/lib/formatNumber';
 import { Button } from '../../../shared/ui/Button';
 import type { MealSectionConfig } from '../constants';
@@ -37,6 +40,9 @@ export function TodayAddEntryDialog({
   );
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [previewNutrition, setPreviewNutrition] = useState<NutritionValues | null>(
+    null,
+  );
 
   const visibleProducts = searchProducts(products, query);
   const selectedProduct =
@@ -45,10 +51,6 @@ export function TodayAddEntryDialog({
     null;
   const parsedAmount = Number(amount);
   const isAmountValid = Number.isFinite(parsedAmount) && parsedAmount > 0;
-  const previewNutrition =
-    selectedProduct && isAmountValid
-      ? getProductNutritionForAmount(selectedProduct, parsedAmount)
-      : null;
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -68,6 +70,42 @@ export function TodayAddEntryDialog({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+
+  useEffect(() => {
+    if (!selectedProduct || !isAmountValid) {
+      setPreviewNutrition(null);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    async function loadPreview() {
+      try {
+        setStatusMessage(null);
+        const nutrition = await previewDayEntryNutrition(
+          {
+            productId: selectedProduct.id,
+            amount: parsedAmount,
+          },
+          controller.signal,
+        );
+        setPreviewNutrition(nutrition);
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          setPreviewNutrition(null);
+          setStatusMessage(
+            error instanceof Error
+              ? error.message
+              : 'Preview could not be calculated.',
+          );
+        }
+      }
+    }
+
+    loadPreview();
+
+    return () => controller.abort();
+  }, [isAmountValid, parsedAmount, selectedProduct]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

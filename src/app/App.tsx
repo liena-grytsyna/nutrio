@@ -4,25 +4,23 @@ import { BottomNavigation } from '../widgets/BottomNavigation';
 import {
   createProduct,
   fetchProducts,
-  getProductNutritionForAmount,
   sortProductsByName,
   type CreateProductInput,
   type Product,
 } from '../features/products';
 import {
   createDayEntry,
-  buildDailyCalorieIndicators,
-  calculateDayTotals,
-  dailyTargets,
-  fetchDayEntries,
+  fetchNutritionOverview,
   getMealSectionId,
-  type DayEntry,
+  type DayNutritionOverview,
+  type NutritionOverview,
   type MealSectionId,
+  type NutritionGoalSummary,
 } from '../features/nutrition';
 import { AddProductPage } from '../pages/add-product/AddProductPage';
 import { ProductsPage } from '../pages/products/ProductsPage';
 import { TodayPage } from '../pages/today/TodayPage';
-import { isSameDay, startOfDay } from '../shared/lib/date';
+import { getDateKey, startOfDay } from '../shared/lib/date';
 import type { AppScreen } from '../features/navigation/types';
 import './App.scss';
 
@@ -41,6 +39,57 @@ const MEAL_SECTION_HOURS: Record<MealSectionId, number> = {
   thirdSnack: 22,
 };
 
+const EMPTY_SUMMARY: NutritionGoalSummary = {
+  consumed: {
+    calories: 0,
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+  },
+  target: {
+    calories: 0,
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+  },
+  remaining: {
+    calories: 0,
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+  },
+  progress: {
+    calories: 0,
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+  },
+  calorieStatus: 'under',
+  calorieProgressRatio: 0,
+};
+
+const EMPTY_DAY_OVERVIEW: DayNutritionOverview = {
+  entries: [],
+  totals: {
+    calories: 0,
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+  },
+  summary: EMPTY_SUMMARY,
+};
+
+const EMPTY_NUTRITION_OVERVIEW: NutritionOverview = {
+  days: {},
+  dailyCalorieIndicators: {},
+  defaultDay: EMPTY_DAY_OVERVIEW,
+  defaultIndicator: {
+    calories: 0,
+    progress: 0,
+    status: 'under',
+  },
+};
+
 function getErrorMessage(error: unknown, fallbackMessage: string) {
   return error instanceof Error ? error.message : fallbackMessage;
 }
@@ -48,12 +97,17 @@ function getErrorMessage(error: unknown, fallbackMessage: string) {
 export default function App() {
   const [activeScreen, setActiveScreen] = useState<AppScreen>('today');
   const [selectedDate, setSelectedDate] = useState(() => startOfDay(new Date()));
-  const [entries, setEntries] = useState<DayEntry[]>([]);
+  const [nutritionOverview, setNutritionOverview] =
+    useState<NutritionOverview>(EMPTY_NUTRITION_OVERVIEW);
   const [entriesLoading, setEntriesLoading] = useState(true);
   const [entriesError, setEntriesError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [productsError, setProductsError] = useState<string | null>(null);
+  const selectedDateKey = getDateKey(selectedDate);
+  const timezoneOffsetMinutes = selectedDate.getTimezoneOffset();
+  const selectedDayOverview =
+    nutritionOverview.days[selectedDateKey] ?? nutritionOverview.defaultDay;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -85,15 +139,20 @@ export default function App() {
   useEffect(() => {
     const controller = new AbortController();
 
-    async function loadDayEntries() {
+    async function loadNutritionOverview() {
+      setEntriesLoading(true);
       setEntriesError(null);
 
       try {
-        const nextEntries = await fetchDayEntries(controller.signal);
-        setEntries(nextEntries);
+        const overview = await fetchNutritionOverview(
+          timezoneOffsetMinutes,
+          controller.signal,
+        );
+        setNutritionOverview(overview);
       } catch (error) {
         if (!controller.signal.aborted) {
           setEntriesError(getErrorMessage(error, 'Meals could not be loaded.'));
+          setNutritionOverview(EMPTY_NUTRITION_OVERVIEW);
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -102,10 +161,10 @@ export default function App() {
       }
     }
 
-    loadDayEntries();
+    loadNutritionOverview();
 
     return () => controller.abort();
-  }, []);
+  }, [timezoneOffsetMinutes]);
 
   async function handleCreateProduct(input: CreateProductInput) {
     const product = await createProduct(input);
@@ -129,10 +188,10 @@ export default function App() {
       throw new Error('Selected product was not found.');
     }
 
-    const sameSectionCount = entries.filter((entry) => {
+    const sameSectionCount = selectedDayOverview.entries.filter((entry) => {
       const eatenAt = new Date(entry.eatenAt);
 
-      return isSameDay(eatenAt, selectedDate) && getMealSectionId(eatenAt) === sectionId;
+      return getMealSectionId(eatenAt) === sectionId;
     }).length;
 
     const eatenAt = new Date(selectedDate);
@@ -143,34 +202,31 @@ export default function App() {
       0,
     );
 
-    const nutrition = getProductNutritionForAmount(product, amount);
-    const dayEntry = await createDayEntry({
-      name: product.name,
+    await createDayEntry({
+      productId,
       amount,
-      ...nutrition,
-      source: 'search',
       eatenAt: eatenAt.toISOString(),
     });
 
-    setEntries((currentEntries) => [...currentEntries, dayEntry]);
-    setEntriesError(null);
-  }
+    setEntriesLoading(true);
 
-  const dailyCalorieIndicators = buildDailyCalorieIndicators(
-    entries,
-    dailyTargets.calories,
-  );
-  const entriesForSelectedDate = entries.filter((entry) =>
-    isSameDay(new Date(entry.eatenAt), selectedDate),
-  );
-  const totals = calculateDayTotals(entriesForSelectedDate);
+    try {
+      const overview = await fetchNutritionOverview(timezoneOffsetMinutes);
+      setNutritionOverview(overview);
+      setEntriesError(null);
+    } catch (error) {
+      setEntriesError(getErrorMessage(error, 'Meals could not be refreshed.'));
+    } finally {
+      setEntriesLoading(false);
+    }
+  }
 
   return (
     <div className="app-shell">
       <div className="app-shell__phone">
         <TopCalendar
-          calorieTarget={dailyTargets.calories}
-          dailyCalorieIndicators={dailyCalorieIndicators}
+          dailyCalorieIndicators={nutritionOverview.dailyCalorieIndicators}
+          defaultIndicator={nutritionOverview.defaultIndicator}
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
         />
@@ -184,8 +240,8 @@ export default function App() {
               isProductsLoading={productsLoading}
               productsError={productsError}
               products={products}
-              totals={totals}
-              entries={entriesForSelectedDate}
+              summary={selectedDayOverview.summary}
+              entries={selectedDayOverview.entries}
               onAddEntry={handleAddEntry}
             />
           )}

@@ -1,11 +1,21 @@
-import type { CreateDayEntryInput, DayEntry } from '../model/types';
+import type {
+  CreateDayEntryInput,
+  DayEntry,
+  NutritionOverview,
+  NutritionValues,
+  PreviewDayEntryNutritionInput,
+} from '../model/types';
 
-type DayEntriesResponse = {
-  dayEntries: DayEntry[];
+type NutritionOverviewResponse = {
+  overview: NutritionOverview;
 };
 
 type DayEntryResponse = {
   dayEntry: DayEntry;
+};
+
+type NutritionPreviewResponse = {
+  nutrition: NutritionValues;
 };
 
 type ErrorResponse = {
@@ -38,14 +48,37 @@ async function readJsonResponse<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export async function fetchDayEntries(signal?: AbortSignal): Promise<DayEntry[]> {
-  const response = await fetch('/api/day-entries', { signal });
-  return (await readJsonResponse<DayEntriesResponse>(response)).dayEntries;
+export async function fetchNutritionOverview(
+  timezoneOffsetMinutes: number,
+  signal?: AbortSignal,
+): Promise<NutritionOverview> {
+  const searchParams = new URLSearchParams({
+    timezoneOffsetMinutes: String(timezoneOffsetMinutes),
+  });
+  const response = await fetch(`/api/nutrition-overview?${searchParams.toString()}`, {
+    signal,
+  });
+
+  return (await readJsonResponse<NutritionOverviewResponse>(response)).overview;
 }
 
-export async function createDayEntry(
-  input: CreateDayEntryInput,
-): Promise<DayEntry> {
+export async function previewDayEntryNutrition(
+  input: PreviewDayEntryNutritionInput,
+  signal?: AbortSignal,
+): Promise<NutritionValues> {
+  const response = await fetch('/api/day-entries/preview', {
+    method: 'POST',
+    signal,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(input),
+  });
+
+  return (await readJsonResponse<NutritionPreviewResponse>(response)).nutrition;
+}
+
+export async function createDayEntry(input: CreateDayEntryInput): Promise<DayEntry> {
   const response = await fetch('/api/day-entries', {
     method: 'POST',
     headers: {

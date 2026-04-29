@@ -1,21 +1,17 @@
 import {
-  getNutritionGoalSummary,
-  type NutritionValues,
+  type NutritionGoalSummary,
 } from '../../features/nutrition';
 import { NutritionSummaryCardChart } from './parts/NutritionSummaryCardChart';
 import { NutritionSummaryCardPanel } from './parts/NutritionSummaryCardPanel';
 import './NutritionSummaryCard.scss';
 
 type NutritionSummaryCardProps = {
-  totals: NutritionValues;
-  targets: NutritionValues;
+  summary: NutritionGoalSummary;
 };
 
 export function NutritionSummaryCard({
-  totals,
-  targets,
+  summary,
 }: NutritionSummaryCardProps) {
-  const summary = getNutritionGoalSummary(totals, targets);
   const className = `nutrition-summary-card nutrition-summary-card--${summary.calorieStatus}`;
 
   return (
