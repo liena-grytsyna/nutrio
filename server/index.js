@@ -18,6 +18,19 @@ const prisma = new PrismaClient({
 
 app.use(express.json({ limit: '1mb' }));
 
+const PRODUCT_SOURCES = new Set(['manual', 'search']);
+const dayEntrySelect = {
+  id: true,
+  name: true,
+  amount: true,
+  calories: true,
+  protein: true,
+  fat: true,
+  carbs: true,
+  source: true,
+  eatenAt: true,
+};
+
 function readText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -29,6 +42,23 @@ function readOptionalText(value) {
 function readNonNegativeNumber(value) {
   const number = Number(value);
   return Number.isFinite(number) && number >= 0 ? number : null;
+}
+
+function readDate(value) {
+  const text = readText(value);
+
+  if (!text) {
+    return null;
+  }
+
+  const date = new Date(text);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function readProductSource(value) {
+  const source = readText(value);
+  return PRODUCT_SOURCES.has(source) ? source : null;
 }
 
 app.get('/api/health', async (_req, res) => {
@@ -60,6 +90,16 @@ app.get('/api/products', async (req, res) => {
   res.json({ products });
 });
 
+app.get('/api/day-entries', async (_req, res) => {
+  const dayEntries = await prisma.dayEntry.findMany({
+    select: dayEntrySelect,
+    orderBy: [{ eatenAt: 'asc' }, { createdAt: 'asc' }],
+    take: 1000,
+  });
+
+  res.json({ dayEntries });
+});
+
 app.post('/api/products', async (req, res) => {
   const name = readText(req.body.name);
   const calories = readNonNegativeNumber(req.body.calories);
@@ -88,6 +128,49 @@ app.post('/api/products', async (req, res) => {
   });
 
   res.status(201).json({ product });
+});
+
+app.post('/api/day-entries', async (req, res) => {
+  const name = readText(req.body.name);
+  const amount = readNonNegativeNumber(req.body.amount);
+  const calories = readNonNegativeNumber(req.body.calories);
+  const protein = readNonNegativeNumber(req.body.protein);
+  const fat = readNonNegativeNumber(req.body.fat);
+  const carbs = readNonNegativeNumber(req.body.carbs);
+  const source = readProductSource(req.body.source);
+  const eatenAt = readDate(req.body.eatenAt);
+
+  if (
+    !name ||
+    amount === null ||
+    calories === null ||
+    protein === null ||
+    fat === null ||
+    carbs === null ||
+    !source ||
+    !eatenAt
+  ) {
+    res.status(400).json({
+      error: 'Day entry requires valid name, amount, nutrition values, source, and eatenAt.',
+    });
+    return;
+  }
+
+  const dayEntry = await prisma.dayEntry.create({
+    data: {
+      name,
+      amount,
+      calories,
+      protein,
+      fat,
+      carbs,
+      source,
+      eatenAt,
+    },
+    select: dayEntrySelect,
+  });
+
+  res.status(201).json({ dayEntry });
 });
 
 app.use((error, _req, res, _next) => {

@@ -18,6 +18,8 @@ import { TodayMealCard } from './parts/TodayMealCard';
 import './TodayPage.scss';
 
 type TodayPageProps = {
+  entriesError?: string | null;
+  isEntriesLoading?: boolean;
   isProductsLoading: boolean;
   productsError?: string | null;
   products: Product[];
@@ -31,6 +33,8 @@ type TodayPageProps = {
 };
 
 export function TodayPage({
+  entriesError = null,
+  isEntriesLoading = false,
   isProductsLoading,
   productsError = null,
   products,
@@ -40,6 +44,7 @@ export function TodayPage({
 }: TodayPageProps) {
   const mealGroups = buildMealEntryGroups(entries);
   const hasEntries = entries.length > 0;
+  const canAddEntries = !isEntriesLoading && !entriesError;
   const [activeSectionId, setActiveSectionId] = useState<MealSectionId | null>(null);
   const [collapsedSections, setCollapsedSections] =
     useState<CollapsedMealSections>(() =>
@@ -67,7 +72,11 @@ export function TodayPage({
 
       <div className="today-screen__meals-section">
         <h2 className="today-screen__meals-title">Meals</h2>
-        {!hasEntries && (
+        {isEntriesLoading ? (
+          <p className="today-screen__status">Loading meals...</p>
+        ) : entriesError ? (
+          <p className="today-screen__status">{entriesError}</p>
+        ) : !hasEntries && (
           <p className="today-screen__meals-empty">
             No meals for this day yet. Use + to add a saved product.
           </p>
@@ -77,6 +86,7 @@ export function TodayPage({
           {MEAL_SECTIONS.map((section) => (
             <TodayMealCard
               key={section.id}
+              canAdd={canAddEntries}
               section={section}
               entries={mealGroups[section.id]}
               isCollapsed={collapsedSections[section.id]}

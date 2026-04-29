@@ -21,3 +21,20 @@ model Product {
 
   @@map("products")
 }
+
+model DayEntry {
+  id        String   @id @default(cuid())
+  name      String
+  amount    Float
+  calories  Float
+  protein   Float
+  fat       Float
+  carbs     Float
+  source    String
+  eatenAt   DateTime @map("eaten_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([eatenAt])
+  @@map("day_entries")
+}

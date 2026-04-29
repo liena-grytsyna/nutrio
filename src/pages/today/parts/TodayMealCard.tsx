@@ -10,6 +10,7 @@ import {
 } from './TodayIcons';
 
 type TodayMealCardProps = {
+  canAdd: boolean;
   section: MealSectionConfig;
   entries: DayEntry[];
   isCollapsed: boolean;
@@ -37,6 +38,7 @@ function MealEntryRow({ entry }: { entry: DayEntry }) {
 }
 
 export function TodayMealCard({
+  canAdd,
   section,
   entries,
   isCollapsed,
@@ -99,7 +101,12 @@ export function TodayMealCard({
           <button
             type="button"
             className="today-screen__meal-action today-screen__meal-action--add"
-            aria-label={`Add item to ${section.title}`}
+            aria-label={
+              canAdd
+                ? `Add item to ${section.title}`
+                : `${section.title} is unavailable while meals are loading`
+            }
+            disabled={!canAdd}
             onClick={() => onAdd(section.id)}
           >
             <PlusIcon />

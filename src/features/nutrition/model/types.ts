@@ -13,7 +13,7 @@ export type DayCalorieIndicator = {
   status: CalorieBalanceStatus;
 };
 
-export type ProductSource = 'manual' | 'search' | 'ocr';
+export type ProductSource = 'manual' | 'search';
 
 export type DayEntry = NutritionValues & {
   id: string;
@@ -22,6 +22,8 @@ export type DayEntry = NutritionValues & {
   source: ProductSource;
   eatenAt: string;
 };
+
+export type CreateDayEntryInput = Omit<DayEntry, 'id'>;
 
 export type NutritionGoalSummary = {
   consumed: NutritionValues;

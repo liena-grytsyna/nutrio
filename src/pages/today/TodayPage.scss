@@ -17,6 +17,18 @@
     letter-spacing: -0.04em;
   }
 
+  &__status {
+    margin: 0;
+    padding: 14px 18px;
+    border: 1px solid rgba(91, 107, 145, 0.1);
+    border-radius: 20px;
+    background: #ffffff;
+    color: #6f7b8f;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 16px 30px rgba(47, 65, 102, 0.08);
+  }
+
   &__meals-empty {
     margin: -4px 4px 0;
     color: #6f7b8f;
@@ -149,6 +161,12 @@
       z-index: 1;
       width: 20px;
       height: 20px;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      box-shadow: none;
     }
   }
 

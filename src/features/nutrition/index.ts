@@ -1,3 +1,4 @@
+export { createDayEntry, fetchDayEntries } from './api/dayEntriesApi';
 export { dailyTargets } from './model/dailyTargets';
 export {
   getCalorieBalanceStatus,
@@ -5,7 +6,6 @@ export {
   getClampedProgress,
 } from './lib/calorieBalance';
 export { calculateDayTotals } from './lib/calculateDayTotals';
-export { getStoredDayEntries, saveDayEntries } from './lib/dayEntryStorage';
 export {
   buildDailyCalorieIndicators,
   getDateKey,
@@ -19,6 +19,7 @@ export {
 export { getNutritionGoalSummary } from './lib/getNutritionGoalSummary';
 export type {
   CalorieBalanceStatus,
+  CreateDayEntryInput,
   DayCalorieIndicator,
   DayEntry,
   NutritionGoalSummary,

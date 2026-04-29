@@ -44,12 +44,12 @@ Then the user opens the `Products` screen and sees that the product is stored in
 
 After that, the user opens the `Today` screen, chooses a meal section such as `Breakfast`, selects the saved product, writes how many grams were eaten, and adds it to the meal.
 
-Nutrio then calculates the nutrition values for the chosen amount and updates the daily summary card. The meal is also saved locally in the browser, so the day entries remain visible after refresh.
+Nutrio then calculates the nutrition values for the chosen amount and updates the daily summary card. The meal is also saved through the API to PostgreSQL, so the day entries remain visible after refresh.
 
 In short:
 
 - product catalog = stored in PostgreSQL
-- daily eating entries = stored in browser `localStorage`
+- daily eating entries = stored in PostgreSQL
 - totals = calculated automatically in the frontend
 
 ## 3. Full Step-by-Step User Scenario
@@ -180,17 +180,17 @@ The app now shows:
 
 This gives instant feedback to the user.
 
-### Step 7. Save day entries locally
+### Step 7. Save day entries in the database
 
-Meal entries are stored in browser `localStorage`.
+Meal entries are stored in PostgreSQL through the backend API.
 
 That means:
 
 - refreshing the page does not remove the meal entries
-- the same browser keeps the same daily entries
-- the data is local to the browser and device
+- the data is loaded again from the server
+- products and meal entries use one shared source of truth
 
-This is useful in the current version because the project already has persistence for the product catalog in PostgreSQL, while the day journal is kept lightweight and simple.
+This is useful because both the product catalog and the daily journal now follow the same persistence model.
 
 ### Step 8. Switch to another date
 
@@ -229,7 +229,7 @@ If you need to present the project to a teacher, examiner, or class, you can use
 8. Add `Banana` with `150 g`.
 9. Show that the nutrition preview updates before saving.
 10. Save the entry and explain that the totals update automatically.
-11. Refresh the page and show that the meal entry is still there because it is saved in `localStorage`.
+11. Refresh the page and show that the meal entry is still there because it is saved in PostgreSQL and loaded again from the API.
 12. Change the date in the calendar and explain that entries are grouped by day.
 
 If you want an even clearer demo, create two or three products first:
@@ -261,7 +261,7 @@ The current project already includes these working features:
 - calendar with day selection
 - visual daily calorie indicators
 - PostgreSQL persistence for products
-- browser `localStorage` persistence for day entries
+- PostgreSQL persistence for day entries
 - Docker setup for frontend, API, database, and pgAdmin
 
 ## 6. What Is Not Finished Yet
@@ -296,7 +296,7 @@ Frontend responsibilities:
 - show calendar and meal sections
 - call the backend API
 - calculate and display daily totals
-- save day entries to `localStorage`
+- load and save day entries through the backend API
 
 ### Backend
 
@@ -310,6 +310,8 @@ Backend responsibilities:
 - validate input
 - save products
 - fetch products
+- save day entries
+- fetch day entries
 - connect safely to PostgreSQL
 
 ### Database
@@ -319,6 +321,7 @@ Backend responsibilities:
 Database responsibilities:
 
 - store product catalog permanently
+- store daily meal entries permanently
 - keep nutrition values consistent
 - support later extension of the app
 
@@ -347,8 +350,8 @@ The data flow is simple and good for explaining during an exam:
 5. The frontend requests products with `GET /api/products`.
 6. The user selects a product and enters a gram amount.
 7. The frontend calculates nutrition for that amount.
-8. The frontend saves the meal entry in `localStorage`.
-9. The summary card recalculates totals for the selected day.
+8. The frontend sends the meal entry to `POST /api/day-entries`.
+9. PostgreSQL stores the day entry and the frontend updates totals for the selected day.
 
 ## 9. Main Screens
 
@@ -392,9 +395,11 @@ Key elements:
 - product list
 - loading and empty states
 
-## 10. Product Data Model
+## 10. Data Models
 
-The database currently stores one main model: `Product`.
+The database currently stores two main models: `Product` and `DayEntry`.
+
+### `Product`
 
 Fields:
 
@@ -410,7 +415,23 @@ Fields:
 - `createdAt`
 - `updatedAt`
 
-This model is enough for the current MVP because the app focuses on storing reusable nutrition references for food items.
+### `DayEntry`
+
+Fields:
+
+- `id`
+- `name`
+- `amount`
+- `calories`
+- `protein`
+- `fat`
+- `carbs`
+- `source`
+- `eatenAt`
+- `createdAt`
+- `updatedAt`
+
+This split fits the MVP well: products are reusable nutrition references, and day entries are time-based records of what the user actually ate.
 
 ## 11. API Endpoints
 
@@ -449,6 +470,29 @@ Optional:
 - `brand`
 - `barcode`
 - `servingSize`
+
+### `GET /api/day-entries`
+
+Purpose:
+
+- return saved day entries
+
+### `POST /api/day-entries`
+
+Purpose:
+
+- create a new day entry
+
+Requires:
+
+- `name`
+- `amount`
+- `calories`
+- `protein`
+- `fat`
+- `carbs`
+- `source`
+- `eatenAt`
 
 ## 12. Project Structure
 
@@ -662,16 +706,14 @@ This is a very important detail for explaining the project clearly.
 - saved product catalog
 - product nutrition values
 - optional brand and barcode
-
-### Stored in browser `localStorage`
-
 - day meal entries
 - selected day journal history
 
-Why this split is useful:
+Why this is useful:
 
-- products are reusable data and should be stored permanently in a database
-- day entries are lightweight for the current MVP and can work locally without user accounts
+- products and day entries share one source of truth
+- refreshing the UI does not depend on browser-local state
+- the backend design is more consistent and easier to extend later
 
 ## 17. Good Points to Explain During Presentation
 
@@ -681,6 +723,7 @@ If you need to explain your technical choices simply, these points are strong:
 - the workflow is small and focused, which makes the MVP realistic
 - the frontend and backend are clearly separated
 - the project uses a real relational database
+- the app keeps one source of truth for both products and meal entries
 - the app stores reusable product data centrally
 - the calculation logic is automatic and practical
 - the UI is mobile-oriented because food tracking is usually done on a phone
@@ -700,7 +743,6 @@ Natural next improvements:
 
 - edit and delete products
 - edit and delete meal entries
-- sync daily entries to the backend
 - add user accounts
 - add charts or weekly statistics
 - add automated testing

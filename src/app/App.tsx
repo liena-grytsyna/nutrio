@@ -10,12 +10,12 @@ import {
   type Product,
 } from '../features/products';
 import {
+  createDayEntry,
   buildDailyCalorieIndicators,
   calculateDayTotals,
   dailyTargets,
+  fetchDayEntries,
   getMealSectionId,
-  getStoredDayEntries,
-  saveDayEntries,
   type DayEntry,
   type MealSectionId,
 } from '../features/nutrition';
@@ -41,10 +41,6 @@ const MEAL_SECTION_HOURS: Record<MealSectionId, number> = {
   thirdSnack: 22,
 };
 
-function createEntryId() {
-  return crypto.randomUUID();
-}
-
 function getErrorMessage(error: unknown, fallbackMessage: string) {
   return error instanceof Error ? error.message : fallbackMessage;
 }
@@ -52,7 +48,9 @@ function getErrorMessage(error: unknown, fallbackMessage: string) {
 export default function App() {
   const [activeScreen, setActiveScreen] = useState<AppScreen>('today');
   const [selectedDate, setSelectedDate] = useState(() => startOfDay(new Date()));
-  const [entries, setEntries] = useState<DayEntry[]>(() => getStoredDayEntries());
+  const [entries, setEntries] = useState<DayEntry[]>([]);
+  const [entriesLoading, setEntriesLoading] = useState(true);
+  const [entriesError, setEntriesError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [productsError, setProductsError] = useState<string | null>(null);
@@ -84,6 +82,31 @@ export default function App() {
     return () => controller.abort();
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadDayEntries() {
+      setEntriesError(null);
+
+      try {
+        const nextEntries = await fetchDayEntries(controller.signal);
+        setEntries(nextEntries);
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          setEntriesError(getErrorMessage(error, 'Meals could not be loaded.'));
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setEntriesLoading(false);
+        }
+      }
+    }
+
+    loadDayEntries();
+
+    return () => controller.abort();
+  }, []);
+
   async function handleCreateProduct(input: CreateProductInput) {
     const product = await createProduct(input);
 
@@ -95,11 +118,7 @@ export default function App() {
     return product;
   }
 
-  useEffect(() => {
-    saveDayEntries(entries);
-  }, [entries]);
-
-  function handleAddEntry(
+  async function handleAddEntry(
     sectionId: MealSectionId,
     productId: string,
     amount: number,
@@ -125,18 +144,16 @@ export default function App() {
     );
 
     const nutrition = getProductNutritionForAmount(product, amount);
+    const dayEntry = await createDayEntry({
+      name: product.name,
+      amount,
+      ...nutrition,
+      source: 'search',
+      eatenAt: eatenAt.toISOString(),
+    });
 
-    setEntries((currentEntries) => [
-      ...currentEntries,
-      {
-        id: createEntryId(),
-        name: product.name,
-        amount,
-        ...nutrition,
-        source: 'search',
-        eatenAt: eatenAt.toISOString(),
-      },
-    ]);
+    setEntries((currentEntries) => [...currentEntries, dayEntry]);
+    setEntriesError(null);
   }
 
   const dailyCalorieIndicators = buildDailyCalorieIndicators(
@@ -162,6 +179,8 @@ export default function App() {
           {activeScreen === 'today' && (
             <TodayPage
               key={selectedDate.getTime()}
+              entriesError={entriesError}
+              isEntriesLoading={entriesLoading}
               isProductsLoading={productsLoading}
               productsError={productsError}
               products={products}
