@@ -1,1 +1,1 @@
-export type AppScreen = 'today' | 'add' | 'products';
+export type AppScreen = "today" | "add" | "products";

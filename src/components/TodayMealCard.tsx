@@ -1,11 +1,8 @@
-import type { ComponentType } from 'react';
-import { cn } from '../lib/cn';
-import {
-  TIME_FORMATTER,
-  type MealSectionConfig,
-} from '../lib/mealSections';
-import type { DayEntry, MealSectionId } from '../types/nutrition';
-import styles from './TodayMealCard.module.scss';
+import type { ComponentType } from "react";
+import { cn } from "../lib/cn";
+import { TIME_FORMATTER, type MealSectionConfig } from "../lib/mealSections";
+import type { DayEntry, MealSectionId } from "../types/nutrition";
+import styles from "./TodayMealCard.module.scss";
 
 function ChevronIcon() {
   return (
@@ -187,15 +184,15 @@ type TodayMealCardProps = {
 function MealEntryRow({ entry }: { entry: DayEntry }) {
   return (
     <div className={styles.item}>
-      <span className={styles['item-status']} aria-hidden="true" />
+      <span className={styles["item-status"]} aria-hidden="true" />
 
-      <div className={styles['item-content']}>
-        <p className={styles['item-name']}>{entry.name}</p>
-        <p className={styles['item-meta']}>
-          <span className={styles['item-accent']}>{entry.amount} g</span>
-          <span className={styles['item-dot']}>•</span>
+      <div className={styles["item-content"]}>
+        <p className={styles["item-name"]}>{entry.name}</p>
+        <p className={styles["item-meta"]}>
+          <span className={styles["item-accent"]}>{entry.amount} g</span>
+          <span className={styles["item-dot"]}>•</span>
           <span>{entry.calories.toFixed(0)} kcal</span>
-          <span className={styles['item-dot']}>•</span>
+          <span className={styles["item-dot"]}>•</span>
           <span>{TIME_FORMATTER.format(new Date(entry.eatenAt))}</span>
         </p>
       </div>
@@ -219,13 +216,13 @@ export function TodayMealCard({
     : section.emptyHint;
   const mealCardClassName = cn(
     styles.card,
-    hasEntries && styles['card--filled'],
-    hasEntries && !isCollapsed && styles['card--expanded'],
+    hasEntries && styles["card--filled"],
+    hasEntries && !isCollapsed && styles["card--expanded"],
   );
   const toggleButtonClassName = cn(
     styles.action,
-    styles['action--toggle'],
-    isCollapsed && styles['action--toggle-collapsed'],
+    styles["action--toggle"],
+    isCollapsed && styles["action--toggle-collapsed"],
   );
 
   return (
@@ -252,7 +249,11 @@ export function TodayMealCard({
             <button
               type="button"
               className={toggleButtonClassName}
-              aria-label={isCollapsed ? `Expand ${section.title}` : `Collapse ${section.title}`}
+              aria-label={
+                isCollapsed
+                  ? `Expand ${section.title}`
+                  : `Collapse ${section.title}`
+              }
               aria-expanded={!isCollapsed}
               aria-controls={contentId}
               onClick={() => onToggle(section.id)}
@@ -263,7 +264,7 @@ export function TodayMealCard({
 
           <button
             type="button"
-            className={cn(styles.action, styles['action--add'])}
+            className={cn(styles.action, styles["action--add"])}
             aria-label={
               canAdd
                 ? `Add item to ${section.title}`

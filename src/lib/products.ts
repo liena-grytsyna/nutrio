@@ -1,4 +1,4 @@
-import type { Product } from '../types/product';
+import type { Product } from "../types/product";
 
 export function sortProductsByName(products: Product[]) {
   return [...products].sort((first, second) =>

@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react';
-import { NutritionSummaryCard } from '../components/NutritionSummaryCard';
-import {
-  buildMealEntryGroups,
-} from '../lib/mealEntries';
+import { useEffect, useState } from "react";
+import { NutritionSummaryCard } from "../components/NutritionSummaryCard";
+import { buildMealEntryGroups } from "../lib/mealEntries";
 import {
   createCollapsedMealSections,
   MEAL_SECTIONS,
   type CollapsedMealSections,
-} from '../lib/mealSections';
+} from "../lib/mealSections";
 import type {
   DayEntry,
   MealSectionId,
   NutritionGoalSummary,
-} from '../types/nutrition';
-import type { Product } from '../types/product';
-import { TodayAddEntryDialog } from '../components/TodayAddEntryDialog';
-import { TodayMealCard } from '../components/TodayMealCard';
-import { cn } from '../lib/cn';
-import styles from './TodayPage.module.scss';
+} from "../types/nutrition";
+import type { Product } from "../types/product";
+import { TodayAddEntryDialog } from "../components/TodayAddEntryDialog";
+import { TodayMealCard } from "../components/TodayMealCard";
+import { cn } from "../lib/cn";
+import styles from "./TodayPage.module.scss";
 
 type TodayPageProps = {
   entriesError?: string | null;
@@ -47,7 +45,9 @@ export function TodayPage({
   const mealGroups = buildMealEntryGroups(entries);
   const hasEntries = entries.length > 0;
   const canAddEntries = !isEntriesLoading && !entriesError;
-  const [activeSectionId, setActiveSectionId] = useState<MealSectionId | null>(null);
+  const [activeSectionId, setActiveSectionId] = useState<MealSectionId | null>(
+    null,
+  );
   const [collapsedSections, setCollapsedSections] =
     useState<CollapsedMealSections>(() =>
       createCollapsedMealSections(mealGroups),
@@ -69,22 +69,24 @@ export function TodayPage({
   );
 
   return (
-    <section className={cn('screen', styles['today-screen'])}>
+    <section className={cn("screen", styles["today-screen"])}>
       <NutritionSummaryCard summary={summary} />
 
-      <div className={styles['today-screen__meals-section']}>
-        <h2 className={styles['today-screen__meals-title']}>Meals</h2>
+      <div className={styles["today-screen__meals-section"]}>
+        <h2 className={styles["today-screen__meals-title"]}>Meals</h2>
         {isEntriesLoading ? (
-          <p className={styles['today-screen__status']}>Loading meals...</p>
+          <p className={styles["today-screen__status"]}>Loading meals...</p>
         ) : entriesError ? (
-          <p className={styles['today-screen__status']}>{entriesError}</p>
-        ) : !hasEntries && (
-          <p className={styles['today-screen__meals-empty']}>
-            No meals for this day yet. Use + to add a saved product.
-          </p>
+          <p className={styles["today-screen__status"]}>{entriesError}</p>
+        ) : (
+          !hasEntries && (
+            <p className={styles["today-screen__meals-empty"]}>
+              No meals for this day yet. Use + to add a saved product.
+            </p>
+          )
         )}
 
-        <div className={styles['today-screen__meals']}>
+        <div className={styles["today-screen__meals"]}>
           {MEAL_SECTIONS.map((section) => (
             <TodayMealCard
               key={section.id}

@@ -1,6 +1,6 @@
-import { cn } from '../lib/cn';
-import type { AppScreen } from '../types/app';
-import styles from './BottomNavigation.module.scss';
+import { cn } from "../lib/cn";
+import type { AppScreen } from "../types/app";
+import styles from "./BottomNavigation.module.scss";
 
 type BottomNavigationTab = {
   id: AppScreen;
@@ -19,7 +19,7 @@ export function BottomNavigation({
   onSelectScreen,
 }: BottomNavigationProps) {
   return (
-    <nav className={styles['bottom-navigation']} aria-label="Navigation">
+    <nav className={styles["bottom-navigation"]} aria-label="Navigation">
       {tabs.map((tab) => {
         const isActive = tab.id === activeScreen;
 
@@ -28,8 +28,8 @@ export function BottomNavigation({
             key={tab.id}
             type="button"
             className={cn(
-              styles['bottom-navigation__tab'],
-              isActive && styles['bottom-navigation__tab--active'],
+              styles["bottom-navigation__tab"],
+              isActive && styles["bottom-navigation__tab--active"],
             )}
             onClick={() => onSelectScreen(tab.id)}
           >

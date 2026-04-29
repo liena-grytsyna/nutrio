@@ -1,18 +1,14 @@
-import {
-  useEffect,
-  useState,
-  type FormEvent,
-} from 'react';
-import { createPortal } from 'react-dom';
-import { previewDayEntryNutrition } from '../api/nutrition';
-import { formatNumber } from '../lib/formatNumber';
-import { searchProducts } from '../lib/products';
-import type { MealSectionConfig } from '../lib/mealSections';
-import type { NutritionValues } from '../types/nutrition';
-import type { Product } from '../types/product';
-import { Button } from './Button';
-import { cn } from '../lib/cn';
-import styles from './TodayAddEntryDialog.module.scss';
+import { useEffect, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
+import { previewDayEntryNutrition } from "../api/nutrition";
+import { formatNumber } from "../lib/formatNumber";
+import { searchProducts } from "../lib/products";
+import type { MealSectionConfig } from "../lib/mealSections";
+import type { NutritionValues } from "../types/nutrition";
+import type { Product } from "../types/product";
+import { Button } from "./Button";
+import { cn } from "../lib/cn";
+import styles from "./TodayAddEntryDialog.module.scss";
 
 type TodayAddEntryDialogProps = {
   isLoadingProducts: boolean;
@@ -31,16 +27,15 @@ export function TodayAddEntryDialog({
   onClose,
   onSubmit,
 }: TodayAddEntryDialogProps) {
-  const [amount, setAmount] = useState('100');
-  const [query, setQuery] = useState('');
+  const [amount, setAmount] = useState("100");
+  const [query, setQuery] = useState("");
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     products[0]?.id ?? null,
   );
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [previewNutrition, setPreviewNutrition] = useState<NutritionValues | null>(
-    null,
-  );
+  const [previewNutrition, setPreviewNutrition] =
+    useState<NutritionValues | null>(null);
 
   const visibleProducts = searchProducts(products, query);
   const selectedProduct =
@@ -53,19 +48,19 @@ export function TodayAddEntryDialog({
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
 
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         onClose();
       }
     }
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow;
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
 
@@ -94,7 +89,7 @@ export function TodayAddEntryDialog({
           setStatusMessage(
             error instanceof Error
               ? error.message
-              : 'Preview could not be calculated.',
+              : "Preview could not be calculated.",
           );
         }
       }
@@ -109,12 +104,12 @@ export function TodayAddEntryDialog({
     event.preventDefault();
 
     if (!selectedProduct) {
-      setStatusMessage('Choose a product first.');
+      setStatusMessage("Choose a product first.");
       return;
     }
 
     if (!isAmountValid) {
-      setStatusMessage('Enter a valid amount in grams.');
+      setStatusMessage("Enter a valid amount in grams.");
       return;
     }
 
@@ -126,7 +121,7 @@ export function TodayAddEntryDialog({
       onClose();
     } catch (error) {
       setStatusMessage(
-        error instanceof Error ? error.message : 'Product could not be added.',
+        error instanceof Error ? error.message : "Product could not be added.",
       );
     } finally {
       setIsSaving(false);
@@ -192,7 +187,7 @@ export function TodayAddEntryDialog({
                 const isSelected = product.id === selectedProduct?.id;
                 const productClassName = cn(
                   styles.product,
-                  isSelected && styles['product--active'],
+                  isSelected && styles["product--active"],
                 );
 
                 return (
@@ -210,9 +205,9 @@ export function TodayAddEntryDialog({
                     <strong>{product.name}</strong>
                     <span>{product.servingSize}</span>
                     <span>
-                      {formatNumber(product.calories, 1)} kcal • P{' '}
-                      {formatNumber(product.protein, 1)} • F{' '}
-                      {formatNumber(product.fat, 1)} • C{' '}
+                      {formatNumber(product.calories, 1)} kcal • P{" "}
+                      {formatNumber(product.protein, 1)} • F{" "}
+                      {formatNumber(product.fat, 1)} • C{" "}
                       {formatNumber(product.carbs, 1)}
                     </span>
                   </button>
@@ -241,13 +236,13 @@ export function TodayAddEntryDialog({
 
             {previewNutrition && (
               <div className={styles.preview}>
-                <strong className={styles['preview-title']}>
+                <strong className={styles["preview-title"]}>
                   {selectedProduct.name} • {formatNumber(parsedAmount, 1)} g
                 </strong>
-                <p className={styles['preview-meta']}>
-                  {formatNumber(previewNutrition.calories, 1)} kcal • P{' '}
-                  {formatNumber(previewNutrition.protein, 1)} • F{' '}
-                  {formatNumber(previewNutrition.fat, 1)} • C{' '}
+                <p className={styles["preview-meta"]}>
+                  {formatNumber(previewNutrition.calories, 1)} kcal • P{" "}
+                  {formatNumber(previewNutrition.protein, 1)} • F{" "}
+                  {formatNumber(previewNutrition.fat, 1)} • C{" "}
                   {formatNumber(previewNutrition.carbs, 1)}
                 </p>
               </div>
@@ -261,7 +256,7 @@ export function TodayAddEntryDialog({
                 disabled={isSaving || !selectedProduct || !isAmountValid}
                 type="submit"
               >
-                {isSaving ? 'Adding...' : 'Add to Meal'}
+                {isSaving ? "Adding..." : "Add to Meal"}
               </Button>
             </div>
           </>

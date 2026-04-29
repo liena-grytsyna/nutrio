@@ -5,7 +5,7 @@ export type NutritionValues = {
   carbs: number;
 };
 
-export type CalorieBalanceStatus = 'under' | 'ideal' | 'over';
+export type CalorieBalanceStatus = "under" | "ideal" | "over";
 
 export type DayCalorieIndicator = {
   calories: number;
@@ -14,12 +14,12 @@ export type DayCalorieIndicator = {
 };
 
 export type MealSectionId =
-  | 'breakfast'
-  | 'snack'
-  | 'lunch'
-  | 'secondSnack'
-  | 'dinner'
-  | 'thirdSnack';
+  | "breakfast"
+  | "snack"
+  | "lunch"
+  | "secondSnack"
+  | "dinner"
+  | "thirdSnack";
 
 export type DayEntry = NutritionValues & {
   id: string;

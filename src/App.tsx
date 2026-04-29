@@ -1,30 +1,28 @@
-import { useState } from 'react';
-import { BottomNavigation } from './components/BottomNavigation';
-import { TopCalendar } from './components/TopCalendar';
-import { useNutritionOverview } from './hooks/useNutritionOverview';
-import { useProducts } from './hooks/useProducts';
-import styles from './App.module.scss';
-import { startOfDay } from './lib/date';
-import { AddProductPage } from './pages/AddProductPage';
-import { ProductsPage } from './pages/ProductsPage';
-import { TodayPage } from './pages/TodayPage';
-import type { AppScreen } from './types/app';
+import { useState } from "react";
+import { BottomNavigation } from "./components/BottomNavigation";
+import { TopCalendar } from "./components/TopCalendar";
+import { useNutritionOverview } from "./hooks/useNutritionOverview";
+import { useProducts } from "./hooks/useProducts";
+import styles from "./App.module.scss";
+import { startOfDay } from "./lib/date";
+import { AddProductPage } from "./pages/AddProductPage";
+import { ProductsPage } from "./pages/ProductsPage";
+import { TodayPage } from "./pages/TodayPage";
+import type { AppScreen } from "./types/app";
 
 const tabs = [
-  { id: 'today', label: 'Today' },
-  { id: 'add', label: 'Add' },
-  { id: 'products', label: 'Products' },
+  { id: "today", label: "Today" },
+  { id: "add", label: "Add" },
+  { id: "products", label: "Products" },
 ] satisfies ReadonlyArray<{ id: AppScreen; label: string }>;
 
 export default function App() {
-  const [activeScreen, setActiveScreen] = useState<AppScreen>('today');
-  const [selectedDate, setSelectedDate] = useState(() => startOfDay(new Date()));
-  const {
-    products,
-    productsLoading,
-    productsError,
-    handleCreateProduct,
-  } = useProducts();
+  const [activeScreen, setActiveScreen] = useState<AppScreen>("today");
+  const [selectedDate, setSelectedDate] = useState(() =>
+    startOfDay(new Date()),
+  );
+  const { products, productsLoading, productsError, handleCreateProduct } =
+    useProducts();
   const {
     nutritionOverview,
     entriesLoading,
@@ -37,8 +35,8 @@ export default function App() {
   });
 
   return (
-    <div className={styles['app-shell']}>
-      <div className={styles['app-shell__phone']}>
+    <div className={styles["app-shell"]}>
+      <div className={styles["app-shell__phone"]}>
         <TopCalendar
           dailyCalorieIndicators={nutritionOverview.dailyCalorieIndicators}
           defaultIndicator={nutritionOverview.defaultIndicator}
@@ -46,8 +44,8 @@ export default function App() {
           onSelectDate={setSelectedDate}
         />
 
-        <main className={styles['app-shell__content']}>
-          {activeScreen === 'today' && (
+        <main className={styles["app-shell__content"]}>
+          {activeScreen === "today" && (
             <TodayPage
               key={selectedDate.getTime()}
               entriesError={entriesError}
@@ -60,10 +58,10 @@ export default function App() {
               onAddEntry={handleAddEntry}
             />
           )}
-          {activeScreen === 'add' && (
+          {activeScreen === "add" && (
             <AddProductPage onCreateProduct={handleCreateProduct} />
           )}
-          {activeScreen === 'products' && (
+          {activeScreen === "products" && (
             <ProductsPage
               error={productsError}
               isLoading={productsLoading}

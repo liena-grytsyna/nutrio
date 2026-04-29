@@ -1,12 +1,12 @@
-import { cn } from '../lib/cn';
+import { cn } from "../lib/cn";
 import type {
   CalorieBalanceStatus,
   NutritionGoalSummary,
   NutritionValues,
-} from '../types/nutrition';
-import styles from './NutritionSummaryCard.module.scss';
+} from "../types/nutrition";
+import styles from "./NutritionSummaryCard.module.scss";
 
-type MacroNutrientKey = keyof Omit<NutritionValues, 'calories'>;
+type MacroNutrientKey = keyof Omit<NutritionValues, "calories">;
 
 type TrackedNutrientConfig = {
   key: MacroNutrientKey;
@@ -70,14 +70,14 @@ const NUTRITION_SUMMARY_RING = {
 } as const;
 
 const NUTRITION_SUMMARY_COLORS = {
-  outerTrack: 'rgba(132, 141, 170, 0.12)',
-  miniTrack: 'rgba(132, 141, 170, 0.14)',
-  protein: '#bf6be5',
-  fat: '#f4b248',
-  carbs: '#4dc4ee',
-  fiber: '#7cc58f',
-  salt: '#96a0b4',
-  sugar: '#f2a5c3',
+  outerTrack: "rgba(132, 141, 170, 0.12)",
+  miniTrack: "rgba(132, 141, 170, 0.14)",
+  protein: "#bf6be5",
+  fat: "#f4b248",
+  carbs: "#4dc4ee",
+  fiber: "#7cc58f",
+  salt: "#96a0b4",
+  sugar: "#f2a5c3",
 } as const;
 
 const CALORIE_RING_STYLES: Record<
@@ -85,35 +85,35 @@ const CALORIE_RING_STYLES: Record<
   { fill: string; track: string }
 > = {
   under: {
-    fill: '#f3b649',
-    track: 'rgba(243, 182, 73, 0.14)',
+    fill: "#f3b649",
+    track: "rgba(243, 182, 73, 0.14)",
   },
   ideal: {
-    fill: '#53c57a',
-    track: 'rgba(83, 197, 122, 0.14)',
+    fill: "#53c57a",
+    track: "rgba(83, 197, 122, 0.14)",
   },
   over: {
-    fill: '#e8695f',
-    track: 'rgba(232, 105, 95, 0.14)',
+    fill: "#e8695f",
+    track: "rgba(232, 105, 95, 0.14)",
   },
 };
 
 const TRACKED_NUTRIENTS = [
   {
-    key: 'protein',
-    label: 'Protein',
+    key: "protein",
+    label: "Protein",
     color: NUTRITION_SUMMARY_COLORS.protein,
     ringRotation: -142,
   },
   {
-    key: 'carbs',
-    label: 'Carbs',
+    key: "carbs",
+    label: "Carbs",
     color: NUTRITION_SUMMARY_COLORS.carbs,
     ringRotation: 16,
   },
   {
-    key: 'fat',
-    label: 'Fat',
+    key: "fat",
+    label: "Fat",
     color: NUTRITION_SUMMARY_COLORS.fat,
     ringRotation: 126,
   },
@@ -121,25 +121,25 @@ const TRACKED_NUTRIENTS = [
 
 const PENDING_NUTRIENTS = [
   {
-    id: 'fiber',
-    label: 'Fiber',
+    id: "fiber",
+    label: "Fiber",
     color: NUTRITION_SUMMARY_COLORS.fiber,
-    valueLabel: '0 g',
-    targetLabel: 'Tracking later',
+    valueLabel: "0 g",
+    targetLabel: "Tracking later",
   },
   {
-    id: 'salt',
-    label: 'Salt',
+    id: "salt",
+    label: "Salt",
     color: NUTRITION_SUMMARY_COLORS.salt,
-    valueLabel: '--',
-    targetLabel: 'Tracking later',
+    valueLabel: "--",
+    targetLabel: "Tracking later",
   },
   {
-    id: 'sugar',
-    label: 'Sugar',
+    id: "sugar",
+    label: "Sugar",
     color: NUTRITION_SUMMARY_COLORS.sugar,
-    valueLabel: '--',
-    targetLabel: 'Tracking later',
+    valueLabel: "--",
+    targetLabel: "Tracking later",
   },
 ] as const satisfies ReadonlyArray<PendingNutrientConfig>;
 
@@ -170,19 +170,14 @@ function MacroRing({ color, progress, rotation }: MacroRingProps) {
   );
 }
 
-function MiniRing({
-  color,
-  progress,
-  label,
-  tracked = true,
-}: MiniRingProps) {
+function MiniRing({ color, progress, label, tracked = true }: MiniRingProps) {
   const clampedProgress = Math.min(Math.max(progress, 0), 1);
 
   return (
-    <div className={styles['nutrition-summary-card__mini-ring']}>
+    <div className={styles["nutrition-summary-card__mini-ring"]}>
       <svg
         viewBox="0 0 48 48"
-        className={styles['nutrition-summary-card__mini-ring-svg']}
+        className={styles["nutrition-summary-card__mini-ring-svg"]}
         aria-hidden="true"
       >
         <circle
@@ -210,7 +205,7 @@ function MiniRing({
           />
         )}
       </svg>
-      <span className={styles['nutrition-summary-card__mini-ring-label']}>
+      <span className={styles["nutrition-summary-card__mini-ring-label"]}>
         {label}
       </span>
     </div>
@@ -224,10 +219,10 @@ function NutritionSummaryCardChart({
   const calorieRingStyle = CALORIE_RING_STYLES[summary.calorieStatus];
 
   return (
-    <div className={styles['nutrition-summary-card__chart']}>
+    <div className={styles["nutrition-summary-card__chart"]}>
       <svg
         viewBox="0 0 96 96"
-        className={styles['nutrition-summary-card__ring']}
+        className={styles["nutrition-summary-card__ring"]}
         role="img"
         aria-label="Nutrition progress"
       >
@@ -270,13 +265,13 @@ function NutritionSummaryCardChart({
         />
       </svg>
 
-      <div className={styles['nutrition-summary-card__center']}>
-        <p className={styles['nutrition-summary-card__title']}>Calories</p>
-        <p className={styles['nutrition-summary-card__value']}>
+      <div className={styles["nutrition-summary-card__center"]}>
+        <p className={styles["nutrition-summary-card__title"]}>Calories</p>
+        <p className={styles["nutrition-summary-card__value"]}>
           {summary.consumed.calories.toFixed(0)}
         </p>
-        <p className={styles['nutrition-summary-card__unit']}>kcal</p>
-        <p className={styles['nutrition-summary-card__percent']}>
+        <p className={styles["nutrition-summary-card__unit"]}>kcal</p>
+        <p className={styles["nutrition-summary-card__percent"]}>
           {calorieProgressPercent}%
         </p>
       </div>
@@ -294,11 +289,11 @@ function NutritionPanelItem({
   value,
 }: NutritionPanelItemProps) {
   return (
-    <article className={styles['nutrition-summary-card__panel-item']}>
-      <p className={styles['nutrition-summary-card__panel-item-label']}>
+    <article className={styles["nutrition-summary-card__panel-item"]}>
+      <p className={styles["nutrition-summary-card__panel-item-label"]}>
         {label}
       </p>
-      <p className={styles['nutrition-summary-card__panel-item-value']}>
+      <p className={styles["nutrition-summary-card__panel-item-value"]}>
         {value}
       </p>
       <MiniRing
@@ -307,7 +302,7 @@ function NutritionPanelItem({
         tracked={tracked}
         label={ringLabel}
       />
-      <p className={styles['nutrition-summary-card__panel-item-target']}>
+      <p className={styles["nutrition-summary-card__panel-item-target"]}>
         {target}
       </p>
     </article>
@@ -319,16 +314,16 @@ function NutritionSummaryCardPanel({
 }: NutritionSummaryCardPanelProps) {
   return (
     <section
-      className={styles['nutrition-summary-card__panel']}
+      className={styles["nutrition-summary-card__panel"]}
       aria-label="Nutrients"
     >
-      <div className={styles['nutrition-summary-card__panel-header']}>
-        <h3 className={styles['nutrition-summary-card__panel-title']}>
+      <div className={styles["nutrition-summary-card__panel-header"]}>
+        <h3 className={styles["nutrition-summary-card__panel-title"]}>
           Nutrients
         </h3>
       </div>
 
-      <div className={styles['nutrition-summary-card__panel-grid']}>
+      <div className={styles["nutrition-summary-card__panel-grid"]}>
         {TRACKED_NUTRIENTS.map((nutrient) => {
           const progress = summary.progress[nutrient.key];
 
@@ -366,19 +361,17 @@ type NutritionSummaryCardProps = {
   summary: NutritionGoalSummary;
 };
 
-export function NutritionSummaryCard({
-  summary,
-}: NutritionSummaryCardProps) {
+export function NutritionSummaryCard({ summary }: NutritionSummaryCardProps) {
   const className = cn(
-    styles['nutrition-summary-card'],
+    styles["nutrition-summary-card"],
     styles[`nutrition-summary-card--${summary.calorieStatus}`],
   );
 
   return (
     <section className={className}>
-      <div className={styles['nutrition-summary-card__header']}>
+      <div className={styles["nutrition-summary-card__header"]}>
         <NutritionSummaryCardChart summary={summary} />
-        <p className={styles['nutrition-summary-card__left']}>
+        <p className={styles["nutrition-summary-card__left"]}>
           {summary.remaining.calories.toFixed(0)} kcal left
         </p>
       </div>

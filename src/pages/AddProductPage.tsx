@@ -1,8 +1,8 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
-import { Button } from '../components/Button';
-import { cn } from '../lib/cn';
-import type { CreateProductInput, Product } from '../types/product';
-import styles from './AddProductPage.module.scss';
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { Button } from "../components/Button";
+import { cn } from "../lib/cn";
+import type { CreateProductInput, Product } from "../types/product";
+import styles from "./AddProductPage.module.scss";
 
 type AddProductPageProps = {
   onCreateProduct: (input: CreateProductInput) => Promise<Product>;
@@ -18,12 +18,12 @@ type ProductFormValues = {
 };
 
 const initialFormValues: ProductFormValues = {
-  name: '',
-  servingSize: '100 g',
-  calories: '',
-  protein: '',
-  fat: '',
-  carbs: '',
+  name: "",
+  servingSize: "100 g",
+  calories: "",
+  protein: "",
+  fat: "",
+  carbs: "",
 };
 
 function toNumber(value: string) {
@@ -32,7 +32,8 @@ function toNumber(value: string) {
 }
 
 export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
-  const [formValues, setFormValues] = useState<ProductFormValues>(initialFormValues);
+  const [formValues, setFormValues] =
+    useState<ProductFormValues>(initialFormValues);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -54,10 +55,16 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
     const fat = toNumber(formValues.fat);
     const carbs = toNumber(formValues.carbs);
     const name = formValues.name.trim();
-    const servingSize = formValues.servingSize.trim() || '100 g';
+    const servingSize = formValues.servingSize.trim() || "100 g";
 
-    if (!name || calories === null || protein === null || fat === null || carbs === null) {
-      setStatusMessage('Fill in product name and nutrition values.');
+    if (
+      !name ||
+      calories === null ||
+      protein === null ||
+      fat === null ||
+      carbs === null
+    ) {
+      setStatusMessage("Fill in product name and nutrition values.");
       return;
     }
 
@@ -75,10 +82,10 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
       });
 
       setFormValues(initialFormValues);
-      setStatusMessage('Product saved.');
+      setStatusMessage("Product saved.");
     } catch (error) {
       setStatusMessage(
-        error instanceof Error ? error.message : 'Product could not be saved.',
+        error instanceof Error ? error.message : "Product could not be saved.",
       );
     } finally {
       setIsSaving(false);
@@ -86,16 +93,19 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
   }
 
   return (
-    <section className={cn('screen', styles['add-product-screen'])}>
-      <div className={styles['add-product-screen__card']}>
-        <h2 className={styles['add-product-screen__title']}>Add Product</h2>
-        <p className={styles['add-product-screen__hint']}>
+    <section className={cn("screen", styles["add-product-screen"])}>
+      <div className={styles["add-product-screen__card"]}>
+        <h2 className={styles["add-product-screen__title"]}>Add Product</h2>
+        <p className={styles["add-product-screen__hint"]}>
           Save product nutrition values to the PostgreSQL database.
         </p>
       </div>
 
-      <form className={styles['add-product-screen__form']} onSubmit={handleSubmit}>
-        <label className={styles['add-product-screen__field']}>
+      <form
+        className={styles["add-product-screen__form"]}
+        onSubmit={handleSubmit}
+      >
+        <label className={styles["add-product-screen__field"]}>
           <span>Name</span>
           <input
             name="name"
@@ -106,7 +116,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           />
         </label>
 
-        <label className={styles['add-product-screen__field']}>
+        <label className={styles["add-product-screen__field"]}>
           <span>Serving</span>
           <input
             name="servingSize"
@@ -116,8 +126,8 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           />
         </label>
 
-        <div className={styles['add-product-screen__macro-grid']}>
-          <label className={styles['add-product-screen__field']}>
+        <div className={styles["add-product-screen__macro-grid"]}>
+          <label className={styles["add-product-screen__field"]}>
             <span>Kcal</span>
             <input
               name="calories"
@@ -131,7 +141,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
             />
           </label>
 
-          <label className={styles['add-product-screen__field']}>
+          <label className={styles["add-product-screen__field"]}>
             <span>Protein</span>
             <input
               name="protein"
@@ -146,7 +156,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
             />
           </label>
 
-          <label className={styles['add-product-screen__field']}>
+          <label className={styles["add-product-screen__field"]}>
             <span>Fat</span>
             <input
               name="fat"
@@ -161,7 +171,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
             />
           </label>
 
-          <label className={styles['add-product-screen__field']}>
+          <label className={styles["add-product-screen__field"]}>
             <span>Carbs</span>
             <input
               name="carbs"
@@ -178,11 +188,13 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
         </div>
 
         <Button disabled={isSaving} type="submit">
-          {isSaving ? 'Saving...' : 'Save Product'}
+          {isSaving ? "Saving..." : "Save Product"}
         </Button>
 
         {statusMessage && (
-          <p className={styles['add-product-screen__status']}>{statusMessage}</p>
+          <p className={styles["add-product-screen__status"]}>
+            {statusMessage}
+          </p>
         )}
       </form>
     </section>

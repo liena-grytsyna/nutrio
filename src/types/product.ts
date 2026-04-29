@@ -1,4 +1,4 @@
-import type { NutritionValues } from './nutrition';
+import type { NutritionValues } from "./nutrition";
 
 export type Product = NutritionValues & {
   id: string;

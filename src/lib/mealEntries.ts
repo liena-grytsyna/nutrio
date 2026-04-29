@@ -1,4 +1,4 @@
-import type { DayEntry, MealSectionId } from '../types/nutrition';
+import type { DayEntry, MealSectionId } from "../types/nutrition";
 
 type MealEntryGroups = Record<MealSectionId, DayEntry[]>;
 
@@ -6,26 +6,26 @@ export function getMealSectionId(date: Date): MealSectionId {
   const hour = date.getHours();
 
   if (hour >= 5 && hour < 10) {
-    return 'breakfast';
+    return "breakfast";
   }
 
   if (hour < 12) {
-    return 'snack';
+    return "snack";
   }
 
   if (hour < 15) {
-    return 'lunch';
+    return "lunch";
   }
 
   if (hour < 17) {
-    return 'secondSnack';
+    return "secondSnack";
   }
 
   if (hour < 21) {
-    return 'dinner';
+    return "dinner";
   }
 
-  return 'thirdSnack';
+  return "thirdSnack";
 }
 
 export function buildMealEntryGroups(entries: DayEntry[]): MealEntryGroups {

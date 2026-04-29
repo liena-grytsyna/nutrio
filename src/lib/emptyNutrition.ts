@@ -2,7 +2,7 @@ import type {
   DayNutritionOverview,
   NutritionGoalSummary,
   NutritionOverview,
-} from '../types/nutrition';
+} from "../types/nutrition";
 
 export const EMPTY_SUMMARY: NutritionGoalSummary = {
   consumed: {
@@ -29,7 +29,7 @@ export const EMPTY_SUMMARY: NutritionGoalSummary = {
     fat: 0,
     carbs: 0,
   },
-  calorieStatus: 'under',
+  calorieStatus: "under",
   calorieProgressRatio: 0,
 };
 
@@ -51,6 +51,6 @@ export const EMPTY_NUTRITION_OVERVIEW: NutritionOverview = {
   defaultIndicator: {
     calories: 0,
     progress: 0,
-    status: 'under',
+    status: "under",
   },
 };

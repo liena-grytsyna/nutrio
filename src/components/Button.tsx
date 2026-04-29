@@ -1,8 +1,8 @@
-import type { ButtonHTMLAttributes } from 'react';
-import { cn } from '../lib/cn';
-import styles from './Button.module.scss';
+import type { ButtonHTMLAttributes } from "react";
+import { cn } from "../lib/cn";
+import styles from "./Button.module.scss";
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+type ButtonVariant = "primary" | "secondary" | "ghost";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
@@ -10,8 +10,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({
   className,
-  type = 'button',
-  variant = 'primary',
+  type = "button",
+  variant = "primary",
   ...props
 }: ButtonProps) {
   return (

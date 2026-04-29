@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import {
   addMonths,
   formatCalendarMonth,
@@ -11,10 +11,10 @@ import {
   isSameMonth,
   startOfDay,
   startOfMonth,
-} from '../lib/date';
-import { cn } from '../lib/cn';
-import type { DayCalorieIndicator } from '../types/nutrition';
-import styles from './TopCalendar.module.scss';
+} from "../lib/date";
+import { cn } from "../lib/cn";
+import type { DayCalorieIndicator } from "../types/nutrition";
+import styles from "./TopCalendar.module.scss";
 
 type TopCalendarProps = {
   dailyCalorieIndicators: Record<string, DayCalorieIndicator>;
@@ -23,7 +23,7 @@ type TopCalendarProps = {
   onSelectDate: (date: Date) => void;
 };
 
-const monthWeekdayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const monthWeekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const RING_RADIUS = 15;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
@@ -35,9 +35,9 @@ type DayProgressRingProps = {
 
 function getWeekDayClassName(isSelected: boolean, isToday: boolean) {
   return cn(
-    styles['top-calendar__day'],
-    isSelected && styles['top-calendar__day--active'],
-    !isSelected && isToday && styles['top-calendar__day--today'],
+    styles["top-calendar__day"],
+    isSelected && styles["top-calendar__day--active"],
+    !isSelected && isToday && styles["top-calendar__day--today"],
   );
 }
 
@@ -47,13 +47,13 @@ function getPickerDayClassName(
   isOutsideMonth: boolean,
 ) {
   return cn(
-    styles['top-calendar__picker-day'],
-    isSelected && styles['top-calendar__picker-day--selected'],
-    !isSelected && isToday && styles['top-calendar__picker-day--today'],
+    styles["top-calendar__picker-day"],
+    isSelected && styles["top-calendar__picker-day--selected"],
+    !isSelected && isToday && styles["top-calendar__picker-day--today"],
     !isSelected &&
       !isToday &&
       isOutsideMonth &&
-      styles['top-calendar__picker-day--outside'],
+      styles["top-calendar__picker-day--outside"],
   );
 }
 
@@ -67,32 +67,32 @@ function DayProgressRing({
   return (
     <span
       className={cn(
-        styles['top-calendar__progress-ring'],
+        styles["top-calendar__progress-ring"],
         sizeClassName,
         styles[`top-calendar__progress-ring--${indicator.status}`],
       )}
     >
       <svg
         viewBox="0 0 36 36"
-        className={styles['top-calendar__progress-ring-svg']}
+        className={styles["top-calendar__progress-ring-svg"]}
         aria-hidden="true"
       >
         <circle
           cx="18"
           cy="18"
           r={RING_RADIUS}
-          className={styles['top-calendar__progress-ring-track']}
+          className={styles["top-calendar__progress-ring-track"]}
         />
         <circle
           cx="18"
           cy="18"
           r={RING_RADIUS}
-          className={styles['top-calendar__progress-ring-fill']}
+          className={styles["top-calendar__progress-ring-fill"]}
           strokeDasharray={RING_CIRCUMFERENCE}
           strokeDashoffset={dashOffset}
         />
       </svg>
-      <span className={styles['top-calendar__progress-ring-content']}>
+      <span className={styles["top-calendar__progress-ring-content"]}>
         {children}
       </span>
     </span>
@@ -135,17 +135,17 @@ export function TopCalendar({
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsDatePickerOpen(false);
       }
     }
 
-    document.addEventListener('pointerdown', handlePointerDown);
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('pointerdown', handlePointerDown);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isDatePickerOpen]);
 
@@ -175,22 +175,22 @@ export function TopCalendar({
   const monthDays = getMonthDays(visibleMonth);
 
   return (
-    <header className={styles['top-calendar']} ref={rootRef}>
-      <div className={styles['top-calendar__header']}>
+    <header className={styles["top-calendar"]} ref={rootRef}>
+      <div className={styles["top-calendar__header"]}>
         <button
           type="button"
-          className={styles['top-calendar__month-button']}
+          className={styles["top-calendar__month-button"]}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"
           onClick={toggleDatePicker}
         >
-          <span className={styles['top-calendar__month']}>
+          <span className={styles["top-calendar__month"]}>
             {formatCalendarMonth(selectedDate)}
           </span>
           <span
             className={cn(
-              styles['top-calendar__month-chevron'],
-              isDatePickerOpen && styles['top-calendar__month-chevron--open'],
+              styles["top-calendar__month-chevron"],
+              isDatePickerOpen && styles["top-calendar__month-chevron--open"],
             )}
             aria-hidden="true"
           >
@@ -200,8 +200,8 @@ export function TopCalendar({
 
         <button
           type="button"
-          className={styles['top-calendar__icon-button']}
-          aria-label={isDatePickerOpen ? 'Close calendar' : 'Open calendar'}
+          className={styles["top-calendar__icon-button"]}
+          aria-label={isDatePickerOpen ? "Close calendar" : "Open calendar"}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"
           onClick={toggleDatePicker}
@@ -223,7 +223,7 @@ export function TopCalendar({
         </button>
       </div>
 
-      <div className={styles['top-calendar__grid']} aria-label="Week overview">
+      <div className={styles["top-calendar__grid"]} aria-label="Week overview">
         {weekDays.map((day) => {
           const isSelected = isSameDay(day, selectedDate);
           const isToday = isSameDay(day, today);
@@ -237,14 +237,14 @@ export function TopCalendar({
               aria-pressed={isSelected}
               onClick={() => onSelectDate(day)}
             >
-              <span className={styles['top-calendar__day-label']}>
+              <span className={styles["top-calendar__day-label"]}>
                 {formatWeekdayLabel(day)}
               </span>
               <DayProgressRing
                 indicator={indicator}
-                sizeClassName={styles['top-calendar__progress-ring--week']}
+                sizeClassName={styles["top-calendar__progress-ring--week"]}
               >
-                <span className={styles['top-calendar__day-number']}>
+                <span className={styles["top-calendar__day-number"]}>
                   {day.getDate()}
                 </span>
               </DayProgressRing>
@@ -255,27 +255,27 @@ export function TopCalendar({
 
       {isDatePickerOpen && (
         <div
-          className={styles['top-calendar__picker']}
+          className={styles["top-calendar__picker"]}
           role="dialog"
           aria-label="Calendar"
         >
-          <div className={styles['top-calendar__picker-header']}>
+          <div className={styles["top-calendar__picker-header"]}>
             <button
               type="button"
-              className={styles['top-calendar__picker-nav']}
+              className={styles["top-calendar__picker-nav"]}
               aria-label="Previous month"
               onClick={() => setVisibleMonth(addMonths(visibleMonth, -1))}
             >
               ‹
             </button>
 
-            <p className={styles['top-calendar__picker-title']}>
+            <p className={styles["top-calendar__picker-title"]}>
               {formatCalendarMonthYear(visibleMonth)}
             </p>
 
             <button
               type="button"
-              className={styles['top-calendar__picker-nav']}
+              className={styles["top-calendar__picker-nav"]}
               aria-label="Next month"
               onClick={() => setVisibleMonth(addMonths(visibleMonth, 1))}
             >
@@ -284,20 +284,20 @@ export function TopCalendar({
           </div>
 
           <div
-            className={styles['top-calendar__picker-weekdays']}
+            className={styles["top-calendar__picker-weekdays"]}
             aria-hidden="true"
           >
             {monthWeekdayLabels.map((label) => (
               <span
                 key={label}
-                className={styles['top-calendar__picker-weekday']}
+                className={styles["top-calendar__picker-weekday"]}
               >
                 {label}
               </span>
             ))}
           </div>
 
-          <div className={styles['top-calendar__picker-grid']}>
+          <div className={styles["top-calendar__picker-grid"]}>
             {monthDays.map((day) => {
               const isSelected = isSameDay(day, selectedDate);
               const isToday = isSameDay(day, today);
@@ -317,9 +317,9 @@ export function TopCalendar({
                 >
                   <DayProgressRing
                     indicator={indicator}
-                    sizeClassName={styles['top-calendar__progress-ring--month']}
+                    sizeClassName={styles["top-calendar__progress-ring--month"]}
                   >
-                    <span className={styles['top-calendar__picker-day-number']}>
+                    <span className={styles["top-calendar__picker-day-number"]}>
                       {day.getDate()}
                     </span>
                   </DayProgressRing>
@@ -328,10 +328,10 @@ export function TopCalendar({
             })}
           </div>
 
-          <div className={styles['top-calendar__picker-footer']}>
+          <div className={styles["top-calendar__picker-footer"]}>
             <button
               type="button"
-              className={styles['top-calendar__picker-today']}
+              className={styles["top-calendar__picker-today"]}
               onClick={handleSelectToday}
             >
               Today

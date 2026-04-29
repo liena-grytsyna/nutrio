@@ -4,8 +4,8 @@ import type {
   NutritionOverview,
   NutritionValues,
   PreviewDayEntryNutritionInput,
-} from '../types/nutrition';
-import { readJsonResponse } from './http';
+} from "../types/nutrition";
+import { readJsonResponse } from "./http";
 
 type NutritionOverviewResponse = {
   overview: NutritionOverview;
@@ -26,9 +26,12 @@ export async function fetchNutritionOverview(
   const searchParams = new URLSearchParams({
     timezoneOffsetMinutes: String(timezoneOffsetMinutes),
   });
-  const response = await fetch(`/api/nutrition-overview?${searchParams.toString()}`, {
-    signal,
-  });
+  const response = await fetch(
+    `/api/nutrition-overview?${searchParams.toString()}`,
+    {
+      signal,
+    },
+  );
 
   return (await readJsonResponse<NutritionOverviewResponse>(response)).overview;
 }
@@ -37,11 +40,11 @@ export async function previewDayEntryNutrition(
   input: PreviewDayEntryNutritionInput,
   signal?: AbortSignal,
 ): Promise<NutritionValues> {
-  const response = await fetch('/api/day-entries/preview', {
-    method: 'POST',
+  const response = await fetch("/api/day-entries/preview", {
+    method: "POST",
     signal,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(input),
   });
@@ -49,11 +52,13 @@ export async function previewDayEntryNutrition(
   return (await readJsonResponse<NutritionPreviewResponse>(response)).nutrition;
 }
 
-export async function createDayEntry(input: CreateDayEntryInput): Promise<DayEntry> {
-  const response = await fetch('/api/day-entries', {
-    method: 'POST',
+export async function createDayEntry(
+  input: CreateDayEntryInput,
+): Promise<DayEntry> {
+  const response = await fetch("/api/day-entries", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(input),
   });

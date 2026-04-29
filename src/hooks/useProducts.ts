@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { createProduct, fetchProducts } from '../api/products';
-import { sortProductsByName } from '../lib/products';
-import type { CreateProductInput, Product } from '../types/product';
+import { useEffect, useState } from "react";
+import { createProduct, fetchProducts } from "../api/products";
+import { sortProductsByName } from "../lib/products";
+import type { CreateProductInput, Product } from "../types/product";
 
 function getErrorMessage(error: unknown, fallbackMessage: string) {
   return error instanceof Error ? error.message : fallbackMessage;
@@ -24,7 +24,7 @@ export function useProducts() {
       } catch (error) {
         if (!controller.signal.aborted) {
           setProductsError(
-            getErrorMessage(error, 'Products could not be loaded.'),
+            getErrorMessage(error, "Products could not be loaded."),
           );
         }
       } finally {

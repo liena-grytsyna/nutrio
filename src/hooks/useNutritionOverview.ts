@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
-import { createDayEntry, fetchNutritionOverview } from '../api/nutrition';
-import { getDateKey } from '../lib/date';
-import { EMPTY_NUTRITION_OVERVIEW } from '../lib/emptyNutrition';
-import { getMealSectionId } from '../lib/mealEntries';
-import { MEAL_SECTION_HOURS } from '../lib/mealSections';
-import type {
-  MealSectionId,
-  NutritionOverview,
-} from '../types/nutrition';
-import type { Product } from '../types/product';
+import { useEffect, useState } from "react";
+import { createDayEntry, fetchNutritionOverview } from "../api/nutrition";
+import { getDateKey } from "../lib/date";
+import { EMPTY_NUTRITION_OVERVIEW } from "../lib/emptyNutrition";
+import { getMealSectionId } from "../lib/mealEntries";
+import { MEAL_SECTION_HOURS } from "../lib/mealSections";
+import type { MealSectionId, NutritionOverview } from "../types/nutrition";
+import type { Product } from "../types/product";
 
 type UseNutritionOverviewOptions = {
   products: Product[];
@@ -23,8 +20,9 @@ export function useNutritionOverview({
   products,
   selectedDate,
 }: UseNutritionOverviewOptions) {
-  const [nutritionOverview, setNutritionOverview] =
-    useState<NutritionOverview>(EMPTY_NUTRITION_OVERVIEW);
+  const [nutritionOverview, setNutritionOverview] = useState<NutritionOverview>(
+    EMPTY_NUTRITION_OVERVIEW,
+  );
   const [entriesLoading, setEntriesLoading] = useState(true);
   const [entriesError, setEntriesError] = useState<string | null>(null);
   const selectedDateKey = getDateKey(selectedDate);
@@ -47,7 +45,7 @@ export function useNutritionOverview({
         setNutritionOverview(overview);
       } catch (error) {
         if (!controller.signal.aborted) {
-          setEntriesError(getErrorMessage(error, 'Meals could not be loaded.'));
+          setEntriesError(getErrorMessage(error, "Meals could not be loaded."));
           setNutritionOverview(EMPTY_NUTRITION_OVERVIEW);
         }
       } finally {
@@ -71,7 +69,7 @@ export function useNutritionOverview({
       setEntriesError(null);
       return overview;
     } catch (error) {
-      setEntriesError(getErrorMessage(error, 'Meals could not be refreshed.'));
+      setEntriesError(getErrorMessage(error, "Meals could not be refreshed."));
       throw error;
     } finally {
       setEntriesLoading(false);
@@ -86,7 +84,7 @@ export function useNutritionOverview({
     const product = products.find((item) => item.id === productId);
 
     if (!product) {
-      throw new Error('Selected product was not found.');
+      throw new Error("Selected product was not found.");
     }
 
     const sameSectionCount = selectedDayOverview.entries.filter((entry) => {

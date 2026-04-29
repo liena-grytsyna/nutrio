@@ -1,4 +1,4 @@
-const locale = 'en-US';
+const locale = "en-US";
 
 export function startOfDay(date: Date) {
   const d = new Date(date);
@@ -41,8 +41,8 @@ export function startOfMonth(date: Date) {
 export function getDateKey(date: Date) {
   const normalized = startOfDay(date);
   const year = normalized.getFullYear();
-  const month = String(normalized.getMonth() + 1).padStart(2, '0');
-  const day = String(normalized.getDate()).padStart(2, '0');
+  const month = String(normalized.getMonth() + 1).padStart(2, "0");
+  const day = String(normalized.getDate()).padStart(2, "0");
 
   return `${year}-${month}-${day}`;
 }
@@ -58,17 +58,17 @@ export function getMonthDays(date: Date) {
 }
 
 export const formatCalendarMonth = (date: Date) =>
-  date.toLocaleDateString(locale, { month: 'long' });
+  date.toLocaleDateString(locale, { month: "long" });
 
 export const formatCalendarMonthYear = (date: Date) =>
-  date.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
+  date.toLocaleDateString(locale, { month: "long", year: "numeric" });
 
 export const formatWeekdayLabel = (date: Date) =>
-  date.toLocaleDateString(locale, { weekday: 'short' });
+  date.toLocaleDateString(locale, { weekday: "short" });
 
 export const formatLongDate = (date: Date) =>
   date.toLocaleDateString(locale, {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
+    weekday: "long",
+    day: "numeric",
+    month: "long",
   });
