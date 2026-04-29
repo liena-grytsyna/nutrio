@@ -157,7 +157,9 @@ export function TodayAddEntryDialog({
                 }}
               />
             </label>
-
+<p className={styles.privacy}>
+  Food entries are stored in the database and linked to this browser.
+</p>
             <div className={styles.actions}>
               <Button type="button" variant="ghost" onClick={onClose}>
                 Cancel
