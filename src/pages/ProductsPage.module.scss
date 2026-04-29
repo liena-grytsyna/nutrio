@@ -1,5 +1,5 @@
-@use '../mixins' as *;
-@use '../tokens' as *;
+@use '../styles/mixins' as *;
+@use '../styles/tokens' as *;
 
 .product-list-screen {
   @include section-stack;
