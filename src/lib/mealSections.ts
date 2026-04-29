@@ -10,6 +10,15 @@ export type CollapsedMealSections = Record<MealSectionId, boolean>;
 
 type MealEntryGroups = Record<MealSectionId, DayEntry[]>;
 
+export const MEAL_SECTION_HOURS: Record<MealSectionId, number> = {
+  breakfast: 8,
+  snack: 10,
+  lunch: 13,
+  secondSnack: 16,
+  dinner: 19,
+  thirdSnack: 22,
+};
+
 export const MEAL_SECTIONS = [
   {
     id: 'breakfast',
