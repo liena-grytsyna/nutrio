@@ -11,8 +11,8 @@ export type CalorieBalanceStatus = "under" | "ideal" | "over";
 
 // Small indicator used in calendar (daily overview)
 export type DayCalorieIndicator = {
-  calories: number;   // total calories for the day
-  progress: number;   // progress toward daily goal (0–1)
+  calories: number; // total calories for the day
+  progress: number; // progress toward daily goal (0–1)
   status: CalorieBalanceStatus; // under / ideal / over
 };
 
@@ -29,8 +29,8 @@ export type MealSectionId =
 export type DayEntry = NutritionValues & {
   id: string;
   name: string;
-  amount: number;     // amount in grams
-  eatenAt: string;    // ISO date string
+  amount: number; // amount in grams
+  eatenAt: string; // ISO date string
 };
 
 // Input for creating a new entry
@@ -48,18 +48,18 @@ export type PreviewDayEntryNutritionInput = {
 
 // Summary for the whole day
 export type NutritionGoalSummary = {
-  consumed: NutritionValues;   // what user already ate
-  target: NutritionValues;     // daily goal
-  remaining: NutritionValues;  // what is left
-  progress: NutritionValues;   // progress for each macro
+  consumed: NutritionValues; // what user already ate
+  target: NutritionValues; // daily goal
+  remaining: NutritionValues; // what is left
+  progress: NutritionValues; // progress for each macro
   calorieStatus: CalorieBalanceStatus;
   calorieProgressRatio: number; // 0–1
 };
 
 // Full data for a single day
 export type DayNutritionOverview = {
-  entries: DayEntry[];         // all meals
-  totals: NutritionValues;     // total nutrition
+  entries: DayEntry[]; // all meals
+  totals: NutritionValues; // total nutrition
   summary: NutritionGoalSummary;
 };
 
@@ -67,6 +67,6 @@ export type DayNutritionOverview = {
 export type NutritionOverview = {
   days: Record<string, DayNutritionOverview>; // key = date
   dailyCalorieIndicators: Record<string, DayCalorieIndicator>;
-  defaultDay: DayNutritionOverview;           // fallback if no data
-  defaultIndicator: DayCalorieIndicator;      // fallback indicator
+  defaultDay: DayNutritionOverview; // fallback if no data
+  defaultIndicator: DayCalorieIndicator; // fallback indicator
 };
