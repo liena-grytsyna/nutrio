@@ -1,17 +1,9 @@
 import { readJsonResponse } from "./http";
 import type { CreateProductInput, Product } from "../types/product";
 
-type ProductsResponse = {
-  products: Product[];
-};
-
-type ProductResponse = {
-  product: Product;
-};
-
 export async function fetchProducts(signal?: AbortSignal): Promise<Product[]> {
   const response = await fetch("/api/products", { signal });
-  return (await readJsonResponse<ProductsResponse>(response)).products;
+  return (await readJsonResponse<{ products: Product[] }>(response)).products;
 }
 
 export async function createProduct(
@@ -24,5 +16,5 @@ export async function createProduct(
     },
     body: JSON.stringify(input),
   });
-  return (await readJsonResponse<ProductResponse>(response)).product;
+  return (await readJsonResponse<{ product: Product }>(response)).product;
 }

@@ -67,19 +67,8 @@ app.get('/api/health', async (_req, res) => {
   }
 });
 
-app.get('/api/products', async (req, res) => {
-  const search = readText(req.query.search);
-  const where = search
-    ? {
-        name: {
-          contains: search,
-          mode: 'insensitive',
-        },
-      }
-    : undefined;
-
+app.get('/api/products', async (_req, res) => {
   const products = await prisma.product.findMany({
-    where,
     orderBy: { name: 'asc' },
     take: 100,
   });
@@ -141,11 +130,7 @@ app.post('/api/day-entries', async (req, res) => {
   const amount = readNonNegativeNumber(req.body.amount);
   const eatenAt = readDate(req.body.eatenAt);
 
-  if (
-    !productId ||
-    amount === null ||
-    !eatenAt
-  ) {
+  if (!productId || amount === null || !eatenAt) {
     res.status(400).json({
       error: 'Day entry requires valid productId, amount, and eatenAt.',
     });
@@ -176,33 +161,6 @@ app.post('/api/day-entries', async (req, res) => {
   });
 
   res.status(201).json({ dayEntry });
-});
-
-app.post('/api/day-entries/preview', async (req, res) => {
-  const productId = readText(req.body.productId);
-  const amount = readNonNegativeNumber(req.body.amount);
-
-  if (!productId || amount === null) {
-    res.status(400).json({
-      error: 'Preview requires valid productId and amount.',
-    });
-    return;
-  }
-
-  const product = await prisma.product.findUnique({
-    where: { id: productId },
-  });
-
-  if (!product) {
-    res.status(404).json({
-      error: 'Selected product was not found.',
-    });
-    return;
-  }
-
-  res.json({
-    nutrition: getProductNutritionForAmount(product, amount),
-  });
 });
 
 app.use((error, _req, res, _next) => {

@@ -30,14 +30,10 @@
 }
 
 .header {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 16px;
+  display: grid;
 }
 
 .title,
-.hint,
 .status {
   margin: 0;
 }
@@ -49,14 +45,9 @@
   letter-spacing: -0.03em;
 }
 
-.hint,
 .status {
   color: #6f7b8f;
   font-size: 0.92rem;
-}
-
-.close {
-  white-space: nowrap;
 }
 
 .field {
@@ -120,31 +111,6 @@
   border-color: rgba(96, 128, 255, 0.36);
   background: rgba(232, 240, 255, 0.92);
   box-shadow: 0 8px 20px rgba(96, 128, 255, 0.12);
-}
-
-.preview {
-  padding: 14px 16px;
-  border: 1px solid rgba(96, 128, 255, 0.12);
-  border-radius: 18px;
-  background: rgba(241, 246, 255, 0.8);
-}
-
-.preview-title,
-.preview-meta {
-  margin: 0;
-}
-
-.preview-title {
-  color: #1d2129;
-  font-size: 0.95rem;
-  font-weight: 800;
-}
-
-.preview-meta {
-  margin-top: 6px;
-  color: #6f7b8f;
-  font-size: 0.86rem;
-  font-weight: 600;
 }
 
 .actions {

@@ -20,23 +20,20 @@ export function BottomNavigation({
 }: BottomNavigationProps) {
   return (
     <nav className={styles["bottom-navigation"]} aria-label="Navigation">
-      {tabs.map((tab) => {
-        const isActive = tab.id === activeScreen;
-
-        return (
-          <button
-            key={tab.id}
-            type="button"
-            className={cn(
-              styles["bottom-navigation__tab"],
-              isActive && styles["bottom-navigation__tab--active"],
-            )}
-            onClick={() => onSelectScreen(tab.id)}
-          >
-            {tab.label}
-          </button>
-        );
-      })}
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          type="button"
+          className={cn(
+            styles["bottom-navigation__tab"],
+            tab.id === activeScreen &&
+              styles["bottom-navigation__tab--active"],
+          )}
+          onClick={() => onSelectScreen(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
     </nav>
   );
 }

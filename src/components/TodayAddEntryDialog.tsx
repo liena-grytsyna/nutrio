@@ -1,10 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
-import { previewDayEntryNutrition } from "../api/nutrition";
 import { formatNumber } from "../lib/formatNumber";
-import { searchProducts } from "../lib/products";
 import type { MealSectionConfig } from "../lib/mealSections";
-import type { NutritionValues } from "../types/nutrition";
 import type { Product } from "../types/product";
 import { Button } from "./Button";
 import { cn } from "../lib/cn";
@@ -28,19 +25,14 @@ export function TodayAddEntryDialog({
   onSubmit,
 }: TodayAddEntryDialogProps) {
   const [amount, setAmount] = useState("100");
-  const [query, setQuery] = useState("");
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     products[0]?.id ?? null,
   );
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [previewNutrition, setPreviewNutrition] =
-    useState<NutritionValues | null>(null);
-
-  const visibleProducts = searchProducts(products, query);
   const selectedProduct =
-    visibleProducts.find((product) => product.id === selectedProductId) ??
-    visibleProducts[0] ??
+    products.find((product) => product.id === selectedProductId) ??
+    products[0] ??
     null;
   const parsedAmount = Number(amount);
   const isAmountValid = Number.isFinite(parsedAmount) && parsedAmount > 0;
@@ -63,42 +55,6 @@ export function TodayAddEntryDialog({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
-
-  useEffect(() => {
-    if (!selectedProduct || !isAmountValid) {
-      setPreviewNutrition(null);
-      return;
-    }
-
-    const controller = new AbortController();
-
-    async function loadPreview() {
-      try {
-        setStatusMessage(null);
-        const nutrition = await previewDayEntryNutrition(
-          {
-            productId: selectedProduct.id,
-            amount: parsedAmount,
-          },
-          controller.signal,
-        );
-        setPreviewNutrition(nutrition);
-      } catch (error) {
-        if (!controller.signal.aborted) {
-          setPreviewNutrition(null);
-          setStatusMessage(
-            error instanceof Error
-              ? error.message
-              : "Preview could not be calculated.",
-          );
-        }
-      }
-    }
-
-    loadPreview();
-
-    return () => controller.abort();
-  }, [isAmountValid, parsedAmount, selectedProduct]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -135,28 +91,13 @@ export function TodayAddEntryDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="today-add-entry-title"
-        aria-describedby="today-add-entry-hint"
         onClick={(event) => event.stopPropagation()}
         onSubmit={handleSubmit}
       >
         <div className={styles.header}>
-          <div>
-            <h3 id="today-add-entry-title" className={styles.title}>
-              Add to {section.title}
-            </h3>
-            <p id="today-add-entry-hint" className={styles.hint}>
-              Choose a saved product and set the amount in grams.
-            </p>
-          </div>
-
-          <Button
-            className={styles.close}
-            type="button"
-            variant="ghost"
-            onClick={onClose}
-          >
-            Close
-          </Button>
+          <h3 id="today-add-entry-title" className={styles.title}>
+            Add to {section.title}
+          </h3>
         </div>
 
         {isLoadingProducts ? (
@@ -169,21 +110,8 @@ export function TodayAddEntryDialog({
           </p>
         ) : (
           <>
-            <label className={styles.field}>
-              <span>Search product</span>
-              <input
-                type="search"
-                value={query}
-                placeholder="Name..."
-                onChange={(event) => {
-                  setStatusMessage(null);
-                  setQuery(event.target.value);
-                }}
-              />
-            </label>
-
             <div className={styles.products} role="listbox">
-              {visibleProducts.map((product) => {
+              {products.map((product) => {
                 const isSelected = product.id === selectedProduct?.id;
                 const productClassName = cn(
                   styles.product,
@@ -215,10 +143,6 @@ export function TodayAddEntryDialog({
               })}
             </div>
 
-            {visibleProducts.length === 0 && (
-              <p className={styles.status}>No products found.</p>
-            )}
-
             <label className={styles.field}>
               <span>Amount</span>
               <input
@@ -233,20 +157,6 @@ export function TodayAddEntryDialog({
                 }}
               />
             </label>
-
-            {previewNutrition && (
-              <div className={styles.preview}>
-                <strong className={styles["preview-title"]}>
-                  {selectedProduct.name} • {formatNumber(parsedAmount, 1)} g
-                </strong>
-                <p className={styles["preview-meta"]}>
-                  {formatNumber(previewNutrition.calories, 1)} kcal • P{" "}
-                  {formatNumber(previewNutrition.protein, 1)} • F{" "}
-                  {formatNumber(previewNutrition.fat, 1)} • C{" "}
-                  {formatNumber(previewNutrition.carbs, 1)}
-                </p>
-              </div>
-            )}
 
             <div className={styles.actions}>
               <Button type="button" variant="ghost" onClick={onClose}>

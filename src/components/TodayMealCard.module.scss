@@ -8,10 +8,6 @@
   box-shadow: 0 16px 30px rgba(47, 65, 102, 0.08);
 }
 
-.card--filled {
-  background: #ffffff;
-}
-
 .card--expanded {
   .header {
     border-bottom: 1px solid rgba(96, 111, 145, 0.09);
@@ -24,14 +20,12 @@
   align-items: center;
   gap: 14px;
   padding: 18px 20px;
-  background: #ffffff;
 }
 
 .status,
 .item-status {
   width: 18px;
   height: 18px;
-  flex-shrink: 0;
   border-radius: 50%;
   border: 2px solid rgba(134, 140, 152, 0.56);
 }
@@ -44,7 +38,6 @@
 }
 
 .icon {
-  flex-shrink: 0;
   display: grid;
   place-items: center;
   width: 30px;
@@ -87,7 +80,6 @@
   font-size: 1.05rem;
   line-height: 1.15;
   font-weight: 800;
-  letter-spacing: -0.025em;
 }
 
 .calories {
@@ -109,7 +101,6 @@
   position: relative;
   display: grid;
   place-items: center;
-  flex-shrink: 0;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -202,10 +193,6 @@
   }
 }
 
-.body {
-  background: #ffffff;
-}
-
 .item {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -228,7 +215,6 @@
   font-size: 1rem;
   line-height: 1.3;
   font-weight: 800;
-  letter-spacing: -0.02em;
 }
 
 .item-meta {

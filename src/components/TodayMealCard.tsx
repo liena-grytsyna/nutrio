@@ -48,7 +48,6 @@ export function TodayMealCard({
     : section.emptyHint;
   const mealCardClassName = cn(
     styles.card,
-    hasEntries && styles["card--filled"],
     hasEntries && !isCollapsed && styles["card--expanded"],
   );
   const toggleButtonClassName = cn(

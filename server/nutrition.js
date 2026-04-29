@@ -7,7 +7,7 @@ export const DAILY_TARGETS = {
 
 const IDEAL_MIN_PROGRESS = 0.95;
 const IDEAL_MAX_PROGRESS = 1.05;
-const EMPTY_NUTRITION = {
+const ZERO_NUTRITION = {
   calories: 0,
   protein: 0,
   fat: 0,
@@ -53,10 +53,6 @@ function getCalorieBalanceStatus(progress) {
   return 'under';
 }
 
-function getProgress(value, target) {
-  return getClampedProgress(getCalorieProgressRatio(value, target));
-}
-
 function getRemaining(value, target) {
   return Math.max(target - value, 0);
 }
@@ -80,10 +76,18 @@ export function getNutritionGoalSummary(
       carbs: getRemaining(consumed.carbs, target.carbs),
     },
     progress: {
-      calories: getProgress(consumed.calories, target.calories),
-      protein: getProgress(consumed.protein, target.protein),
-      fat: getProgress(consumed.fat, target.fat),
-      carbs: getProgress(consumed.carbs, target.carbs),
+      calories: getClampedProgress(
+        getCalorieProgressRatio(consumed.calories, target.calories),
+      ),
+      protein: getClampedProgress(
+        getCalorieProgressRatio(consumed.protein, target.protein),
+      ),
+      fat: getClampedProgress(
+        getCalorieProgressRatio(consumed.fat, target.fat),
+      ),
+      carbs: getClampedProgress(
+        getCalorieProgressRatio(consumed.carbs, target.carbs),
+      ),
     },
     calorieStatus: getCalorieBalanceStatus(calorieProgressRatio),
     calorieProgressRatio,
@@ -114,7 +118,7 @@ function getDateKeyForOffset(date, timezoneOffsetMinutes) {
 }
 
 function createEmptyDayOverview() {
-  const totals = { ...EMPTY_NUTRITION };
+  const totals = { ...ZERO_NUTRITION };
 
   return {
     entries: [],
