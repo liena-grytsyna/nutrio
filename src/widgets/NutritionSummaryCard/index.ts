@@ -1,1 +1,0 @@
-export { NutritionSummaryCard } from './NutritionSummaryCard';

@@ -1,0 +1,23 @@
+@use "./tokens" as *;
+
+@mixin reset-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+@mixin surface-card($radius: 22px, $background: $color-panel) {
+  padding: 16px;
+  border-radius: $radius;
+  background: $background;
+  border: 1px solid $color-border;
+  box-shadow: 0 10px 24px rgba(30, 45, 75, 0.06);
+}
+
+@mixin section-stack($gap: 16px) {
+  display: grid;
+  gap: $gap;
+}

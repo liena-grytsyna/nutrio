@@ -1,70 +1,50 @@
-# Nutrio
+Nutrio
+======
 
-A simple starter project for a calorie tracking app.
+Lightweight food tracking app (MVP) for adding products, creating day entries, and viewing daily nutrition summaries.
 
-## Step 1. What We Are Building Now
+Tech stack
+----------
+- Frontend: React + Vite + TypeScript
+- Backend: Node.js + Express
+- Database: PostgreSQL (Prisma ORM)
+- Docker for local development
 
-At this stage, we are preparing only the project foundation:
+Simple MVP flow
+---------------
+1. Add product → 2. Add entry (select product, amount, time) → 3. See daily summary (totals & progress)
 
-- set up `React + TypeScript + Vite`
-- create a clear folder structure
-- split the code into `app`, `components`, `screens`, `logic`, `ocr`, `storage`
-- build a simple starter web page for iPhone Safari
+Setup (Docker)
+--------------
+1. Create a `.env` file in the project root with the required environment variables (see below).
+2. Build and start containers:
 
-This is not the final app yet, but a clean foundation for the MVP.
+	docker-compose up --build
 
-## Step 2. Why This Stack
+3. The frontend is served by the Vite build or the static server in the container. The API listens on the configured PORT (default 3000).
 
-- `React` is easy to use for the web version
-- `TypeScript` helps keep product and macro data consistent
-- `Vite` is beginner-friendly and starts quickly
-- the business logic can later be adapted for a mobile app if needed
+Required environment variables
+------------------------------
+- DATABASE_URL  — PostgreSQL connection string (e.g. postgres://user:pass@host:5432/dbname)
+- PORT (optional) — API port (defaults to 3000)
 
-## Step 3. Project Structure
+Main API endpoints
+------------------
+- GET  /api/health               — health check
+- GET  /api/products             — list products
+- POST /api/products             — create product (name, calories, protein, fat, carbs, servingSize)
+- POST /api/day-entries          — create a day entry (productId, amount, eatenAt)
+- GET  /api/nutrition-overview   — get aggregated per-day nutrition overview (requires timezoneOffsetMinutes query param)
 
-```text
-src/
-  api/           // future backend requests
-  app/           // root App and application layout
-  components/    // reusable UI components
-  data/          // temporary mock data
-  logic/         // calorie and macro calculations
-  ocr/           // OCR and nutrition text parsing
-  screens/       // application screens
-  storage/       // local data storage
-  styles/        // Sass tokens, mixins, and global styles
-  types/         // product and nutrition types
-  main.tsx
-```
+Notes / removed features
+------------------------
+This submission focuses on the MVP. Previously considered or removed fields/endpoints such as brand, barcode, source, and the preview endpoint are intentionally not part of the MVP and are not required for the exam.
 
-## Step 4. How to Run the Project
+Build & validate (exam checklist)
+--------------------------------
+After setting `.env` and starting services (or from a local dev environment), run:
 
-```bash
-npm install
-npm run dev
-```
+1. npm run build
+2. npx prisma validate
 
-After that, open the address shown by Vite in your browser.
-
-For iPhone testing, it is easiest to run the project on the same network and later add access via local IP.
-
-## Step 5. What Is Already Included
-
-- starter mobile-style interface
-- styles split into `scss` files
-- screens:
-  - `Today`
-  - `Add Product`
-  - `Product List`
-- daily totals calculation
-- local storage scaffold via `localStorage`
-- OCR text parsing scaffold for package labels
-
-## Step 6. Next Step
-
-The next step can be building the actual MVP:
-
-1. a manual product entry form
-2. saving to `localStorage`
-3. daily calorie and macro totals
-4. basic OCR with `Tesseract.js`
+Keep the project small and focused for the exam: no UI/UX changes or new features are included in this submission.

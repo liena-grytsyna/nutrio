@@ -1,13 +1,17 @@
-import express from 'express';
-import { PrismaClient } from '@prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
+import express from "express";
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import {
+  buildNutritionOverview,
+  getProductNutritionForAmount,
+} from "./nutrition.js";
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
 const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
-  throw new Error('DATABASE_URL is required.');
+  throw new Error("DATABASE_URL is required.");
 }
 
 const prisma = new PrismaClient({
@@ -16,14 +20,20 @@ const prisma = new PrismaClient({
   }),
 });
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: "1mb" }));
+const dayEntrySelect = {
+  id: true,
+  name: true,
+  amount: true,
+  calories: true,
+  protein: true,
+  fat: true,
+  carbs: true,
+  eatenAt: true,
+};
 
 function readText(value) {
-  return typeof value === 'string' ? value.trim() : '';
-}
-
-function readOptionalText(value) {
-  return readText(value) || null;
+  return typeof value === "string" ? value.trim() : "";
 }
 
 function readNonNegativeNumber(value) {
@@ -31,45 +41,78 @@ function readNonNegativeNumber(value) {
   return Number.isFinite(number) && number >= 0 ? number : null;
 }
 
-app.get('/api/health', async (_req, res) => {
+function readDate(value) {
+  const text = readText(value);
+
+  if (!text) {
+    return null;
+  }
+
+  const date = new Date(text);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function readInteger(value) {
+  const number = Number(value);
+  return Number.isInteger(number) ? number : null;
+}
+
+app.get("/api/health", async (_req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
-    res.json({ status: 'ok' });
+    res.json({ status: "ok" });
   } catch {
-    res.status(503).json({ status: 'error' });
+    res.status(503).json({ status: "error" });
   }
 });
 
-app.get('/api/products', async (req, res) => {
-  const search = readText(req.query.search);
-  const where = search
-    ? {
-        name: {
-          contains: search,
-          mode: 'insensitive',
-        },
-      }
-    : undefined;
-
+app.get("/api/products", async (_req, res) => {
   const products = await prisma.product.findMany({
-    where,
-    orderBy: { name: 'asc' },
+    orderBy: { name: "asc" },
     take: 100,
   });
 
   res.json({ products });
 });
 
-app.post('/api/products', async (req, res) => {
+app.get("/api/nutrition-overview", async (req, res) => {
+  const timezoneOffsetMinutes = readInteger(req.query.timezoneOffsetMinutes);
+
+  if (timezoneOffsetMinutes === null) {
+    res.status(400).json({
+      error: "timezoneOffsetMinutes must be a valid integer.",
+    });
+    return;
+  }
+
+  const dayEntries = await prisma.dayEntry.findMany({
+    select: dayEntrySelect,
+    orderBy: [{ eatenAt: "asc" }, { createdAt: "asc" }],
+    take: 1000,
+  });
+
+  res.json({
+    overview: buildNutritionOverview(dayEntries, timezoneOffsetMinutes),
+  });
+});
+
+app.post("/api/products", async (req, res) => {
   const name = readText(req.body.name);
   const calories = readNonNegativeNumber(req.body.calories);
   const protein = readNonNegativeNumber(req.body.protein);
   const fat = readNonNegativeNumber(req.body.fat);
   const carbs = readNonNegativeNumber(req.body.carbs);
 
-  if (!name || calories === null || protein === null || fat === null || carbs === null) {
+  if (
+    !name ||
+    calories === null ||
+    protein === null ||
+    fat === null ||
+    carbs === null
+  ) {
     res.status(400).json({
-      error: 'Name and non-negative nutrition values are required.',
+      error: "Name and non-negative nutrition values are required.",
     });
     return;
   }
@@ -77,9 +120,7 @@ app.post('/api/products', async (req, res) => {
   const product = await prisma.product.create({
     data: {
       name,
-      brand: readOptionalText(req.body.brand),
-      barcode: readOptionalText(req.body.barcode),
-      servingSize: readText(req.body.servingSize) || '100 g',
+      servingSize: readText(req.body.servingSize) || "100 g",
       calories,
       protein,
       fat,
@@ -90,15 +131,53 @@ app.post('/api/products', async (req, res) => {
   res.status(201).json({ product });
 });
 
+app.post("/api/day-entries", async (req, res) => {
+  const productId = readText(req.body.productId);
+  const amount = readNonNegativeNumber(req.body.amount);
+  const eatenAt = readDate(req.body.eatenAt);
+
+  if (!productId || amount === null || !eatenAt) {
+    res.status(400).json({
+      error: "Day entry requires valid productId, amount, and eatenAt.",
+    });
+    return;
+  }
+
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+  });
+
+  if (!product) {
+    res.status(404).json({
+      error: "Selected product was not found.",
+    });
+    return;
+  }
+
+  const nutrition = getProductNutritionForAmount(product, amount);
+
+  const dayEntry = await prisma.dayEntry.create({
+    data: {
+      name: product.name,
+      amount,
+      ...nutrition,
+      eatenAt,
+    },
+    select: dayEntrySelect,
+  });
+
+  res.status(201).json({ dayEntry });
+});
+
 app.use((error, _req, res, _next) => {
-  if (error?.code === 'P2002') {
+  if (error?.code === "P2002") {
     return res.status(409).json({
-      error: 'Product with this unique value already exists.',
+      error: "Product with this unique value already exists.",
     });
   }
 
   console.error(error);
-  res.status(500).json({ error: 'Internal server error.' });
+  res.status(500).json({ error: "Internal server error." });
 });
 
 async function disconnectAndExit() {
@@ -106,8 +185,8 @@ async function disconnectAndExit() {
   process.exit(0);
 }
 
-process.on('SIGINT', disconnectAndExit);
-process.on('SIGTERM', disconnectAndExit);
+process.on("SIGINT", disconnectAndExit);
+process.on("SIGTERM", disconnectAndExit);
 
 app.listen(port, () => {
   console.log(`Nutrio API listening on port ${port}`);

@@ -1,0 +1,67 @@
+@use "../styles/mixins" as *;
+@use "../styles/tokens" as *;
+
+.add-product-screen {
+  @include section-stack;
+
+  &__title {
+    margin: 0;
+    color: $color-text;
+  }
+
+  &__form {
+    @include surface-card;
+    display: grid;
+    gap: 14px;
+  }
+
+  &__macro-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  &__macro-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  &__field {
+    display: grid;
+    gap: 7px;
+    color: $color-muted;
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid $color-border;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: #ffffff;
+      color: $color-text;
+      font: inherit;
+      outline: none;
+
+      @media (pointer: coarse) {
+        font-size: 16px;
+      }
+
+      &:focus {
+        border-color: rgba(96, 128, 255, 0.48);
+        box-shadow: 0 0 0 3px rgba(96, 128, 255, 0.12);
+      }
+    }
+  }
+
+  &__status {
+    margin: 0;
+    color: $color-muted;
+    font-weight: 700;
+  }
+
+  @media (max-width: 420px) {
+    &__macro-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

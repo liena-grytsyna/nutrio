@@ -9,8 +9,6 @@ datasource db {
 model Product {
   id          String   @id @default(cuid())
   name        String
-  brand       String?
-  barcode     String?  @unique
   servingSize String   @default("100 g") @map("serving_size")
   calories    Float
   protein     Float
@@ -20,4 +18,20 @@ model Product {
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("products")
+}
+
+model DayEntry {
+  id        String   @id @default(cuid())
+  name      String
+  amount    Float
+  calories  Float
+  protein   Float
+  fat       Float
+  carbs     Float
+  eatenAt   DateTime @map("eaten_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([eatenAt])
+  @@map("day_entries")
 }

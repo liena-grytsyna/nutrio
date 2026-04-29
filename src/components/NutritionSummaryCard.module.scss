@@ -1,0 +1,157 @@
+.nutrition-summary-card {
+  --nutrition-calorie-color: #f3b649;
+  position: relative;
+  padding: 8px 0 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+
+  &--ideal {
+    --nutrition-calorie-color: #53c57a;
+  }
+
+  &--over {
+    --nutrition-calorie-color: #e8695f;
+  }
+
+  &__header {
+    display: grid;
+    gap: 14px;
+  }
+
+  &__chart,
+  &__panel {
+    width: 100%;
+    border-radius: 28px;
+    background: #ffffff;
+    border: 1px solid rgba(31, 41, 55, 0.06);
+    box-shadow:
+      0 14px 34px rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+  }
+
+  &__center {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    line-height: 1;
+    padding: 24px 20px 20px;
+  }
+
+  &__title {
+    margin: 0 0 6px;
+    color: var(--nutrition-calorie-color);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  &__value {
+    margin: 0;
+    color: #22242a;
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  &__unit {
+    margin: 6px 0 0;
+    color: #8c93a3;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__percent {
+    margin: 8px 0 0;
+    color: var(--nutrition-calorie-color);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  &__progress {
+    width: min(220px, 100%);
+    height: 10px;
+    margin-top: 14px;
+    border-radius: 999px;
+    background: rgba(132, 141, 170, 0.14);
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--nutrition-calorie-color);
+  }
+
+  &__left {
+    margin: 12px 0 0;
+    color: #8c93a3;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  &__panel {
+    margin-top: 18px;
+  }
+
+  &__panel-header {
+    padding: 20px 22px 18px;
+    border-bottom: 1px solid rgba(140, 147, 163, 0.14);
+  }
+
+  &__panel-title {
+    margin: 0;
+    color: #262933;
+    font-size: 1.08rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  &__panel-grid {
+    padding: 18px 16px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 10px;
+  }
+
+  &__panel-item {
+    min-width: 0;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    text-align: center;
+  }
+
+  &__panel-item-label,
+  &__panel-item-value,
+  &__panel-item-target {
+    margin: 0;
+  }
+
+  &__panel-item-label {
+    color: #262933;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  &__panel-item-value {
+    margin-top: 6px;
+    color: #262933;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  &__panel-item-target {
+    margin-top: 8px;
+    color: #969dac;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+}
