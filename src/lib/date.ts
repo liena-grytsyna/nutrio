@@ -1,21 +1,25 @@
 const locale = "en-US";
 
+function copyDate(date: Date) {
+  return new Date(date);
+}
+
 export function startOfDay(date: Date) {
-  const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  return d;
+  const copy = copyDate(date);
+  copy.setHours(0, 0, 0, 0);
+  return copy;
 }
 
 export function addDays(date: Date, amount: number) {
-  const d = new Date(date);
-  d.setDate(d.getDate() + amount);
-  return d;
+  const copy = copyDate(date);
+  copy.setDate(copy.getDate() + amount);
+  return copy;
 }
 
 export function addMonths(date: Date, amount: number) {
-  const d = new Date(date);
-  d.setMonth(d.getMonth() + amount);
-  return d;
+  const copy = copyDate(date);
+  copy.setMonth(copy.getMonth() + amount);
+  return copy;
 }
 
 export function isSameDay(a: Date, b: Date) {
@@ -33,18 +37,18 @@ export function getStartOfWeek(date: Date) {
 }
 
 export function startOfMonth(date: Date) {
-  const d = startOfDay(date);
-  d.setDate(1);
-  return d;
+  const copy = copyDate(date);
+  copy.setHours(0, 0, 0, 0);
+  copy.setDate(1);
+  return copy;
 }
 
 export function getDateKey(date: Date) {
   const normalized = startOfDay(date);
-  const year = normalized.getFullYear();
   const month = String(normalized.getMonth() + 1).padStart(2, "0");
   const day = String(normalized.getDate()).padStart(2, "0");
 
-  return `${year}-${month}-${day}`;
+  return `${normalized.getFullYear()}-${month}-${day}`;
 }
 
 export function getWeekDays(date: Date) {

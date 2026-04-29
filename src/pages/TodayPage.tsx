@@ -17,6 +17,7 @@ import { TodayMealCard } from "../components/TodayMealCard";
 import { cn } from "../lib/cn";
 import styles from "./TodayPage.module.scss";
 
+// Props for the TodayPage component
 type TodayPageProps = {
   entriesError?: string | null;
   isEntriesLoading?: boolean;
@@ -32,6 +33,7 @@ type TodayPageProps = {
   ) => Promise<void> | void;
 };
 
+// Main screen for today's meals and nutrition summary
 export function TodayPage({
   entriesError = null,
   isEntriesLoading = false,

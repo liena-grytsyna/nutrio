@@ -1,8 +1,8 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
-import { Button } from "../components/Button";
-import { cn } from "../lib/cn";
-import type { CreateProductInput, Product } from "../types/product";
-import styles from "./AddProductPage.module.scss";
+import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { Button } from '../components/Button';
+import { cn } from '../lib/cn';
+import type { CreateProductInput, Product } from '../types/product';
+import styles from './AddProductPage.module.scss';
 
 type AddProductPageProps = {
   onCreateProduct: (input: CreateProductInput) => Promise<Product>;
@@ -18,13 +18,45 @@ type ProductFormValues = {
 };
 
 const initialFormValues: ProductFormValues = {
-  name: "",
-  servingSize: "100 g",
-  calories: "",
-  protein: "",
-  fat: "",
-  carbs: "",
+  name: '',
+  servingSize: '100 g',
+  calories: '',
+  protein: '',
+  fat: '',
+  carbs: '',
 };
+
+const macroFields = [
+  {
+    name: 'calories',
+    label: 'Kcal',
+    placeholder: '89',
+    step: undefined,
+  },
+  {
+    name: 'protein',
+    label: 'Protein',
+    placeholder: '1.1',
+    step: '0.1',
+  },
+  {
+    name: 'fat',
+    label: 'Fat',
+    placeholder: '0.3',
+    step: '0.1',
+  },
+  {
+    name: 'carbs',
+    label: 'Carbs',
+    placeholder: '22.8',
+    step: '0.1',
+  },
+] as const satisfies ReadonlyArray<{
+  name: keyof Pick<ProductFormValues, 'calories' | 'protein' | 'fat' | 'carbs'>;
+  label: string;
+  placeholder: string;
+  step?: string;
+}>;
 
 function toNumber(value: string) {
   const number = Number(value);
@@ -55,7 +87,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
     const fat = toNumber(formValues.fat);
     const carbs = toNumber(formValues.carbs);
     const name = formValues.name.trim();
-    const servingSize = formValues.servingSize.trim() || "100 g";
+    const servingSize = formValues.servingSize.trim() || '100 g';
 
     if (
       !name ||
@@ -64,7 +96,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
       fat === null ||
       carbs === null
     ) {
-      setStatusMessage("Fill in product name and nutrition values.");
+      setStatusMessage('Fill in product name and nutrition values.');
       return;
     }
 
@@ -82,10 +114,10 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
       });
 
       setFormValues(initialFormValues);
-      setStatusMessage("Product saved.");
+      setStatusMessage('Product saved.');
     } catch (error) {
       setStatusMessage(
-        error instanceof Error ? error.message : "Product could not be saved.",
+        error instanceof Error ? error.message : 'Product could not be saved.',
       );
     } finally {
       setIsSaving(false);
@@ -93,19 +125,14 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
   }
 
   return (
-    <section className={cn("screen", styles["add-product-screen"])}>
-      <div className={styles["add-product-screen__card"]}>
-        <h2 className={styles["add-product-screen__title"]}>Add Product</h2>
-        <p className={styles["add-product-screen__hint"]}>
-          Save product nutrition values to the PostgreSQL database.
-        </p>
-      </div>
+    <section className={cn('screen', styles['add-product-screen'])}>
+      <h2 className={styles['add-product-screen__title']}>Add Product</h2>
 
       <form
-        className={styles["add-product-screen__form"]}
+        className={styles['add-product-screen__form']}
         onSubmit={handleSubmit}
       >
-        <label className={styles["add-product-screen__field"]}>
+        <label className={styles['add-product-screen__field']}>
           <span>Name</span>
           <input
             name="name"
@@ -116,7 +143,7 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           />
         </label>
 
-        <label className={styles["add-product-screen__field"]}>
+        <label className={styles['add-product-screen__field']}>
           <span>Serving</span>
           <input
             name="servingSize"
@@ -126,73 +153,34 @@ export function AddProductPage({ onCreateProduct }: AddProductPageProps) {
           />
         </label>
 
-        <div className={styles["add-product-screen__macro-grid"]}>
-          <label className={styles["add-product-screen__field"]}>
-            <span>Kcal</span>
-            <input
-              name="calories"
-              value={formValues.calories}
-              onChange={handleFieldChange}
-              inputMode="decimal"
-              min="0"
-              placeholder="89"
-              required
-              type="number"
-            />
-          </label>
-
-          <label className={styles["add-product-screen__field"]}>
-            <span>Protein</span>
-            <input
-              name="protein"
-              value={formValues.protein}
-              onChange={handleFieldChange}
-              inputMode="decimal"
-              min="0"
-              placeholder="1.1"
-              required
-              step="0.1"
-              type="number"
-            />
-          </label>
-
-          <label className={styles["add-product-screen__field"]}>
-            <span>Fat</span>
-            <input
-              name="fat"
-              value={formValues.fat}
-              onChange={handleFieldChange}
-              inputMode="decimal"
-              min="0"
-              placeholder="0.3"
-              required
-              step="0.1"
-              type="number"
-            />
-          </label>
-
-          <label className={styles["add-product-screen__field"]}>
-            <span>Carbs</span>
-            <input
-              name="carbs"
-              value={formValues.carbs}
-              onChange={handleFieldChange}
-              inputMode="decimal"
-              min="0"
-              placeholder="22.8"
-              required
-              step="0.1"
-              type="number"
-            />
-          </label>
+        <div className={styles['add-product-screen__macro-grid']}>
+          {macroFields.map((field) => (
+            <label
+              key={field.name}
+              className={styles['add-product-screen__field']}
+            >
+              <span>{field.label}</span>
+              <input
+                name={field.name}
+                value={formValues[field.name]}
+                onChange={handleFieldChange}
+                inputMode="decimal"
+                min="0"
+                placeholder={field.placeholder}
+                required
+                step={field.step}
+                type="number"
+              />
+            </label>
+          ))}
         </div>
 
         <Button disabled={isSaving} type="submit">
-          {isSaving ? "Saving..." : "Save Product"}
+          {isSaving ? 'Saving...' : 'Save Product'}
         </Button>
 
         {statusMessage && (
-          <p className={styles["add-product-screen__status"]}>
+          <p className={styles['add-product-screen__status']}>
             {statusMessage}
           </p>
         )}

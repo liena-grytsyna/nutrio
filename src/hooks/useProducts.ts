@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { createProduct, fetchProducts } from "../api/products";
+import { getErrorMessage } from "../lib/errors";
 import { sortProductsByName } from "../lib/products";
 import type { CreateProductInput, Product } from "../types/product";
-
-function getErrorMessage(error: unknown, fallbackMessage: string) {
-  return error instanceof Error ? error.message : fallbackMessage;
-}
 
 export function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);
