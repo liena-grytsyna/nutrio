@@ -195,14 +195,24 @@
 
 .item {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
   gap: 14px;
   padding: 18px 20px;
 
   + .item {
     border-top: 1px solid rgba(96, 111, 145, 0.08);
   }
+}
+
+.item-delete {
+  border: 0;
+  background: transparent;
+  color: #e8695f;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 8px;
 }
 
 .item-content {
