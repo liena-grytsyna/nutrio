@@ -11,9 +11,10 @@ type TodayMealCardProps = {
   isCollapsed: boolean;
   onAdd: (sectionId: MealSectionId) => void;
   onToggle: (sectionId: MealSectionId) => void;
+  onDeleteEntry?: (entryId: string) => void;
 };
 
-function MealEntryRow({ entry }: { entry: DayEntry }) {
+function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry?: (entryId: string) => void }) {
   return (
     <div className={styles.item}>
       <span className={styles["item-status"]} aria-hidden="true" />
@@ -28,6 +29,9 @@ function MealEntryRow({ entry }: { entry: DayEntry }) {
           <span>{TIME_FORMATTER.format(new Date(entry.eatenAt))}</span>
         </p>
       </div>
+      <button type="button" className={styles["item-delete"]} onClick={() => onDeleteEntry?.(entry.id)}>
+        Delete
+      </button>
     </div>
   );
 }
@@ -39,6 +43,7 @@ export function TodayMealCard({
   isCollapsed,
   onAdd,
   onToggle,
+  onDeleteEntry
 }: TodayMealCardProps) {
   const hasEntries = entries.length > 0;
   const totalCalories = entries.reduce((sum, entry) => sum + entry.calories, 0);
@@ -92,7 +97,6 @@ export function TodayMealCard({
               <ChevronIcon />
             </button>
           )}
-
           <button
             type="button"
             className={cn(styles.action, styles["action--add"])}
@@ -112,7 +116,11 @@ export function TodayMealCard({
       {hasEntries && !isCollapsed && (
         <div id={contentId} className={styles.body}>
           {entries.map((entry) => (
-            <MealEntryRow key={entry.id} entry={entry} />
+            <MealEntryRow
+              key={entry.id}
+              entry={entry}
+              onDeleteEntry={onDeleteEntry}
+            />
           ))}
         </div>
       )}
