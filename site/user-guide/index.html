@@ -8,7 +8,13 @@
       
       
       
+        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/user-guide/">
       
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../system-overview/">
       
       
         
@@ -19,7 +25,7 @@
     
     
       
-        <title>Troubleshooting - Nutrio Documentation</title>
+        <title>User Guide - Nutrio Documentation</title>
       
     
     
@@ -60,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#troubleshooting" class="md-skip">
+        <a href="#user-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Troubleshooting
+              User Guide
             
           </span>
         </div>
@@ -192,7 +198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../index.md" class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -216,10 +222,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../user-guide.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -235,6 +268,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add product
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-food-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add food entry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-food-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete food entry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consent
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -300,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting.md" class="md-nav__link">
+      <a href="../troubleshooting/" class="md-nav__link">
         
   
   
@@ -347,10 +455,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#api-returns-502" class="md-nav__link">
+  <a href="#add-product" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API returns 502
+        Add product
       
     </span>
   </a>
@@ -358,10 +466,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-not-updating" class="md-nav__link">
+  <a href="#add-food-entry" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data not updating
+        Add food entry
       
     </span>
   </a>
@@ -369,10 +477,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#database-connection-error" class="md-nav__link">
+  <a href="#delete-food-entry" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Database connection error
+        Delete food entry
       
     </span>
   </a>
@@ -380,10 +488,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#grafana-shows-down" class="md-nav__link">
+  <a href="#privacy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Grafana shows DOWN
+        Privacy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consent
       
     </span>
   </a>
@@ -407,35 +526,43 @@
 
 
 
-<h1 id="troubleshooting">Troubleshooting</h1>
-<h2 id="api-returns-502">API returns 502</h2>
-<p>Problem:
-- Backend is not reachable</p>
-<p>Solution:
-- Check if backend container is running
-- Check Nginx configuration
-- Check logs</p>
+<h1 id="user-guide">User Guide</h1>
+<h2 id="add-product">Add product</h2>
+<ol>
+<li>Open the "Add" page</li>
+<li>Enter product name</li>
+<li>Enter calories, protein, carbs, fat</li>
+<li>Click "Save Product"</li>
+</ol>
 <hr />
-<h2 id="data-not-updating">Data not updating</h2>
-<p>Problem:
-- UI does not refresh</p>
-<p>Solution:
-- Reload page
-- Check frontend console</p>
+<h2 id="add-food-entry">Add food entry</h2>
+<ol>
+<li>Open "Today"</li>
+<li>Choose a meal (breakfast, lunch, dinner)</li>
+<li>Click "+"</li>
+<li>Select a product</li>
+<li>Enter amount (grams)</li>
+<li>Click "Add"</li>
+</ol>
 <hr />
-<h2 id="database-connection-error">Database connection error</h2>
-<p>Problem:
-- Backend cannot connect to database</p>
-<p>Solution:
-- Check DATABASE_URL
-- Check if PostgreSQL is running</p>
+<h2 id="delete-food-entry">Delete food entry</h2>
+<ol>
+<li>Open "Today"</li>
+<li>Find the food entry</li>
+<li>Click "Delete"</li>
+<li>The entry is removed</li>
+<li>The summary updates automatically</li>
+</ol>
 <hr />
-<h2 id="grafana-shows-down">Grafana shows DOWN</h2>
-<p>Problem:
-- Health endpoint is failing</p>
-<p>Solution:
-- Check /api/health
-- Restart backend</p>
+<h2 id="privacy">Privacy</h2>
+<p>Food entries are stored in the database and linked to your browser using a deviceId.</p>
+<hr />
+<h2 id="consent">Consent</h2>
+<p>By using the application, the user agrees that:</p>
+<ul>
+<li>Food data is stored in the database</li>
+<li>Data is linked to the browser (deviceId)</li>
+</ul>
 
 
 

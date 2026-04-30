@@ -1,4 +1,5 @@
 site_name: Nutrio Documentation
+site_url: https://liena-grytsyna.github.io/nutrio/
 
 nav:
   - Home: index.md
