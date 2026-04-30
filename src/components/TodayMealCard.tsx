@@ -1,7 +1,7 @@
 import { cn } from "../lib/cn";
 import { TIME_FORMATTER, type MealSectionConfig } from "../lib/mealSections";
 import type { DayEntry, MealSectionId } from "../types/nutrition";
-import { ChevronIcon, MealSectionIcon, PlusIcon } from "./icons";
+import { ChevronIcon, MealSectionIcon, PlusIcon, TrashIcon } from "./icons";
 import styles from "./TodayMealCard.module.scss";
 
 type TodayMealCardProps = {
@@ -29,6 +29,9 @@ function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry
           <span>{TIME_FORMATTER.format(new Date(entry.eatenAt))}</span>
         </p>
       </div>
+      <button type="button" className={styles["item-delete"]} onClick={() => onDeleteEntry?.(entry.id)}>
+      Delete
+      </button>
     </div>
   );
 }
