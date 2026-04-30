@@ -26,21 +26,9 @@
   &__topbar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 16px;
     padding: 16px 20px 0;
-  }
-
-  &__brand {
-    display: grid;
-    gap: 2px;
-  }
-
-
-  &__title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: $color-text;
   }
 
   &__content {
