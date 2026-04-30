@@ -11,6 +11,7 @@ type TodayMealCardProps = {
   isCollapsed: boolean;
   onAdd: (sectionId: MealSectionId) => void;
   onToggle: (sectionId: MealSectionId) => void;
+  onDeleteEntry: (entryId: string) => void;
 };
 
 function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry?: (entryId: string) => void }) {
@@ -39,6 +40,7 @@ export function TodayMealCard({
   isCollapsed,
   onAdd,
   onToggle,
+  onDeleteEntry,
 }: TodayMealCardProps) {
   const hasEntries = entries.length > 0;
   const totalCalories = entries.reduce((sum, entry) => sum + entry.calories, 0);
@@ -114,6 +116,7 @@ export function TodayMealCard({
             <MealEntryRow
               key={entry.id}
               entry={entry}
+              onDeleteEntry={onDeleteEntry}
             />
           ))}
         </div>

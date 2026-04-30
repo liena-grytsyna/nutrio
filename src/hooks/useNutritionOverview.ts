@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createDayEntry, fetchNutritionOverview } from "../api/nutrition";
+import { createDayEntry, deleteDayEntry, fetchNutritionOverview } from "../api/nutrition";
 import { getDateKey } from "../lib/date";
 import { EMPTY_NUTRITION_OVERVIEW } from "../lib/emptyNutrition";
 import { getErrorMessage } from "../lib/errors";
@@ -115,6 +115,11 @@ export function useNutritionOverview({
     await refreshNutritionOverview();
   }
 
+  async function handleDeleteEntry(entryId: string) {
+    await deleteDayEntry(entryId);
+    await refreshNutritionOverview();
+  }
+
 
   return {
     nutritionOverview,
@@ -123,5 +128,6 @@ export function useNutritionOverview({
     selectedDayOverview,
     refreshNutritionOverview,
     handleAddEntry,
+    handleDeleteEntry,
   };
 }
