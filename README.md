@@ -1,52 +1,96 @@
-Nutrio
-======
+# Nutrio
 
-Lightweight food tracking app (MVP) for adding products, creating day entries, and viewing daily nutrition summaries.
+Nutrio is a lightweight food tracking app for adding food products, logging meals, and viewing daily nutrition totals. It helps users keep a simple overview of calories, protein, fat, and carbohydrates for the current day.
 
-Tech stack
-----------
-- Frontend: React + Vite + TypeScript
-- Backend: Node.js + Express
-- Database: PostgreSQL (Prisma ORM)
-- Docker for local development
+## Live Preview
 
-Simple MVP flow
----------------
-1. Add product → 2. Add entry (select product, amount, time) → 3. See daily summary (totals & progress)
+https://nutrio.it4.iktim.no/
 
-Setup (Docker)
---------------
-1. Create a `.env` file in the project root with the required environment variables (see below).
-2. Build and start containers:
+## Technologies Used
 
-	docker-compose up --build
+- React
+- TypeScript
+- Vite
+- Sass modules
+- Node.js
+- Express
+- PostgreSQL
+- Prisma ORM
+- Docker
+- Nginx
 
-3. The frontend is served by the Vite build or the static server in the container. The API listens on the configured PORT (default 3000).
+## Getting Started
 
-Required environment variables
-------------------------------
-- DATABASE_URL  — PostgreSQL connection string (e.g. postgres://user:pass@host:5432/dbname)
-- PORT (optional) — API port (defaults to 3000)
+### Clone the repository
 
-Main API endpoints
-------------------
-- GET  /api/health               — health check
-- GET  /api/products             — list products
-- POST /api/products             — create product (name, calories, protein, fat, carbs, servingSize)
-- POST /api/day-entries          — create a day entry (productId, amount, eatenAt)
-- GET  /api/nutrition-overview   — get aggregated per-day nutrition overview (requires timezoneOffsetMinutes query param)
-  
-Note: For the MVP Nutrio separates day entries per device using a generated deviceId stored in the browser's localStorage. The frontend includes this deviceId with requests so each device only sees its own entries.
+```bash
+git clone https://github.com/liena-grytsyna/nutrio.git
+cd nutrio
+```
 
-Notes / removed features
-------------------------
-This submission focuses on the MVP. Previously considered or removed fields/endpoints such as brand, barcode, source, and the preview endpoint are intentionally not part of the MVP and are not required for the exam.
+### Install dependencies
 
-Build & validate (exam checklist)
---------------------------------
-After setting `.env` and starting services (or from a local dev environment), run:
+```bash
+npm install
+```
 
-1. npm run build
-2. npx prisma validate
+### Configure environment variables
 
-Keep the project small and focused for the exam: no UI/UX changes or new features are included in this submission.
+Create a `.env` file in the project root. You can use `.env.example` as a starting point:
+
+```bash
+cp .env.example .env
+```
+
+The Docker setup uses these values for PostgreSQL, the API, and pgAdmin.
+
+### Run with Docker
+
+```bash
+docker-compose up --build
+```
+
+After the containers start, open:
+
+- App: http://localhost:8080
+- pgAdmin: http://localhost:5050
+
+### Run locally for development
+
+Start PostgreSQL first and make sure `DATABASE_URL` is available in your environment.
+
+Generate the Prisma client and run migrations:
+
+```bash
+npm run prisma:generate
+npm run prisma:migrate:deploy
+```
+
+Start the API:
+
+```bash
+npm run api:start
+```
+
+In another terminal, start the frontend:
+
+```bash
+npm run dev
+```
+
+The Vite dev server runs at http://localhost:5173 and proxies API requests to http://localhost:3000.
+
+## Features
+
+- Add food products with nutrition values.
+- Log food entries by amount and time.
+- View daily calorie and macronutrient totals.
+- Separate entries per device using a generated browser device ID.
+- Responsive mobile-first interface.
+
+## Useful Commands
+
+```bash
+npm run build
+npx prisma validate
+```
