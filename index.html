@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#what-nutrio-covers" class="md-skip">
+        <a href="#choose-a-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -376,10 +376,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-nutrio-covers" class="md-nav__link">
+  <a href="#choose-a-guide" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Nutrio covers
+        Choose a guide
       
     </span>
   </a>
@@ -387,10 +387,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#choose-your-path" class="md-nav__link">
+  <a href="#app-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Choose your path
+        App structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack
       
     </span>
   </a>
@@ -774,10 +785,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-nutrio-covers" class="md-nav__link">
+  <a href="#choose-a-guide" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Nutrio covers
+        Choose a guide
       
     </span>
   </a>
@@ -785,10 +796,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#choose-your-path" class="md-nav__link">
+  <a href="#app-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Choose your path
+        App structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack
       
     </span>
   </a>
@@ -819,104 +841,82 @@
 
 <div class="hero">
   <div>
-    <span class="section-label">Nutrition tracker documentation</span>
+    <span class="section-label">Overview</span>
     <h1>Nutrio</h1>
     <p>
-      Nutrio is a lightweight food tracking app for daily calories and macros.
-      The docs are split into a user path and a developer path.
+      Nutrio is a small food tracking app for logging meals, checking daily
+      calories and macros, and keeping data separated per browser.
     </p>
-    <a class="md-button md-button--primary" href="user/">For Users</a>
-    <a class="md-button" href="developer/">For Developers</a>
+    <p>
+      This documentation is split into two paths: one for people who use the
+      app and one for people who build or maintain it.
+    </p>
   </div>
   <div class="hero__panel">
-    <p><strong>At a glance</strong></p>
+    <p><strong>What Nutrio does</strong></p>
     <ul>
-      <li>Add reusable food products</li>
-      <li>Log meals by section and amount</li>
-      <li>Track calories, protein, fat, and carbs</li>
-      <li>Separate data per browser with a generated <code>deviceId</code></li>
-      <li>Run locally with Docker or a local PostgreSQL instance</li>
+      <li>stores reusable food products</li>
+      <li>logs meals by amount and day section</li>
+      <li>shows daily calories, protein, fat, and carbs</li>
+      <li>runs on React, Express, and PostgreSQL</li>
     </ul>
-    <p><strong>Stack</strong></p>
-    <p><code>React 19</code> <code>TypeScript</code> <code>Vite</code> <code>Express 5</code> <code>Prisma</code> <code>PostgreSQL</code> <code>Docker</code> <code>Nginx</code></p>
   </div>
 </div>
 
-<div class="metric-strip">
-  <div class="metric">
-    <strong>3</strong>
-    <span>main screens in the app</span>
-  </div>
-  <div class="metric">
-    <strong>6</strong>
-    <span>meal sections per day</span>
-  </div>
-  <div class="metric">
-    <strong>100</strong>
-    <span>products returned per API call</span>
-  </div>
-  <div class="metric">
-    <strong>1000</strong>
-    <span>day entries fetched per overview request</span>
-  </div>
-</div>
-
-<h2 id="what-nutrio-covers">What Nutrio covers<a class="headerlink" href="#what-nutrio-covers" title="Permanent link">&para;</a></h2>
+<h2 id="choose-a-guide">Choose a guide<a class="headerlink" href="#choose-a-guide" title="Permanent link">&para;</a></h2>
 <div class="feature-grid">
   <div class="feature-card">
-    <h3>Product catalog</h3>
+    <h3>User Guide</h3>
     <p>
-      Save food items once, including serving size and nutrition values per 100
-      grams. The app then reuses those products when logging meals.
+      Open this if you want to use Nutrio: create products, log meals, review
+      totals, and remove mistakes.
     </p>
+    <p><a class="md-button md-button--primary" href="user/">Open User Guide</a></p>
   </div>
   <div class="feature-card">
-    <h3>Daily meal logging</h3>
+    <h3>Developer Guide</h3>
     <p>
-      Organize entries into breakfast, snack, lunch, second snack, dinner, and
-      late snack sections without building a full scheduling system.
-    </p>
-  </div>
-  <div class="feature-card">
-    <h3>Nutrition summary</h3>
-    <p>
-      Aggregate daily totals and compare them with built-in targets for
-      calories and macronutrients.
-    </p>
-  </div>
-  <div class="feature-card">
-    <h3>Simple infrastructure</h3>
-    <p>
-      Run the frontend through Nginx, the API through Node.js, and store all
-      persistent data in PostgreSQL using Prisma migrations.
-    </p>
-  </div>
-</div>
-
-<h2 id="choose-your-path">Choose your path<a class="headerlink" href="#choose-your-path" title="Permanent link">&para;</a></h2>
-<div class="feature-grid">
-  <div class="feature-card">
-    <h3>For users</h3>
-    <p>
-      Start with <a href="user/">User Guide</a> if you want to use
-      Nutrio as an app: create products, log meals, inspect totals, and fix
-      mistakes.
-    </p>
-  </div>
-  <div class="feature-card">
-    <h3>For developers</h3>
-    <p>
-      Start with <a href="developer/">Developer Guide</a> if you
-      need local setup, architecture, API details, deployment notes, or
+      Open this if you need setup, architecture, API details, deployment, or
       troubleshooting.
     </p>
+    <p><a class="md-button" href="developer/">Open Developer Guide</a></p>
   </div>
 </div>
 
-<div class="admonition note">
-<p class="admonition-title">Current product scope</p>
-<p>Nutrio intentionally keeps scope small. There is no account system, no multi-user collaboration, and no external nutrition database integration in the current implementation.</p>
+<h2 id="app-structure">App structure<a class="headerlink" href="#app-structure" title="Permanent link">&para;</a></h2>
+<div class="feature-grid">
+  <div class="feature-card">
+    <h3>Today</h3>
+    <p>
+      Review the selected day, add meal entries, and check the nutrition
+      summary.
+    </p>
+  </div>
+  <div class="feature-card">
+    <h3>Add</h3>
+    <p>
+      Create food products with serving size, calories, protein, fat, and
+      carbs.
+    </p>
+  </div>
+  <div class="feature-card">
+    <h3>Products</h3>
+    <p>
+      Browse saved products and quickly compare nutrition values before logging
+      a meal.
+    </p>
+  </div>
+  <div class="feature-card">
+    <h3>Backend</h3>
+    <p>
+      The API stores products and entries, groups data by day, and returns the
+      overview used by the frontend.
+    </p>
+  </div>
 </div>
+
+<h2 id="stack">Stack<a class="headerlink" href="#stack" title="Permanent link">&para;</a></h2>
+<p><code>React 19</code> <code>TypeScript</code> <code>Vite</code> <code>Express 5</code> <code>Prisma</code> <code>PostgreSQL</code> <code>Docker</code> <code>Nginx</code></p>
 
 
 
