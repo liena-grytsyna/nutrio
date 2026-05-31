@@ -1,51 +1,23 @@
 :root {
-  --nutrio-bg: #f4eee4;
-  --nutrio-surface: rgba(255, 250, 243, 0.82);
-  --nutrio-surface-strong: #fff8ee;
+  --nutrio-bg: #ffffff;
+  --nutrio-surface: #ffffff;
+  --nutrio-surface-strong: #ffffff;
   --nutrio-ink: #1f1a16;
   --nutrio-muted: #655b50;
-  --nutrio-line: rgba(54, 42, 31, 0.14);
+  --nutrio-line: transparent;
   --nutrio-accent: #c46b2c;
   --nutrio-accent-soft: rgba(196, 107, 44, 0.12);
   --nutrio-green: #2f6b57;
   --nutrio-green-soft: rgba(47, 107, 87, 0.12);
-  --nutrio-shadow: 0 24px 60px rgba(34, 25, 18, 0.08);
+  --nutrio-shadow: none;
   --md-primary-fg-color: #2f6b57;
   --md-primary-fg-color--light: #4b8772;
   --md-primary-fg-color--dark: #1f4e3f;
   --md-accent-fg-color: #c46b2c;
 }
 
-[data-md-color-scheme="slate"] {
-  --nutrio-bg: #16181b;
-  --nutrio-surface: rgba(33, 37, 42, 0.82);
-  --nutrio-surface-strong: #1e2328;
-  --nutrio-ink: #f4ede3;
-  --nutrio-muted: #c4b8aa;
-  --nutrio-line: rgba(255, 240, 224, 0.12);
-  --nutrio-accent: #f09a57;
-  --nutrio-accent-soft: rgba(240, 154, 87, 0.14);
-  --nutrio-green: #78b49c;
-  --nutrio-green-soft: rgba(120, 180, 156, 0.14);
-  --nutrio-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
-  --md-primary-fg-color: #78b49c;
-  --md-primary-fg-color--light: #93c8b2;
-  --md-primary-fg-color--dark: #558d77;
-  --md-accent-fg-color: #f09a57;
-}
-
-[data-md-color-scheme="default"] .md-main {
-  background:
-    radial-gradient(circle at top right, rgba(240, 154, 87, 0.2), transparent 24rem),
-    radial-gradient(circle at left 10rem, rgba(47, 107, 87, 0.14), transparent 22rem),
-    linear-gradient(180deg, #f7f0e6 0%, var(--nutrio-bg) 38%, #f3eee8 100%);
-}
-
-[data-md-color-scheme="slate"] .md-main {
-  background:
-    radial-gradient(circle at top right, rgba(240, 154, 87, 0.16), transparent 24rem),
-    radial-gradient(circle at left 10rem, rgba(120, 180, 156, 0.12), transparent 22rem),
-    linear-gradient(180deg, #14171a 0%, var(--nutrio-bg) 34%, #121417 100%);
+.md-main {
+  background: #ffffff;
 }
 
 .md-header {
@@ -80,9 +52,10 @@
 
 .md-typeset .admonition,
 .md-typeset details {
-  border: 1px solid var(--nutrio-line);
+  border: none;
   border-radius: 1rem;
-  box-shadow: var(--nutrio-shadow);
+  box-shadow: none;
+  background: #ffffff;
 }
 
 .md-typeset .admonition-title,
@@ -90,24 +63,34 @@
   font-weight: 700;
 }
 
+.md-sidebar--secondary {
+  display: none;
+}
+
+.md-content {
+  margin-right: 0;
+}
+
+.md-content__inner {
+  margin-right: 0;
+}
+
 .hero {
   display: grid;
   gap: 1.25rem;
   margin: 0 0 2rem;
   padding: 1.4rem;
-  border: 1px solid var(--nutrio-line);
+  border: none;
   border-radius: 1.5rem;
-  background:
-    linear-gradient(135deg, var(--nutrio-surface-strong), var(--nutrio-surface)),
-    linear-gradient(180deg, var(--nutrio-green-soft), transparent);
-  box-shadow: var(--nutrio-shadow);
+  background: #ffffff;
+  box-shadow: none;
 }
 
 .hero__panel {
   padding: 1.1rem 1.15rem;
-  border: 1px solid var(--nutrio-line);
+  border: none;
   border-radius: 1.15rem;
-  background: color-mix(in srgb, var(--nutrio-surface-strong) 88%, transparent);
+  background: #ffffff;
 }
 
 .hero .md-button {
@@ -136,10 +119,10 @@
 
 .metric {
   padding: 1rem 1.05rem;
-  border: 1px solid var(--nutrio-line);
+  border: none;
   border-radius: 1.2rem;
-  background: color-mix(in srgb, var(--nutrio-surface-strong) 92%, transparent);
-  box-shadow: var(--nutrio-shadow);
+  background: #ffffff;
+  box-shadow: none;
 }
 
 .metric strong {
@@ -162,10 +145,10 @@
 
 .feature-card {
   padding: 1.15rem;
-  border: 1px solid var(--nutrio-line);
+  border: none;
   border-radius: 1.2rem;
-  background: color-mix(in srgb, var(--nutrio-surface-strong) 90%, transparent);
-  box-shadow: var(--nutrio-shadow);
+  background: #ffffff;
+  box-shadow: none;
 }
 
 .feature-card h3 {
@@ -180,15 +163,15 @@
 .md-typeset table:not([class]) {
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: var(--nutrio-shadow);
+  box-shadow: none;
 }
 
 .md-typeset table:not([class]) th {
-  background: color-mix(in srgb, var(--nutrio-green) 12%, var(--nutrio-surface-strong));
+  background: #ffffff;
 }
 
 .md-typeset table:not([class]) tr {
-  background: color-mix(in srgb, var(--nutrio-surface-strong) 94%, transparent);
+  background: #ffffff;
 }
 
 .md-typeset code {
