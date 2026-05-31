@@ -1,6 +1,7 @@
 site_name: Nutrio Docs
 site_description: Product, API, architecture, and deployment documentation for the Nutrio nutrition tracker.
 site_url: https://liena-grytsyna.github.io/nutrio/
+site_dir: .mkdocs-site
 repo_url: https://github.com/liena-grytsyna/nutrio
 repo_name: liena-grytsyna/nutrio
 

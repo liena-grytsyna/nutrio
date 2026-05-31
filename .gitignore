@@ -1,6 +1,7 @@
 node_modules
 dist
 site
+.mkdocs-site
 .venv
 .DS_Store
 *.local

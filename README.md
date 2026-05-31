@@ -97,7 +97,7 @@ npx prisma validate
 
 ## Documentation
 
-The MkDocs source now lives in `docs/`, while generated output should **not** be committed to `main`.
+The MkDocs source lives in `docs/`. Generated output is written to `.mkdocs-site/` and should **not** be committed to `main`.
 
 Install the docs toolchain once:
 
