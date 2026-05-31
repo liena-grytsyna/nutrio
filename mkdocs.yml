@@ -6,12 +6,16 @@ repo_name: liena-grytsyna/nutrio
 
 nav:
   - Overview: index.md
-  - Quick Start: getting-started.md
-  - User Guide: user-guide.md
-  - Architecture: system-overview.md
-  - API Reference: api.md
-  - Deployment: deployment.md
-  - Troubleshooting: troubleshooting.md
+  - User Documentation:
+      - Start Here: user-docs.md
+      - User Guide: user-guide.md
+  - Developer Documentation:
+      - Start Here: developer-docs.md
+      - Quick Start: getting-started.md
+      - Architecture: system-overview.md
+      - API Reference: api.md
+      - Deployment: deployment.md
+      - Troubleshooting: troubleshooting.md
 
 theme:
   name: material

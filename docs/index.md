@@ -13,8 +13,8 @@ hide:
       combines a React frontend, a small Express API, and PostgreSQL
       persistence behind a simple mobile-first interface.
     </p>
-    <a class="md-button md-button--primary" href="getting-started/">Open Quick Start</a>
-    <a class="md-button" href="api/">Read API Reference</a>
+    <a class="md-button md-button--primary" href="user-docs/">For Users</a>
+    <a class="md-button" href="developer-docs/">For Developers</a>
   </div>
   <div class="hero__panel">
     <p><strong>At a glance</strong></p>
@@ -82,36 +82,42 @@ hide:
   </div>
 </div>
 
+## Choose your path
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h3>For users</h3>
+    <p>
+      Start with <a href="user-docs/">User Documentation</a> if you want to use
+      Nutrio as an app: create products, log meals, inspect totals, and fix
+      mistakes.
+    </p>
+  </div>
+  <div class="feature-card">
+    <h3>For developers</h3>
+    <p>
+      Start with <a href="developer-docs/">Developer Documentation</a> if you
+      need local setup, architecture, API details, deployment notes, or
+      troubleshooting.
+    </p>
+  </div>
+</div>
+
 ## Documentation map
 
 <div class="feature-grid">
   <div class="feature-card">
-    <h3>Quick Start</h3>
+    <h3>User documentation</h3>
     <p>
-      Use <a href="getting-started/">Quick Start</a> for installation, local
-      development, and first-run verification.
+      Includes the app workflow, main screens, daily targets, product creation,
+      meal logging, and privacy expectations.
     </p>
   </div>
   <div class="feature-card">
-    <h3>User Guide</h3>
+    <h3>Developer documentation</h3>
     <p>
-      Use <a href="user-guide/">User Guide</a> for the main product workflow:
-      create products, log meals, inspect totals, and remove mistakes.
-    </p>
-  </div>
-  <div class="feature-card">
-    <h3>Architecture</h3>
-    <p>
-      Use <a href="system-overview/">Architecture</a> for the request flow,
-      storage model, browser identity strategy, and container topology.
-    </p>
-  </div>
-  <div class="feature-card">
-    <h3>API and Ops</h3>
-    <p>
-      Use <a href="api/">API Reference</a>,
-      <a href="deployment/">Deployment</a>, and
-      <a href="troubleshooting/">Troubleshooting</a> for engineering work.
+      Includes setup, Docker and local run modes, architecture, API behavior,
+      deployment topology, and failure recovery.
     </p>
   </div>
 </div>
