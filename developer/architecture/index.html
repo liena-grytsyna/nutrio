@@ -660,10 +660,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend-responsibilities" class="md-nav__link">
+  <a href="#frontend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Frontend responsibilities
+        Frontend
       
     </span>
   </a>
@@ -671,10 +671,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backend-responsibilities" class="md-nav__link">
+  <a href="#backend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backend responsibilities
+        Backend
       
     </span>
   </a>
@@ -682,65 +682,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#request-flow" class="md-nav__link">
+  <a href="#core-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Request flow
+        Core flow
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Request flow">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#product-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Product creation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#daily-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Daily overview
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#day-entry-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Day entry creation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-model" class="md-nav__link">
+  <a href="#main-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data model
+        Main models
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data model">
+    <nav class="md-nav" aria-label="Main models">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -782,10 +743,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#container-topology" class="md-nav__link">
+  <a href="#runtime-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Container topology
+        Runtime services
       
     </span>
   </a>
@@ -930,10 +891,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend-responsibilities" class="md-nav__link">
+  <a href="#frontend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Frontend responsibilities
+        Frontend
       
     </span>
   </a>
@@ -941,10 +902,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backend-responsibilities" class="md-nav__link">
+  <a href="#backend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backend responsibilities
+        Backend
       
     </span>
   </a>
@@ -952,65 +913,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#request-flow" class="md-nav__link">
+  <a href="#core-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Request flow
+        Core flow
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Request flow">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#product-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Product creation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#daily-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Daily overview
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#day-entry-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Day entry creation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-model" class="md-nav__link">
+  <a href="#main-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data model
+        Main models
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data model">
+    <nav class="md-nav" aria-label="Main models">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1052,10 +974,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#container-topology" class="md-nav__link">
+  <a href="#runtime-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Container topology
+        Runtime services
       
     </span>
   </a>
@@ -1083,215 +1005,71 @@
 
 
 <h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
-<p>Nutrio is intentionally small. The architecture favors a low operational footprint and a short request path over abstraction-heavy layering.</p>
+<p>Nutrio uses a small client-server setup with minimal layers.</p>
 <h2 id="system-map">System map<a class="headerlink" href="#system-map" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Browser UI (React + Vite)
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        |
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        v
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Nginx reverse proxy
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        |
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        v
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>React frontend
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    v
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Nginx
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    |
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    v
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Express API
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        |
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        v
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    v
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Prisma + PostgreSQL
 </code></pre></div>
-<h2 id="frontend-responsibilities">Frontend responsibilities<a class="headerlink" href="#frontend-responsibilities" title="Permanent link">&para;</a></h2>
-<p>The frontend is a React 19 application with three primary responsibilities:</p>
+<h2 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h2>
+<p>The frontend is responsible for:</p>
 <ul>
-<li>manage screen navigation between <code>Today</code>, <code>Add</code>, and <code>Products</code></li>
-<li>fetch products and nutrition overview data from the API</li>
-<li>create and delete day entries, then refresh the visible daily summary</li>
+<li>screen navigation</li>
+<li>product and overview requests</li>
+<li>creating and deleting day entries</li>
 </ul>
-<p>Important client-side behaviors:</p>
-<ul>
-<li>a persistent <code>deviceId</code> is created in <code>localStorage</code></li>
-<li>the selected date is grouped locally and rendered through the calendar</li>
-<li>the frontend sends <code>timezoneOffsetMinutes</code> when loading the nutrition overview</li>
-</ul>
-<h2 id="backend-responsibilities">Backend responsibilities<a class="headerlink" href="#backend-responsibilities" title="Permanent link">&para;</a></h2>
-<p>The Express API handles:</p>
+<p>It also stores a persistent <code>deviceId</code> in <code>localStorage</code> and sends <code>timezoneOffsetMinutes</code> with overview requests.</p>
+<h2 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h2>
+<p>The API is responsible for:</p>
 <ul>
 <li>health checks</li>
 <li>product creation and listing</li>
 <li>nutrition overview aggregation</li>
-<li>day entry creation</li>
-<li>day entry deletion</li>
+<li>day entry creation and deletion</li>
 </ul>
-<p>The backend also contains the nutrition calculation logic:</p>
-<ul>
-<li>converts product nutrition values from <code>per 100 g</code> into entry totals</li>
-<li>aggregates totals per day</li>
-<li>compares totals with built-in daily targets</li>
-<li>calculates under / ideal / over calorie status</li>
-</ul>
-<h2 id="request-flow">Request flow<a class="headerlink" href="#request-flow" title="Permanent link">&para;</a></h2>
-<h3 id="product-creation">Product creation<a class="headerlink" href="#product-creation" title="Permanent link">&para;</a></h3>
+<p>The nutrition logic converts product values from <code>per 100 g</code> into entry totals and compares the result with built-in daily targets.</p>
+<h2 id="core-flow">Core flow<a class="headerlink" href="#core-flow" title="Permanent link">&para;</a></h2>
 <ol>
-<li>The user submits the <code>Add</code> form.</li>
-<li>The frontend sends <code>POST /api/products</code>.</li>
-<li>The API validates input and creates the product through Prisma.</li>
-<li>The new product becomes available for later meal logging.</li>
+<li>The frontend sends requests to <code>/api</code>.</li>
+<li>The API validates data and reads or writes through Prisma.</li>
+<li>PostgreSQL stores products and day entries.</li>
+<li>The frontend refreshes the visible totals.</li>
 </ol>
-<h3 id="daily-overview">Daily overview<a class="headerlink" href="#daily-overview" title="Permanent link">&para;</a></h3>
-<ol>
-<li>The frontend sends <code>GET /api/nutrition-overview</code>.</li>
-<li>The request includes <code>deviceId</code> and <code>timezoneOffsetMinutes</code>.</li>
-<li>The API loads matching day entries from PostgreSQL.</li>
-<li>The API groups entries into day buckets and computes totals.</li>
-<li>The frontend renders the summary card and meal sections.</li>
-</ol>
-<h3 id="day-entry-creation">Day entry creation<a class="headerlink" href="#day-entry-creation" title="Permanent link">&para;</a></h3>
-<ol>
-<li>The user picks a product and amount.</li>
-<li>The frontend sends <code>POST /api/day-entries</code>.</li>
-<li>The API looks up the product, calculates entry nutrition, and stores a new row.</li>
-<li>The frontend refreshes the overview.</li>
-</ol>
-<h2 id="data-model">Data model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
+<h2 id="main-models">Main models<a class="headerlink" href="#main-models" title="Permanent link">&para;</a></h2>
 <h3 id="product"><code>Product</code><a class="headerlink" href="#product" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td><code>String</code></td>
-<td>Prisma <code>cuid()</code></td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td><code>String</code></td>
-<td>Product name</td>
-</tr>
-<tr>
-<td><code>servingSize</code></td>
-<td><code>String</code></td>
-<td>Defaults to <code>100 g</code></td>
-</tr>
-<tr>
-<td><code>calories</code></td>
-<td><code>Float</code></td>
-<td>Per 100 g</td>
-</tr>
-<tr>
-<td><code>protein</code></td>
-<td><code>Float</code></td>
-<td>Per 100 g</td>
-</tr>
-<tr>
-<td><code>fat</code></td>
-<td><code>Float</code></td>
-<td>Per 100 g</td>
-</tr>
-<tr>
-<td><code>carbs</code></td>
-<td><code>Float</code></td>
-<td>Per 100 g</td>
-</tr>
-</tbody>
-</table>
-<h3 id="dayentry"><code>DayEntry</code><a class="headerlink" href="#dayentry" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td><code>String</code></td>
-<td>Prisma <code>cuid()</code></td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td><code>String</code></td>
-<td>Copied from the product at entry creation time</td>
-</tr>
-<tr>
-<td><code>amount</code></td>
-<td><code>Float</code></td>
-<td>Amount in grams</td>
-</tr>
-<tr>
-<td><code>calories</code></td>
-<td><code>Float</code></td>
-<td>Calculated for the selected amount</td>
-</tr>
-<tr>
-<td><code>protein</code></td>
-<td><code>Float</code></td>
-<td>Calculated for the selected amount</td>
-</tr>
-<tr>
-<td><code>fat</code></td>
-<td><code>Float</code></td>
-<td>Calculated for the selected amount</td>
-</tr>
-<tr>
-<td><code>carbs</code></td>
-<td><code>Float</code></td>
-<td>Calculated for the selected amount</td>
-</tr>
-<tr>
-<td><code>deviceId</code></td>
-<td><code>String</code></td>
-<td>Browser-scoped identity</td>
-</tr>
-<tr>
-<td><code>eatenAt</code></td>
-<td><code>DateTime</code></td>
-<td>Timestamp used for day grouping</td>
-</tr>
-</tbody>
-</table>
-<h2 id="identity-model">Identity model<a class="headerlink" href="#identity-model" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">No account system</p>
-<p>Browser storage is the current identity boundary. If <code>localStorage</code> is cleared or a different browser is used, the app behaves like a different user.</p>
-</div>
-<p>This model is simple and frictionless, but it also means:</p>
 <ul>
-<li>data portability is limited</li>
-<li>there is no password recovery or account ownership</li>
-<li>user separation depends on the browser-generated identifier</li>
+<li>name</li>
+<li>serving size</li>
+<li>calories</li>
+<li>protein</li>
+<li>fat</li>
+<li>carbs</li>
 </ul>
-<h2 id="container-topology">Container topology<a class="headerlink" href="#container-topology" title="Permanent link">&para;</a></h2>
+<h3 id="dayentry"><code>DayEntry</code><a class="headerlink" href="#dayentry" title="Permanent link">&para;</a></h3>
+<ul>
+<li>copied product name</li>
+<li>amount in grams</li>
+<li>calculated nutrition values</li>
+<li><code>deviceId</code></li>
+<li><code>eatenAt</code></li>
+</ul>
+<h2 id="identity-model">Identity model<a class="headerlink" href="#identity-model" title="Permanent link">&para;</a></h2>
+<p>Nutrio does not use accounts. Data is separated by a browser-generated <code>deviceId</code>.</p>
+<h2 id="runtime-services">Runtime services<a class="headerlink" href="#runtime-services" title="Permanent link">&para;</a></h2>
 <p>The Docker setup runs four services:</p>
-<table>
-<thead>
-<tr>
-<th>Service</th>
-<th>Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>frontend</code></td>
-<td>Builds the Vite app and serves static assets through Nginx</td>
-</tr>
-<tr>
-<td><code>api</code></td>
-<td>Runs Prisma migrations and starts the Express server</td>
-</tr>
-<tr>
-<td><code>db</code></td>
-<td>PostgreSQL data store</td>
-</tr>
-<tr>
-<td><code>pgadmin</code></td>
-<td>Optional database administration UI</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><code>frontend</code></li>
+<li><code>api</code></li>
+<li><code>db</code></li>
+<li><code>pgadmin</code></li>
+</ul>
 
 
 

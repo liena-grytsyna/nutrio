@@ -705,10 +705,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#docker-services" class="md-nav__link">
+  <a href="#services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Docker services
+        Services
       
     </span>
   </a>
@@ -716,10 +716,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#published-ports" class="md-nav__link">
+  <a href="#ports" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Published ports
+        Ports
       
     </span>
   </a>
@@ -727,10 +727,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend-container-behavior" class="md-nav__link">
+  <a href="#container-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Frontend container behavior
+        Container behavior
       
     </span>
   </a>
@@ -738,10 +738,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-container-behavior" class="md-nav__link">
+  <a href="#before-publishing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API container behavior
+        Before publishing
       
     </span>
   </a>
@@ -749,32 +749,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-checklist" class="md-nav__link">
+  <a href="#production-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deployment checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-hardening-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Environment hardening notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#static-documentation-publishing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Static documentation publishing
+        Production notes
       
     </span>
   </a>
@@ -852,10 +830,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#docker-services" class="md-nav__link">
+  <a href="#services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Docker services
+        Services
       
     </span>
   </a>
@@ -863,10 +841,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#published-ports" class="md-nav__link">
+  <a href="#ports" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Published ports
+        Ports
       
     </span>
   </a>
@@ -874,10 +852,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend-container-behavior" class="md-nav__link">
+  <a href="#container-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Frontend container behavior
+        Container behavior
       
     </span>
   </a>
@@ -885,10 +863,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-container-behavior" class="md-nav__link">
+  <a href="#before-publishing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API container behavior
+        Before publishing
       
     </span>
   </a>
@@ -896,32 +874,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-checklist" class="md-nav__link">
+  <a href="#production-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deployment checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-hardening-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Environment hardening notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#static-documentation-publishing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Static documentation publishing
+        Production notes
       
     </span>
   </a>
@@ -949,97 +905,76 @@
 
 
 <h1 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h1>
-<p>This page documents how Nutrio is packaged and what the runtime topology looks like.</p>
-<h2 id="docker-services">Docker services<a class="headerlink" href="#docker-services" title="Permanent link">&para;</a></h2>
+<p>Nutrio is deployed as a small Docker-based stack.</p>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Service</th>
-<th>Image or build</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>frontend</code></td>
-<td>Local <code>Dockerfile</code></td>
-<td>Builds the frontend and serves it through Nginx</td>
+<td>Serves the built frontend through Nginx</td>
 </tr>
 <tr>
 <td><code>api</code></td>
-<td>Local <code>Dockerfile.api</code></td>
-<td>Runs Prisma migrations and starts the API</td>
+<td>Runs Prisma migrations and starts the Express API</td>
 </tr>
 <tr>
 <td><code>db</code></td>
-<td><code>postgres:16-alpine</code></td>
 <td>Stores products and day entries</td>
 </tr>
 <tr>
 <td><code>pgadmin</code></td>
-<td><code>dpage/pgadmin4:latest</code></td>
-<td>Optional inspection UI for the database</td>
+<td>Optional database UI</td>
 </tr>
 </tbody>
 </table>
-<h2 id="published-ports">Published ports<a class="headerlink" href="#published-ports" title="Permanent link">&para;</a></h2>
+<h2 id="ports">Ports<a class="headerlink" href="#ports" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Port</th>
-<th>Service</th>
 <th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>8080</code></td>
-<td>frontend</td>
-<td>Main application URL</td>
+<td>Main app</td>
 </tr>
 <tr>
 <td><code>5050</code></td>
 <td>pgAdmin</td>
-<td>Database administration</td>
 </tr>
 </tbody>
 </table>
-<p>The API stays internal to the Docker network and is reached through Nginx.</p>
-<h2 id="frontend-container-behavior">Frontend container behavior<a class="headerlink" href="#frontend-container-behavior" title="Permanent link">&para;</a></h2>
-<p>The frontend image uses a two-stage build:</p>
-<ol>
-<li><code>node:22-alpine</code> installs dependencies and runs <code>npm run build</code></li>
-<li><code>nginx:1.27-alpine</code> serves the generated <code>dist/</code> directory</li>
-</ol>
-<p>Nginx also proxies <code>/api/*</code> to the API container and serves the SPA with <code>try_files ... /index.html</code>.</p>
-<h2 id="api-container-behavior">API container behavior<a class="headerlink" href="#api-container-behavior" title="Permanent link">&para;</a></h2>
-<p>The API image:</p>
-<ol>
-<li>installs dependencies</li>
-<li>copies <code>prisma/</code> and generates the Prisma client</li>
-<li>copies the <code>server/</code> directory</li>
-<li>runs <code>npm run prisma:migrate:deploy &amp;&amp; npm run api:start</code></li>
-</ol>
-<p>This means schema migrations are applied automatically when the API container starts.</p>
-<h2 id="deployment-checklist">Deployment checklist<a class="headerlink" href="#deployment-checklist" title="Permanent link">&para;</a></h2>
+<p>The API stays inside the Docker network and is reached through Nginx.</p>
+<h2 id="container-behavior">Container behavior<a class="headerlink" href="#container-behavior" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Set strong values in <code>.env</code> before publishing the stack</li>
-<li>Confirm PostgreSQL data volumes are persistent</li>
-<li>Confirm <code>http://&lt;host&gt;/api/health</code> returns <code>200</code></li>
-<li>Confirm frontend routing works after reloading deep links</li>
-<li>Confirm the API container can reach the database before accepting traffic</li>
+<li>the frontend image builds <code>dist/</code> and serves it with Nginx</li>
+<li>the API image generates the Prisma client and starts the server</li>
+<li>the API container runs <code>npm run prisma:migrate:deploy</code> on startup</li>
 </ul>
-<h2 id="environment-hardening-notes">Environment hardening notes<a class="headerlink" href="#environment-hardening-notes" title="Permanent link">&para;</a></h2>
-<p>The current stack is good for development and small deployments, but consider these upgrades before production use:</p>
+<h2 id="before-publishing">Before publishing<a class="headerlink" href="#before-publishing" title="Permanent link">&para;</a></h2>
 <ul>
-<li>add authentication if data should be user-owned rather than browser-owned</li>
-<li>protect or remove pgAdmin in public environments</li>
-<li>add structured logging and monitoring</li>
-<li>back up PostgreSQL volumes</li>
-<li>review entry deletion rules and ownership validation</li>
+<li>set real values in <code>.env</code></li>
+<li>confirm PostgreSQL data is persistent</li>
+<li>confirm <code>/api/health</code> returns <code>200</code></li>
+<li>confirm frontend routing works after refresh</li>
 </ul>
-<h2 id="static-documentation-publishing">Static documentation publishing<a class="headerlink" href="#static-documentation-publishing" title="Permanent link">&para;</a></h2>
-<p>The MkDocs site itself is configured separately from the main Nutrio application and can be published to GitHub Pages or any static hosting provider after running a standard MkDocs build in an environment where MkDocs is installed.</p>
+<h2 id="production-notes">Production notes<a class="headerlink" href="#production-notes" title="Permanent link">&para;</a></h2>
+<p>For a more serious deployment, consider:</p>
+<ul>
+<li>authentication</li>
+<li>backups</li>
+<li>structured logs</li>
+<li>monitoring</li>
+<li>restricted access to pgAdmin</li>
+</ul>
 
 
 
