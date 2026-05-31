@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/user-guide/">
+        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/developer/architecture/">
       
       
-        <link rel="prev" href="../user-docs/">
+        <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../developer-docs/">
+        <link rel="next" href="../api/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>User Guide - Nutrio Docs</title>
+        <title>Architecture - Nutrio Docs</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#user-guide" class="md-skip">
+        <a href="#architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Nutrio Docs" class="md-header__button md-logo" aria-label="Nutrio Docs" data-md-component="logo">
+    <a href="../.." title="Nutrio Docs" class="md-header__button md-logo" aria-label="Nutrio Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              User Guide
+              Architecture
             
           </span>
         </div>
@@ -227,7 +227,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -244,17 +244,15 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../user-docs/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../user/" class="md-tabs__link">
           
   
   
-  User Documentation
+  User Guide
 
         </a>
       </li>
@@ -266,15 +264,17 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../developer-docs/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
-  Developer Documentation
+  Developer Guide
 
         </a>
       </li>
@@ -304,7 +304,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Nutrio Docs" class="md-nav__button md-logo" aria-label="Nutrio Docs" data-md-component="logo">
+    <a href="../.." title="Nutrio Docs" class="md-nav__button md-logo" aria-label="Nutrio Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -334,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -350,6 +350,121 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using Nutrio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -379,17 +494,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    User Documentation
+    Developer Guide
   
 
     
@@ -400,273 +515,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    User Documentation
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../user-docs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Start Here
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    User Guide
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    User Guide
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#main-screens" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Main screens
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-create-a-product" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Create a product
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-log-food-into-a-meal-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Log food into a meal section
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-review-daily-progress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Review daily progress
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-use-the-calendar-and-meal-groups" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Use the calendar and meal groups
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-remove-an-incorrect-entry" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Remove an incorrect entry
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-browse-products" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Browse products
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-how-data-separation-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. How data separation works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-privacy-expectations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Privacy expectations
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Developer Documentation
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Developer Documentation
+    Developer Guide
   
 
           </label>
@@ -679,14 +533,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-docs/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Start Here
+    Overview
   
 
     
@@ -732,10 +586,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../system-overview/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -751,6 +632,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#system-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#product-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daily-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daily overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-entry-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day entry creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dayentry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DayEntry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -874,10 +919,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#main-screens" class="md-nav__link">
+  <a href="#system-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Main screens
+        System map
       
     </span>
   </a>
@@ -885,10 +930,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-product" class="md-nav__link">
+  <a href="#frontend-responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Create a product
+        Frontend responsibilities
       
     </span>
   </a>
@@ -896,10 +941,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-log-food-into-a-meal-section" class="md-nav__link">
+  <a href="#backend-responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Log food into a meal section
+        Backend responsibilities
       
     </span>
   </a>
@@ -907,10 +952,99 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-review-daily-progress" class="md-nav__link">
+  <a href="#request-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Review daily progress
+        Request flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#product-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daily-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daily overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-entry-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day entry creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dayentry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DayEntry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity model
       
     </span>
   </a>
@@ -918,54 +1052,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-use-the-calendar-and-meal-groups" class="md-nav__link">
+  <a href="#container-topology" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Use the calendar and meal groups
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-remove-an-incorrect-entry" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Remove an incorrect entry
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-browse-products" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Browse products
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-how-data-separation-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. How data separation works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-privacy-expectations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Privacy expectations
+        Container topology
       
     </span>
   </a>
@@ -992,125 +1082,216 @@
   
 
 
-<h1 id="user-guide">User Guide<a class="headerlink" href="#user-guide" title="Permanent link">&para;</a></h1>
-<p>This guide follows the normal user workflow inside Nutrio.</p>
-<h2 id="main-screens">Main screens<a class="headerlink" href="#main-screens" title="Permanent link">&para;</a></h2>
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>Nutrio is intentionally small. The architecture favors a low operational footprint and a short request path over abstraction-heavy layering.</p>
+<h2 id="system-map">System map<a class="headerlink" href="#system-map" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Browser UI (React + Vite)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        v
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Nginx reverse proxy
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        |
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        v
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Express API
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        v
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Prisma + PostgreSQL
+</code></pre></div>
+<h2 id="frontend-responsibilities">Frontend responsibilities<a class="headerlink" href="#frontend-responsibilities" title="Permanent link">&para;</a></h2>
+<p>The frontend is a React 19 application with three primary responsibilities:</p>
+<ul>
+<li>manage screen navigation between <code>Today</code>, <code>Add</code>, and <code>Products</code></li>
+<li>fetch products and nutrition overview data from the API</li>
+<li>create and delete day entries, then refresh the visible daily summary</li>
+</ul>
+<p>Important client-side behaviors:</p>
+<ul>
+<li>a persistent <code>deviceId</code> is created in <code>localStorage</code></li>
+<li>the selected date is grouped locally and rendered through the calendar</li>
+<li>the frontend sends <code>timezoneOffsetMinutes</code> when loading the nutrition overview</li>
+</ul>
+<h2 id="backend-responsibilities">Backend responsibilities<a class="headerlink" href="#backend-responsibilities" title="Permanent link">&para;</a></h2>
+<p>The Express API handles:</p>
+<ul>
+<li>health checks</li>
+<li>product creation and listing</li>
+<li>nutrition overview aggregation</li>
+<li>day entry creation</li>
+<li>day entry deletion</li>
+</ul>
+<p>The backend also contains the nutrition calculation logic:</p>
+<ul>
+<li>converts product nutrition values from <code>per 100 g</code> into entry totals</li>
+<li>aggregates totals per day</li>
+<li>compares totals with built-in daily targets</li>
+<li>calculates under / ideal / over calorie status</li>
+</ul>
+<h2 id="request-flow">Request flow<a class="headerlink" href="#request-flow" title="Permanent link">&para;</a></h2>
+<h3 id="product-creation">Product creation<a class="headerlink" href="#product-creation" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The user submits the <code>Add</code> form.</li>
+<li>The frontend sends <code>POST /api/products</code>.</li>
+<li>The API validates input and creates the product through Prisma.</li>
+<li>The new product becomes available for later meal logging.</li>
+</ol>
+<h3 id="daily-overview">Daily overview<a class="headerlink" href="#daily-overview" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The frontend sends <code>GET /api/nutrition-overview</code>.</li>
+<li>The request includes <code>deviceId</code> and <code>timezoneOffsetMinutes</code>.</li>
+<li>The API loads matching day entries from PostgreSQL.</li>
+<li>The API groups entries into day buckets and computes totals.</li>
+<li>The frontend renders the summary card and meal sections.</li>
+</ol>
+<h3 id="day-entry-creation">Day entry creation<a class="headerlink" href="#day-entry-creation" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The user picks a product and amount.</li>
+<li>The frontend sends <code>POST /api/day-entries</code>.</li>
+<li>The API looks up the product, calculates entry nutrition, and stores a new row.</li>
+<li>The frontend refreshes the overview.</li>
+</ol>
+<h2 id="data-model">Data model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
+<h3 id="product"><code>Product</code><a class="headerlink" href="#product" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Screen</th>
-<th>Purpose</th>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Today</code></td>
-<td>Review the selected day, add entries to meal sections, remove mistakes</td>
+<td><code>id</code></td>
+<td><code>String</code></td>
+<td>Prisma <code>cuid()</code></td>
 </tr>
 <tr>
-<td><code>Add</code></td>
-<td>Create reusable food products</td>
+<td><code>name</code></td>
+<td><code>String</code></td>
+<td>Product name</td>
 </tr>
 <tr>
-<td><code>Products</code></td>
-<td>Browse and search saved food products</td>
+<td><code>servingSize</code></td>
+<td><code>String</code></td>
+<td>Defaults to <code>100 g</code></td>
+</tr>
+<tr>
+<td><code>calories</code></td>
+<td><code>Float</code></td>
+<td>Per 100 g</td>
+</tr>
+<tr>
+<td><code>protein</code></td>
+<td><code>Float</code></td>
+<td>Per 100 g</td>
+</tr>
+<tr>
+<td><code>fat</code></td>
+<td><code>Float</code></td>
+<td>Per 100 g</td>
+</tr>
+<tr>
+<td><code>carbs</code></td>
+<td><code>Float</code></td>
+<td>Per 100 g</td>
 </tr>
 </tbody>
 </table>
-<h2 id="1-create-a-product">1. Create a product<a class="headerlink" href="#1-create-a-product" title="Permanent link">&para;</a></h2>
-<p>Before you can log meals, you need at least one saved product.</p>
-<ol>
-<li>Open the <code>Add</code> screen.</li>
-<li>Enter a product name.</li>
-<li>Enter a serving label such as <code>100 g</code>.</li>
-<li>Fill in <code>Kcal</code>, <code>Protein</code>, <code>Fat</code>, and <code>Carbs</code>.</li>
-<li>Click <code>Save Product</code>.</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Nutrition values are stored as non-negative numbers. The default serving label is <code>100 g</code>.</p>
+<h3 id="dayentry"><code>DayEntry</code><a class="headerlink" href="#dayentry" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>String</code></td>
+<td>Prisma <code>cuid()</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>String</code></td>
+<td>Copied from the product at entry creation time</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td><code>Float</code></td>
+<td>Amount in grams</td>
+</tr>
+<tr>
+<td><code>calories</code></td>
+<td><code>Float</code></td>
+<td>Calculated for the selected amount</td>
+</tr>
+<tr>
+<td><code>protein</code></td>
+<td><code>Float</code></td>
+<td>Calculated for the selected amount</td>
+</tr>
+<tr>
+<td><code>fat</code></td>
+<td><code>Float</code></td>
+<td>Calculated for the selected amount</td>
+</tr>
+<tr>
+<td><code>carbs</code></td>
+<td><code>Float</code></td>
+<td>Calculated for the selected amount</td>
+</tr>
+<tr>
+<td><code>deviceId</code></td>
+<td><code>String</code></td>
+<td>Browser-scoped identity</td>
+</tr>
+<tr>
+<td><code>eatenAt</code></td>
+<td><code>DateTime</code></td>
+<td>Timestamp used for day grouping</td>
+</tr>
+</tbody>
+</table>
+<h2 id="identity-model">Identity model<a class="headerlink" href="#identity-model" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">No account system</p>
+<p>Browser storage is the current identity boundary. If <code>localStorage</code> is cleared or a different browser is used, the app behaves like a different user.</p>
 </div>
-<h2 id="2-log-food-into-a-meal-section">2. Log food into a meal section<a class="headerlink" href="#2-log-food-into-a-meal-section" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Open the <code>Today</code> screen.</li>
-<li>Find the meal section where the entry belongs.</li>
-<li>Click <code>+</code>.</li>
-<li>Select a saved product.</li>
-<li>Enter the amount in grams.</li>
-<li>Submit the dialog.</li>
-</ol>
-<p>The app creates a day entry, recalculates totals, and refreshes the summary automatically.</p>
-<h2 id="3-review-daily-progress">3. Review daily progress<a class="headerlink" href="#3-review-daily-progress" title="Permanent link">&para;</a></h2>
-<p>The summary card on top of the <code>Today</code> screen shows:</p>
+<p>This model is simple and frictionless, but it also means:</p>
 <ul>
-<li>consumed calories</li>
-<li>remaining calories</li>
-<li>daily progress in percent</li>
-<li>consumed protein, fat, and carbs</li>
-<li>target values for the tracked nutrients</li>
+<li>data portability is limited</li>
+<li>there is no password recovery or account ownership</li>
+<li>user separation depends on the browser-generated identifier</li>
 </ul>
-<p>Current built-in daily targets:</p>
+<h2 id="container-topology">Container topology<a class="headerlink" href="#container-topology" title="Permanent link">&para;</a></h2>
+<p>The Docker setup runs four services:</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Target</th>
+<th>Service</th>
+<th>Role</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Calories</td>
-<td><code>1600 kcal</code></td>
+<td><code>frontend</code></td>
+<td>Builds the Vite app and serves static assets through Nginx</td>
 </tr>
 <tr>
-<td>Protein</td>
-<td><code>120 g</code></td>
+<td><code>api</code></td>
+<td>Runs Prisma migrations and starts the Express server</td>
 </tr>
 <tr>
-<td>Fat</td>
-<td><code>53 g</code></td>
+<td><code>db</code></td>
+<td>PostgreSQL data store</td>
 </tr>
 <tr>
-<td>Carbs</td>
-<td><code>160 g</code></td>
+<td><code>pgadmin</code></td>
+<td>Optional database administration UI</td>
 </tr>
 </tbody>
 </table>
-<h2 id="4-use-the-calendar-and-meal-groups">4. Use the calendar and meal groups<a class="headerlink" href="#4-use-the-calendar-and-meal-groups" title="Permanent link">&para;</a></h2>
-<p>Nutrio groups entries by calendar day and shows them in these sections:</p>
-<ul>
-<li>Breakfast</li>
-<li>Snack</li>
-<li>Lunch</li>
-<li>Second Snack</li>
-<li>Dinner</li>
-<li>Third Snack</li>
-</ul>
-<p>Use the calendar at the top of the app to switch between days and inspect previous totals.</p>
-<h2 id="5-remove-an-incorrect-entry">5. Remove an incorrect entry<a class="headerlink" href="#5-remove-an-incorrect-entry" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Open the correct day on the <code>Today</code> screen.</li>
-<li>Find the meal card containing the wrong entry.</li>
-<li>Click <code>Delete</code>.</li>
-<li>Wait for the summary to refresh.</li>
-</ol>
-<h2 id="6-browse-products">6. Browse products<a class="headerlink" href="#6-browse-products" title="Permanent link">&para;</a></h2>
-<p>Open the <code>Products</code> screen to:</p>
-<ul>
-<li>inspect all saved products</li>
-<li>search by product name</li>
-<li>compare nutrition values quickly before logging a meal</li>
-</ul>
-<h2 id="7-how-data-separation-works">7. How data separation works<a class="headerlink" href="#7-how-data-separation-works" title="Permanent link">&para;</a></h2>
-<p>Nutrio does not use sign-in. Instead, the frontend generates a browser-specific <code>deviceId</code> and stores it in <code>localStorage</code> under the key <code>nutrio:deviceId</code>.</p>
-<p>Practical consequences:</p>
-<ul>
-<li>your data is separated per browser profile</li>
-<li>clearing browser storage can make old data appear disconnected</li>
-<li>opening the app in another browser creates a different identity</li>
-</ul>
-<h2 id="8-privacy-expectations">8. Privacy expectations<a class="headerlink" href="#8-privacy-expectations" title="Permanent link">&para;</a></h2>
-<p>Nutrio stores food products and day entries in PostgreSQL. Data is not anonymous from an infrastructure perspective, but the current product uses browser-generated identity rather than named user accounts.</p>
 
 
 
@@ -1188,10 +1369,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/getting-started/">
+        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/developer/">
       
       
-        <link rel="prev" href="../developer-docs/">
+        <link rel="prev" href="../user/guide/">
       
       
-        <link rel="next" href="../system-overview/">
+        <link rel="next" href="getting-started/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Quick Start - Nutrio Docs</title>
+        <title>Overview - Nutrio Docs</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quick-start" class="md-skip">
+        <a href="#developer-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quick Start
+              Overview
             
           </span>
         </div>
@@ -248,11 +248,11 @@
     
     
       <li class="md-tabs__item">
-        <a href="../user-docs/" class="md-tabs__link">
+        <a href="../user/" class="md-tabs__link">
           
   
   
-  User Documentation
+  User Guide
 
         </a>
       </li>
@@ -270,11 +270,11 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../developer-docs/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   
-  Developer Documentation
+  Developer Guide
 
         </a>
       </li>
@@ -384,7 +384,7 @@
   <span class="md-ellipsis">
     
   
-    User Documentation
+    User Guide
   
 
     
@@ -400,7 +400,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    User Documentation
+    User Guide
   
 
           </label>
@@ -413,14 +413,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-docs/" class="md-nav__link">
+      <a href="../user/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Start Here
+    Overview
   
 
     
@@ -441,14 +441,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/" class="md-nav__link">
+      <a href="../user/guide/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User Guide
+    Using Nutrio
   
 
     
@@ -504,7 +504,7 @@
   <span class="md-ellipsis">
     
   
-    Developer Documentation
+    Developer Guide
   
 
     
@@ -520,39 +520,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Developer Documentation
+    Developer Guide
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../developer-docs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Start Here
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -577,7 +549,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Start
+    Overview
   
 
     
@@ -595,7 +567,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Start
+    Overview
   
 
     
@@ -621,10 +593,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#what-is-in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        What is in this section
       
     </span>
   </a>
@@ -632,110 +604,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fastest-path-docker-compose" class="md-nav__link">
+  <a href="#use-this-section-if-you-want-to" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fastest path: Docker Compose
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Fastest path: Docker Compose">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-the-docker-setup-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the Docker setup does
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#local-development" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Local development
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Local development">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Install dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-provide-a-postgresql-connection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Provide a PostgreSQL connection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-generate-the-prisma-client-and-run-migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Generate the Prisma client and run migrations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-start-the-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Start the API
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-start-the-frontend-in-another-terminal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Start the frontend in another terminal
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Environment variables
+        Use this section if you want to
       
     </span>
   </a>
@@ -743,10 +615,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#first-run-checklist" class="md-nav__link">
+  <a href="#recommended-reading-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        First-run checklist
+        Recommended reading order
       
     </span>
   </a>
@@ -754,10 +626,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#useful-commands" class="md-nav__link">
+  <a href="#not-for-developers-only" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Useful commands
+        Not for developers only
       
     </span>
   </a>
@@ -780,7 +652,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../system-overview/" class="md-nav__link">
+      <a href="getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
         
   
   
@@ -808,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/" class="md-nav__link">
+      <a href="api/" class="md-nav__link">
         
   
   
@@ -836,7 +736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deployment/" class="md-nav__link">
+      <a href="deployment/" class="md-nav__link">
         
   
   
@@ -864,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="troubleshooting/" class="md-nav__link">
         
   
   
@@ -919,10 +819,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#what-is-in-this-section" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        What is in this section
       
     </span>
   </a>
@@ -930,110 +830,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fastest-path-docker-compose" class="md-nav__link">
+  <a href="#use-this-section-if-you-want-to" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fastest path: Docker Compose
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Fastest path: Docker Compose">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-the-docker-setup-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the Docker setup does
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#local-development" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Local development
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Local development">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Install dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-provide-a-postgresql-connection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Provide a PostgreSQL connection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-generate-the-prisma-client-and-run-migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Generate the Prisma client and run migrations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-start-the-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Start the API
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-start-the-frontend-in-another-terminal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Start the frontend in another terminal
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Environment variables
+        Use this section if you want to
       
     </span>
   </a>
@@ -1041,10 +841,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#first-run-checklist" class="md-nav__link">
+  <a href="#recommended-reading-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        First-run checklist
+        Recommended reading order
       
     </span>
   </a>
@@ -1052,10 +852,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#useful-commands" class="md-nav__link">
+  <a href="#not-for-developers-only" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Useful commands
+        Not for developers only
       
     </span>
   </a>
@@ -1082,164 +882,55 @@
   
 
 
-<h1 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h1>
-<p>Nutrio can be started in two ways:</p>
-<ul>
-<li><code>Docker Compose</code> for the fastest end-to-end setup</li>
-<li><code>Local development</code> if you want to run the frontend and API separately</li>
-</ul>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<h1 id="developer-guide">Developer Guide<a class="headerlink" href="#developer-guide" title="Permanent link">&para;</a></h1>
+<p>This section is for people who need to run, inspect, extend, or deploy Nutrio.</p>
+<h2 id="what-is-in-this-section">What is in this section<a class="headerlink" href="#what-is-in-this-section" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Why it is needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Node.js 22</code></td>
-<td>Required for local frontend and API execution</td>
-</tr>
-<tr>
-<td><code>npm</code></td>
-<td>Used for package installation and scripts</td>
-</tr>
-<tr>
-<td><code>Docker</code></td>
-<td>Required for the containerized workflow</td>
-</tr>
-<tr>
-<td><code>PostgreSQL</code></td>
-<td>Required only for local API development outside Docker</td>
-</tr>
-</tbody>
-</table>
-<h2 id="fastest-path-docker-compose">Fastest path: Docker Compose<a class="headerlink" href="#fastest-path-docker-compose" title="Permanent link">&para;</a></h2>
-<div class="admonition tip">
-<p class="admonition-title">Recommended for first run</p>
-<p>If your goal is to try the app quickly, start with Docker. It gives you the frontend, API, database, and pgAdmin in one command.</p>
-</div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">docker compose</label><label for="__tabbed_1_2">docker-compose</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>--build
-</code></pre></div>
-</div>
-</div>
-</div>
-<p>After startup, these endpoints should be available:</p>
-<table>
-<thead>
-<tr>
-<th>Service</th>
-<th>URL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>App</td>
-<td><code>http://localhost:8080</code></td>
-</tr>
-<tr>
-<td>pgAdmin</td>
-<td><code>http://localhost:5050</code></td>
-</tr>
-<tr>
-<td>API health check</td>
-<td><code>http://localhost:8080/api/health</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="what-the-docker-setup-does">What the Docker setup does<a class="headerlink" href="#what-the-docker-setup-does" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Builds the Vite frontend and serves it through <code>nginx:1.27-alpine</code></li>
-<li>Starts the API on port <code>3000</code> inside the Docker network</li>
-<li>Starts PostgreSQL 16</li>
-<li>Runs <code>npm run prisma:migrate:deploy</code> when the API container starts</li>
-<li>Exposes pgAdmin for database inspection</li>
-</ul>
-<h2 id="local-development">Local development<a class="headerlink" href="#local-development" title="Permanent link">&para;</a></h2>
-<p>Use this path if you want live frontend development with Vite and direct control of the API process.</p>
-<h3 id="1-install-dependencies">1. Install dependencies<a class="headerlink" href="#1-install-dependencies" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>npm<span class="w"> </span>install
-</code></pre></div>
-<h3 id="2-provide-a-postgresql-connection">2. Provide a PostgreSQL connection<a class="headerlink" href="#2-provide-a-postgresql-connection" title="Permanent link">&para;</a></h3>
-<p>The local API reads <code>DATABASE_URL</code> from the shell environment. It does <strong>not</strong> load <code>.env</code> automatically, so export the variable before starting the API.</p>
-<p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">&quot;postgresql://nutrio:change_me_to_a_strong_password@localhost:5432/nutrio?schema=public&quot;</span>
-</code></pre></div>
-<h3 id="3-generate-the-prisma-client-and-run-migrations">3. Generate the Prisma client and run migrations<a class="headerlink" href="#3-generate-the-prisma-client-and-run-migrations" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>npm<span class="w"> </span>run<span class="w"> </span>prisma:generate
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>npm<span class="w"> </span>run<span class="w"> </span>prisma:migrate:deploy
-</code></pre></div>
-<h3 id="4-start-the-api">4. Start the API<a class="headerlink" href="#4-start-the-api" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>npm<span class="w"> </span>run<span class="w"> </span>api:start
-</code></pre></div>
-<h3 id="5-start-the-frontend-in-another-terminal">5. Start the frontend in another terminal<a class="headerlink" href="#5-start-the-frontend-in-another-terminal" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>npm<span class="w"> </span>run<span class="w"> </span>dev
-</code></pre></div>
-<p>The Vite frontend runs on <code>http://localhost:5173</code> and proxies <code>/api</code> requests to <code>http://localhost:3000</code>.</p>
-<h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Used by</th>
+<th>Page</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>POSTGRES_DB</code></td>
-<td>Docker Compose</td>
-<td>Database name for the PostgreSQL container</td>
+<td><a href="getting-started/">Quick Start</a></td>
+<td>Local and Docker setup</td>
 </tr>
 <tr>
-<td><code>POSTGRES_USER</code></td>
-<td>Docker Compose</td>
-<td>Database user for the PostgreSQL container</td>
+<td><a href="architecture/">Architecture</a></td>
+<td>Request flow, data model, and runtime structure</td>
 </tr>
 <tr>
-<td><code>POSTGRES_PASSWORD</code></td>
-<td>Docker Compose</td>
-<td>Database password for the PostgreSQL container</td>
+<td><a href="api/">API Reference</a></td>
+<td>Endpoint behavior and payloads</td>
 </tr>
 <tr>
-<td><code>PGADMIN_DEFAULT_EMAIL</code></td>
-<td>Docker Compose</td>
-<td>Login email for pgAdmin</td>
+<td><a href="deployment/">Deployment</a></td>
+<td>Container topology and release concerns</td>
 </tr>
 <tr>
-<td><code>PGADMIN_DEFAULT_PASSWORD</code></td>
-<td>Docker Compose</td>
-<td>Login password for pgAdmin</td>
-</tr>
-<tr>
-<td><code>DATABASE_URL</code></td>
-<td>Local API and Prisma</td>
-<td>Direct PostgreSQL connection string</td>
+<td><a href="troubleshooting/">Troubleshooting</a></td>
+<td>Common runtime and setup failures</td>
 </tr>
 </tbody>
 </table>
-<h2 id="first-run-checklist">First-run checklist<a class="headerlink" href="#first-run-checklist" title="Permanent link">&para;</a></h2>
+<h2 id="use-this-section-if-you-want-to">Use this section if you want to<a class="headerlink" href="#use-this-section-if-you-want-to" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Open the app and confirm the main screens <code>Today</code>, <code>Add</code>, and <code>Products</code></li>
-<li>Create one product on the <code>Add</code> screen</li>
-<li>Log that product into any meal section on the <code>Today</code> screen</li>
-<li>Confirm <code>GET /api/health</code> returns <code>{ "status": "ok" }</code></li>
+<li>run the project locally</li>
+<li>start the full stack with Docker</li>
+<li>understand how <code>deviceId</code> and nutrition aggregation work</li>
+<li>inspect backend routes and payloads</li>
+<li>publish or debug the application</li>
 </ul>
-<h2 id="useful-commands">Useful commands<a class="headerlink" href="#useful-commands" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>npm<span class="w"> </span>run<span class="w"> </span>build
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>npm<span class="w"> </span>run<span class="w"> </span>prisma:generate
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>npm<span class="w"> </span>run<span class="w"> </span>prisma:migrate:deploy
-</code></pre></div>
+<h2 id="recommended-reading-order">Recommended reading order<a class="headerlink" href="#recommended-reading-order" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Read <a href="getting-started/">Quick Start</a>.</li>
+<li>Read <a href="architecture/">Architecture</a>.</li>
+<li>Use <a href="api/">API Reference</a> while implementing or debugging changes.</li>
+</ol>
+<h2 id="not-for-developers-only">Not for developers only<a class="headerlink" href="#not-for-developers-only" title="Permanent link">&para;</a></h2>
+<p>If your goal is just to use the app interface, start with <a href="../user/">User Guide</a>.</p>
 
 
 
