@@ -1,5 +1,7 @@
 node_modules
 dist
+site
+.venv
 .DS_Store
 *.local
 .env

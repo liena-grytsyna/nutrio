@@ -13,8 +13,8 @@ hide:
       combines a React frontend, a small Express API, and PostgreSQL
       persistence behind a simple mobile-first interface.
     </p>
-    <a class="md-button md-button--primary" href="user-docs/">For Users</a>
-    <a class="md-button" href="developer-docs/">For Developers</a>
+    <a class="md-button md-button--primary" href="user/">For Users</a>
+    <a class="md-button" href="developer/">For Developers</a>
   </div>
   <div class="hero__panel">
     <p><strong>At a glance</strong></p>
@@ -88,7 +88,7 @@ hide:
   <div class="feature-card">
     <h3>For users</h3>
     <p>
-      Start with <a href="user-docs/">User Documentation</a> if you want to use
+      Start with <a href="user/">User Guide</a> if you want to use
       Nutrio as an app: create products, log meals, inspect totals, and fix
       mistakes.
     </p>
@@ -96,7 +96,7 @@ hide:
   <div class="feature-card">
     <h3>For developers</h3>
     <p>
-      Start with <a href="developer-docs/">Developer Documentation</a> if you
+      Start with <a href="developer/">Developer Guide</a> if you
       need local setup, architecture, API details, deployment notes, or
       troubleshooting.
     </p>

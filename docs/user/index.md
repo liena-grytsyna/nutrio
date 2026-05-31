@@ -1,4 +1,4 @@
-# User Documentation
+# User Guide
 
 This section is for people who want to use Nutrio, not develop it.
 
@@ -6,7 +6,7 @@ This section is for people who want to use Nutrio, not develop it.
 
 | Page | Purpose |
 | --- | --- |
-| [User Guide](user-guide.md) | Main workflow inside the app |
+| [Using Nutrio](guide.md) | Main workflow inside the app |
 
 ## Use this section if you want to
 
@@ -18,10 +18,10 @@ This section is for people who want to use Nutrio, not develop it.
 
 ## Recommended reading order
 
-1. Read [User Guide](user-guide.md).
+1. Read [Using Nutrio](guide.md).
 2. Open the live app.
 3. Create one product and log one meal entry.
 
 ## Not for end users
 
-If you need installation, Docker, API, or architecture details, go to [Developer Documentation](developer-docs.md).
+If you need installation, Docker, API, or architecture details, go to [Developer Guide](../developer/index.md).
