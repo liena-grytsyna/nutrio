@@ -27,15 +27,6 @@ theme:
     - scheme: default
       primary: green
       accent: amber
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    - scheme: slate
-      primary: green
-      accent: amber
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.sections
@@ -44,7 +35,6 @@ theme:
     - search.suggest
     - content.code.copy
     - content.tabs.link
-    - toc.follow
   icon:
     repo: fontawesome/brands/github
 
