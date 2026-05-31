@@ -1,14 +1,8 @@
 # User Guide
 
-This section is for people who want to use Nutrio, not develop it.
+This section is for using Nutrio as an app.
 
-## What is in this section
-
-| Page | Purpose |
-| --- | --- |
-| [Using Nutrio](guide.md) | Main workflow inside the app |
-
-## Use this section if you want to
+## Use it if you want to
 
 - create and save food products
 - log meals for the current day
@@ -16,12 +10,10 @@ This section is for people who want to use Nutrio, not develop it.
 - switch between days in the calendar
 - remove an incorrect entry
 
-## Recommended reading order
+## Start here
 
-1. Read [Using Nutrio](guide.md).
-2. Open the live app.
-3. Create one product and log one meal entry.
+Read [Using Nutrio](guide.md), then open the app and try one full flow: create a product, log a meal, and verify the totals.
 
-## Not for end users
+## Need technical details?
 
 If you need installation, Docker, API, or architecture details, go to [Developer Guide](../developer/index.md).

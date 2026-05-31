@@ -8,10 +8,8 @@ hide:
     <span class="section-label">Nutrition tracker documentation</span>
     <h1>Nutrio</h1>
     <p>
-      Nutrio is a lightweight food tracking app focused on one job: make daily
-      calorie and macro tracking fast enough to use every day. The product
-      combines a React frontend, a small Express API, and PostgreSQL
-      persistence behind a simple mobile-first interface.
+      Nutrio is a lightweight food tracking app for daily calories and macros.
+      The docs are split into a user path and a developer path.
     </p>
     <a class="md-button md-button--primary" href="user/">For Users</a>
     <a class="md-button" href="developer/">For Developers</a>
@@ -99,25 +97,6 @@ hide:
       Start with <a href="developer/">Developer Guide</a> if you
       need local setup, architecture, API details, deployment notes, or
       troubleshooting.
-    </p>
-  </div>
-</div>
-
-## Documentation map
-
-<div class="feature-grid">
-  <div class="feature-card">
-    <h3>User documentation</h3>
-    <p>
-      Includes the app workflow, main screens, daily targets, product creation,
-      meal logging, and privacy expectations.
-    </p>
-  </div>
-  <div class="feature-card">
-    <h3>Developer documentation</h3>
-    <p>
-      Includes setup, Docker and local run modes, architecture, API behavior,
-      deployment topology, and failure recovery.
     </p>
   </div>
 </div>
