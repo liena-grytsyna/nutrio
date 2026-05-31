@@ -1,44 +1,96 @@
 # User Guide
 
-## Add product
+This guide follows the normal user workflow inside Nutrio.
 
-1. Open the "Add" page
-2. Enter product name
-3. Enter calories, protein, carbs, fat
-4. Click "Save Product"
+## Main screens
 
----
+| Screen | Purpose |
+| --- | --- |
+| `Today` | Review the selected day, add entries to meal sections, remove mistakes |
+| `Add` | Create reusable food products |
+| `Products` | Browse and search saved food products |
 
-## Add food entry
+## 1. Create a product
 
-1. Open "Today"
-2. Choose a meal (breakfast, lunch, dinner)
-3. Click "+"
-4. Select a product
-5. Enter amount (grams)
-6. Click "Add"
+Before you can log meals, you need at least one saved product.
 
----
+1. Open the `Add` screen.
+2. Enter a product name.
+3. Enter a serving label such as `100 g`.
+4. Fill in `Kcal`, `Protein`, `Fat`, and `Carbs`.
+5. Click `Save Product`.
 
-## Delete food entry
+!!! note
+    Nutrition values are stored as non-negative numbers. The default serving label is `100 g`.
 
-1. Open "Today"
-2. Find the food entry
-3. Click "Delete"
-4. The entry is removed
-5. The summary updates automatically
+## 2. Log food into a meal section
 
----
+1. Open the `Today` screen.
+2. Find the meal section where the entry belongs.
+3. Click `+`.
+4. Select a saved product.
+5. Enter the amount in grams.
+6. Submit the dialog.
 
-## Privacy
+The app creates a day entry, recalculates totals, and refreshes the summary automatically.
 
-Food entries are stored in the database and linked to your browser using a deviceId.
+## 3. Review daily progress
 
----
+The summary card on top of the `Today` screen shows:
 
-## Consent
+- consumed calories
+- remaining calories
+- daily progress in percent
+- consumed protein, fat, and carbs
+- target values for the tracked nutrients
 
-By using the application, the user agrees that:
+Current built-in daily targets:
 
-- Food data is stored in the database
-- Data is linked to the browser (deviceId)
+| Metric | Target |
+| --- | --- |
+| Calories | `1600 kcal` |
+| Protein | `120 g` |
+| Fat | `53 g` |
+| Carbs | `160 g` |
+
+## 4. Use the calendar and meal groups
+
+Nutrio groups entries by calendar day and shows them in these sections:
+
+- Breakfast
+- Snack
+- Lunch
+- Second Snack
+- Dinner
+- Third Snack
+
+Use the calendar at the top of the app to switch between days and inspect previous totals.
+
+## 5. Remove an incorrect entry
+
+1. Open the correct day on the `Today` screen.
+2. Find the meal card containing the wrong entry.
+3. Click `Delete`.
+4. Wait for the summary to refresh.
+
+## 6. Browse products
+
+Open the `Products` screen to:
+
+- inspect all saved products
+- search by product name
+- compare nutrition values quickly before logging a meal
+
+## 7. How data separation works
+
+Nutrio does not use sign-in. Instead, the frontend generates a browser-specific `deviceId` and stores it in `localStorage` under the key `nutrio:deviceId`.
+
+Practical consequences:
+
+- your data is separated per browser profile
+- clearing browser storage can make old data appear disconnected
+- opening the app in another browser creates a different identity
+
+## 8. Privacy expectations
+
+Nutrio stores food products and day entries in PostgreSQL. Data is not anonymous from an infrastructure perspective, but the current product uses browser-generated identity rather than named user accounts.

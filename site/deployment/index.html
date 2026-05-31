@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/troubleshooting/">
+        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/deployment/">
       
       
-        <link rel="prev" href="../deployment/">
+        <link rel="prev" href="../api/">
       
+      
+        <link rel="next" href="../troubleshooting/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>Troubleshooting - Nutrio Docs</title>
+        <title>Deployment - Nutrio Docs</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#troubleshooting" class="md-skip">
+        <a href="#deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Troubleshooting
+              Deployment
             
           </span>
         </div>
@@ -318,9 +320,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../deployment/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -337,11 +341,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
         
   
   
@@ -538,33 +540,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../deployment/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Deployment
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -584,7 +559,7 @@
   <span class="md-ellipsis">
     
   
-    Troubleshooting
+    Deployment
   
 
     
@@ -602,7 +577,7 @@
   <span class="md-ellipsis">
     
   
-    Troubleshooting
+    Deployment
   
 
     
@@ -628,352 +603,79 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#database_url-is-required" class="md-nav__link">
+  <a href="#docker-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DATABASE_URL is required
+        Docker services
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="DATABASE_URL is required">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-apihealth-returns-503" class="md-nav__link">
+  <a href="#published-ports" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /api/health returns 503
+        Published ports
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="GET /api/health returns 503">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend-loads-but-api-calls-fail-with-502" class="md-nav__link">
+  <a href="#frontend-container-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Frontend loads but API calls fail with 502
+        Frontend container behavior
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Frontend loads but API calls fail with 502">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-appears-missing-in-another-browser" class="md-nav__link">
+  <a href="#api-container-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data appears missing in another browser
+        API container behavior
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Data appears missing in another browser">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#entries-show-up-on-the-wrong-calendar-day" class="md-nav__link">
+  <a href="#deployment-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Entries show up on the wrong calendar day
+        Deployment checklist
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Entries show up on the wrong calendar day">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#prisma-migrations-fail-on-startup" class="md-nav__link">
+  <a href="#environment-hardening-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prisma migrations fail on startup
+        Environment hardening notes
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Prisma migrations fail on startup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#product-creation-fails-with-400" class="md-nav__link">
+  <a href="#static-documentation-publishing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Product creation fails with 400
+        Static documentation publishing
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Product creation fails with 400">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -981,6 +683,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1012,352 +741,79 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#database_url-is-required" class="md-nav__link">
+  <a href="#docker-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DATABASE_URL is required
+        Docker services
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="DATABASE_URL is required">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-apihealth-returns-503" class="md-nav__link">
+  <a href="#published-ports" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GET /api/health returns 503
+        Published ports
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="GET /api/health returns 503">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#frontend-loads-but-api-calls-fail-with-502" class="md-nav__link">
+  <a href="#frontend-container-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Frontend loads but API calls fail with 502
+        Frontend container behavior
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Frontend loads but API calls fail with 502">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-appears-missing-in-another-browser" class="md-nav__link">
+  <a href="#api-container-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data appears missing in another browser
+        API container behavior
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Data appears missing in another browser">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#entries-show-up-on-the-wrong-calendar-day" class="md-nav__link">
+  <a href="#deployment-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Entries show up on the wrong calendar day
+        Deployment checklist
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Entries show up on the wrong calendar day">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#prisma-migrations-fail-on-startup" class="md-nav__link">
+  <a href="#environment-hardening-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prisma migrations fail on startup
+        Environment hardening notes
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Prisma migrations fail on startup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#product-creation-fails-with-400" class="md-nav__link">
+  <a href="#static-documentation-publishing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Product creation fails with 400
+        Static documentation publishing
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Product creation fails with 400">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#symptom_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Symptom
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cause_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cause
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fix
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1381,89 +837,98 @@
   
 
 
-<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
-<p>This page focuses on the most likely operational and development issues in the current Nutrio setup.</p>
-<h2 id="database_url-is-required"><code>DATABASE_URL is required</code><a class="headerlink" href="#database_url-is-required" title="Permanent link">&para;</a></h2>
-<h3 id="symptom">Symptom<a class="headerlink" href="#symptom" title="Permanent link">&para;</a></h3>
-<p>The API process exits immediately on startup.</p>
-<h3 id="cause">Cause<a class="headerlink" href="#cause" title="Permanent link">&para;</a></h3>
-<p>The local API expects <code>DATABASE_URL</code> to exist in the shell environment.</p>
-<h3 id="fix">Fix<a class="headerlink" href="#fix" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">&quot;postgresql://nutrio:change_me_to_a_strong_password@localhost:5432/nutrio?schema=public&quot;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>npm<span class="w"> </span>run<span class="w"> </span>api:start
-</code></pre></div>
-<h2 id="get-apihealth-returns-503"><code>GET /api/health</code> returns <code>503</code><a class="headerlink" href="#get-apihealth-returns-503" title="Permanent link">&para;</a></h2>
-<h3 id="symptom_1">Symptom<a class="headerlink" href="#symptom_1" title="Permanent link">&para;</a></h3>
-<p>The API is reachable, but the health endpoint reports:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div>
-<h3 id="cause_1">Cause<a class="headerlink" href="#cause_1" title="Permanent link">&para;</a></h3>
-<p>The API could not reach PostgreSQL.</p>
-<h3 id="fix_1">Fix<a class="headerlink" href="#fix_1" title="Permanent link">&para;</a></h3>
+<h1 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h1>
+<p>This page documents how Nutrio is packaged and what the runtime topology looks like.</p>
+<h2 id="docker-services">Docker services<a class="headerlink" href="#docker-services" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Image or build</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>frontend</code></td>
+<td>Local <code>Dockerfile</code></td>
+<td>Builds the frontend and serves it through Nginx</td>
+</tr>
+<tr>
+<td><code>api</code></td>
+<td>Local <code>Dockerfile.api</code></td>
+<td>Runs Prisma migrations and starts the API</td>
+</tr>
+<tr>
+<td><code>db</code></td>
+<td><code>postgres:16-alpine</code></td>
+<td>Stores products and day entries</td>
+</tr>
+<tr>
+<td><code>pgadmin</code></td>
+<td><code>dpage/pgadmin4:latest</code></td>
+<td>Optional inspection UI for the database</td>
+</tr>
+</tbody>
+</table>
+<h2 id="published-ports">Published ports<a class="headerlink" href="#published-ports" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Service</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>8080</code></td>
+<td>frontend</td>
+<td>Main application URL</td>
+</tr>
+<tr>
+<td><code>5050</code></td>
+<td>pgAdmin</td>
+<td>Database administration</td>
+</tr>
+</tbody>
+</table>
+<p>The API stays internal to the Docker network and is reached through Nginx.</p>
+<h2 id="frontend-container-behavior">Frontend container behavior<a class="headerlink" href="#frontend-container-behavior" title="Permanent link">&para;</a></h2>
+<p>The frontend image uses a two-stage build:</p>
+<ol>
+<li><code>node:22-alpine</code> installs dependencies and runs <code>npm run build</code></li>
+<li><code>nginx:1.27-alpine</code> serves the generated <code>dist/</code> directory</li>
+</ol>
+<p>Nginx also proxies <code>/api/*</code> to the API container and serves the SPA with <code>try_files ... /index.html</code>.</p>
+<h2 id="api-container-behavior">API container behavior<a class="headerlink" href="#api-container-behavior" title="Permanent link">&para;</a></h2>
+<p>The API image:</p>
+<ol>
+<li>installs dependencies</li>
+<li>copies <code>prisma/</code> and generates the Prisma client</li>
+<li>copies the <code>server/</code> directory</li>
+<li>runs <code>npm run prisma:migrate:deploy &amp;&amp; npm run api:start</code></li>
+</ol>
+<p>This means schema migrations are applied automatically when the API container starts.</p>
+<h2 id="deployment-checklist">Deployment checklist<a class="headerlink" href="#deployment-checklist" title="Permanent link">&para;</a></h2>
 <ul>
-<li>verify the database container or local PostgreSQL instance is running</li>
-<li>verify credentials in <code>DATABASE_URL</code></li>
-<li>inspect API logs for Prisma or connection errors</li>
+<li>Set strong values in <code>.env</code> before publishing the stack</li>
+<li>Confirm PostgreSQL data volumes are persistent</li>
+<li>Confirm <code>http://&lt;host&gt;/api/health</code> returns <code>200</code></li>
+<li>Confirm frontend routing works after reloading deep links</li>
+<li>Confirm the API container can reach the database before accepting traffic</li>
 </ul>
-<h2 id="frontend-loads-but-api-calls-fail-with-502">Frontend loads but API calls fail with <code>502</code><a class="headerlink" href="#frontend-loads-but-api-calls-fail-with-502" title="Permanent link">&para;</a></h2>
-<h3 id="symptom_2">Symptom<a class="headerlink" href="#symptom_2" title="Permanent link">&para;</a></h3>
-<p>The UI opens, but product or overview requests fail behind Nginx.</p>
-<h3 id="cause_2">Cause<a class="headerlink" href="#cause_2" title="Permanent link">&para;</a></h3>
-<p>The frontend container is alive, but the API container is down or unhealthy.</p>
-<h3 id="fix_2">Fix<a class="headerlink" href="#fix_2" title="Permanent link">&para;</a></h3>
+<h2 id="environment-hardening-notes">Environment hardening notes<a class="headerlink" href="#environment-hardening-notes" title="Permanent link">&para;</a></h2>
+<p>The current stack is good for development and small deployments, but consider these upgrades before production use:</p>
 <ul>
-<li>run <code>docker compose ps</code></li>
-<li>inspect the API container logs</li>
-<li>confirm the API health check passes</li>
-<li>confirm database migrations did not fail during container startup</li>
+<li>add authentication if data should be user-owned rather than browser-owned</li>
+<li>protect or remove pgAdmin in public environments</li>
+<li>add structured logging and monitoring</li>
+<li>back up PostgreSQL volumes</li>
+<li>review entry deletion rules and ownership validation</li>
 </ul>
-<h2 id="data-appears-missing-in-another-browser">Data appears missing in another browser<a class="headerlink" href="#data-appears-missing-in-another-browser" title="Permanent link">&para;</a></h2>
-<h3 id="symptom_3">Symptom<a class="headerlink" href="#symptom_3" title="Permanent link">&para;</a></h3>
-<p>You created products or entries before, but another browser or private window shows an empty state.</p>
-<h3 id="cause_3">Cause<a class="headerlink" href="#cause_3" title="Permanent link">&para;</a></h3>
-<p>Nutrio separates data by the browser-generated <code>deviceId</code>.</p>
-<h3 id="fix_3">Fix<a class="headerlink" href="#fix_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li>use the same browser profile where the data was created</li>
-<li>avoid clearing <code>localStorage</code> if you want to keep the same local identity</li>
-<li>move to a real account system if cross-device continuity is required</li>
-</ul>
-<h2 id="entries-show-up-on-the-wrong-calendar-day">Entries show up on the wrong calendar day<a class="headerlink" href="#entries-show-up-on-the-wrong-calendar-day" title="Permanent link">&para;</a></h2>
-<h3 id="symptom_4">Symptom<a class="headerlink" href="#symptom_4" title="Permanent link">&para;</a></h3>
-<p>An entry looks shifted into the previous or next day.</p>
-<h3 id="cause_4">Cause<a class="headerlink" href="#cause_4" title="Permanent link">&para;</a></h3>
-<p>The overview is grouped using the browser-provided <code>timezoneOffsetMinutes</code>.</p>
-<h3 id="fix_4">Fix<a class="headerlink" href="#fix_4" title="Permanent link">&para;</a></h3>
-<ul>
-<li>verify the system timezone on the client device</li>
-<li>verify the client clock is correct</li>
-<li>recreate the request and inspect the <code>timezoneOffsetMinutes</code> query value</li>
-</ul>
-<h2 id="prisma-migrations-fail-on-startup">Prisma migrations fail on startup<a class="headerlink" href="#prisma-migrations-fail-on-startup" title="Permanent link">&para;</a></h2>
-<h3 id="symptom_5">Symptom<a class="headerlink" href="#symptom_5" title="Permanent link">&para;</a></h3>
-<p>The API container restarts repeatedly or the local <code>prisma:migrate:deploy</code> command fails.</p>
-<h3 id="cause_5">Cause<a class="headerlink" href="#cause_5" title="Permanent link">&para;</a></h3>
-<p>The database may be unavailable, credentials may be wrong, or a previous schema state may conflict with the current migrations.</p>
-<h3 id="fix_5">Fix<a class="headerlink" href="#fix_5" title="Permanent link">&para;</a></h3>
-<ul>
-<li>verify PostgreSQL connectivity first</li>
-<li>inspect the exact Prisma error message</li>
-<li>confirm the target database is the expected one</li>
-<li>run <code>npm run prisma:generate</code> again if the Prisma client is stale</li>
-</ul>
-<h2 id="product-creation-fails-with-400">Product creation fails with <code>400</code><a class="headerlink" href="#product-creation-fails-with-400" title="Permanent link">&para;</a></h2>
-<h3 id="symptom_6">Symptom<a class="headerlink" href="#symptom_6" title="Permanent link">&para;</a></h3>
-<p>The app refuses to save a new product.</p>
-<h3 id="cause_6">Cause<a class="headerlink" href="#cause_6" title="Permanent link">&para;</a></h3>
-<p>One or more required nutrition fields are empty or invalid.</p>
-<h3 id="fix_6">Fix<a class="headerlink" href="#fix_6" title="Permanent link">&para;</a></h3>
-<ul>
-<li>provide a non-empty name</li>
-<li>provide non-negative numeric values for calories, protein, fat, and carbs</li>
-<li>keep the serving label if you do not need a custom one</li>
-</ul>
+<h2 id="static-documentation-publishing">Static documentation publishing<a class="headerlink" href="#static-documentation-publishing" title="Permanent link">&para;</a></h2>
+<p>The MkDocs site itself is configured separately from the main Nutrio application and can be published to GitHub Pages or any static hosting provider after running a standard MkDocs build in an environment where MkDocs is installed.</p>
 
 
 
