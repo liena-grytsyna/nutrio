@@ -10,6 +10,8 @@ This guide follows the normal user workflow inside Nutrio.
 | `Add` | Create reusable food products |
 | `Products` | Browse and search saved food products |
 
+![Main navigation](../images/today-tab.png){ .app-shot .app-shot--wide }
+
 ## 1. Create a product
 
 Before you can log meals, you need at least one saved product.
@@ -19,6 +21,8 @@ Before you can log meals, you need at least one saved product.
 3. Enter a serving label such as `100 g`.
 4. Fill in `Kcal`, `Protein`, `Fat`, and `Carbs`.
 5. Click `Save Product`.
+
+![Add product screen](../images/add-product.png){ .app-shot }
 
 !!! note
     Nutrition values are stored as non-negative numbers. The default serving label is `100 g`.
@@ -33,6 +37,8 @@ Before you can log meals, you need at least one saved product.
 6. Submit the dialog.
 
 The app creates a day entry, recalculates totals, and refreshes the summary automatically.
+
+![Add to breakfast dialog](../images/add-to-breakfast.png){ .app-shot }
 
 ## 3. Review daily progress
 
@@ -52,6 +58,8 @@ Current built-in daily targets:
 | Protein | `120 g` |
 | Fat | `53 g` |
 | Carbs | `160 g` |
+
+![Today summary](../images/today-summary.png){ .app-shot }
 
 ## 4. Use the calendar and meal groups
 
@@ -73,6 +81,8 @@ Use the calendar at the top of the app to switch between days and inspect previo
 3. Click `Delete`.
 4. Wait for the summary to refresh.
 
+![Delete entry from a meal card](../images/delete-entry.png){ .app-shot }
+
 ## 6. Browse products
 
 Open the `Products` screen to:
@@ -81,16 +91,4 @@ Open the `Products` screen to:
 - search by product name
 - compare nutrition values quickly before logging a meal
 
-## 7. How data separation works
-
-Nutrio does not use sign-in. Instead, the frontend generates a browser-specific `deviceId` and stores it in `localStorage` under the key `nutrio:deviceId`.
-
-Practical consequences:
-
-- your data is separated per browser profile
-- clearing browser storage can make old data appear disconnected
-- opening the app in another browser creates a different identity
-
-## 8. Privacy expectations
-
-Nutrio stores food products and day entries in PostgreSQL. Data is not anonymous from an infrastructure perspective, but the current product uses browser-generated identity rather than named user accounts.
+![Products screen](../images/product-screen.png){ .app-shot }
