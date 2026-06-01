@@ -568,28 +568,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#7-how-data-separation-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. How data separation works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-privacy-expectations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Privacy expectations
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -936,28 +914,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#7-how-data-separation-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. How data separation works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-privacy-expectations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Privacy expectations
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1003,6 +959,7 @@
 </tr>
 </tbody>
 </table>
+<p><img alt="Main navigation" class="app-shot app-shot--wide" src="../../images/today-tab.png" /></p>
 <h2 id="1-create-a-product">1. Create a product<a class="headerlink" href="#1-create-a-product" title="Permanent link">&para;</a></h2>
 <p>Before you can log meals, you need at least one saved product.</p>
 <ol>
@@ -1012,6 +969,7 @@
 <li>Fill in <code>Kcal</code>, <code>Protein</code>, <code>Fat</code>, and <code>Carbs</code>.</li>
 <li>Click <code>Save Product</code>.</li>
 </ol>
+<p><img alt="Add product screen" class="app-shot" src="../../images/add-product.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Nutrition values are stored as non-negative numbers. The default serving label is <code>100 g</code>.</p>
@@ -1026,6 +984,7 @@
 <li>Submit the dialog.</li>
 </ol>
 <p>The app creates a day entry, recalculates totals, and refreshes the summary automatically.</p>
+<p><img alt="Add to breakfast dialog" class="app-shot" src="../../images/add-to-breakfast.png" /></p>
 <h2 id="3-review-daily-progress">3. Review daily progress<a class="headerlink" href="#3-review-daily-progress" title="Permanent link">&para;</a></h2>
 <p>The summary card on top of the <code>Today</code> screen shows:</p>
 <ul>
@@ -1062,6 +1021,7 @@
 </tr>
 </tbody>
 </table>
+<p><img alt="Today summary" class="app-shot" src="../../images/today-summary.png" /></p>
 <h2 id="4-use-the-calendar-and-meal-groups">4. Use the calendar and meal groups<a class="headerlink" href="#4-use-the-calendar-and-meal-groups" title="Permanent link">&para;</a></h2>
 <p>Nutrio groups entries by calendar day and shows them in these sections:</p>
 <ul>
@@ -1080,6 +1040,7 @@
 <li>Click <code>Delete</code>.</li>
 <li>Wait for the summary to refresh.</li>
 </ol>
+<p><img alt="Delete entry from a meal card" class="app-shot" src="../../images/delete-entry.png" /></p>
 <h2 id="6-browse-products">6. Browse products<a class="headerlink" href="#6-browse-products" title="Permanent link">&para;</a></h2>
 <p>Open the <code>Products</code> screen to:</p>
 <ul>
@@ -1087,16 +1048,7 @@
 <li>search by product name</li>
 <li>compare nutrition values quickly before logging a meal</li>
 </ul>
-<h2 id="7-how-data-separation-works">7. How data separation works<a class="headerlink" href="#7-how-data-separation-works" title="Permanent link">&para;</a></h2>
-<p>Nutrio does not use sign-in. Instead, the frontend generates a browser-specific <code>deviceId</code> and stores it in <code>localStorage</code> under the key <code>nutrio:deviceId</code>.</p>
-<p>Practical consequences:</p>
-<ul>
-<li>your data is separated per browser profile</li>
-<li>clearing browser storage can make old data appear disconnected</li>
-<li>opening the app in another browser creates a different identity</li>
-</ul>
-<h2 id="8-privacy-expectations">8. Privacy expectations<a class="headerlink" href="#8-privacy-expectations" title="Permanent link">&para;</a></h2>
-<p>Nutrio stores food products and day entries in PostgreSQL. Data is not anonymous from an infrastructure perspective, but the current product uses browser-generated identity rather than named user accounts.</p>
+<p><img alt="Products screen" class="app-shot" src="../../images/product-screen.png" /></p>
 
 
 
