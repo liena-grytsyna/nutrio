@@ -193,6 +193,7 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ error: "Internal server error." });
 });
 
+<<<<<<< HEAD
 app.delete("/api/day-entries/:id", async (req, res) => {
   const id = readText(req.params.id);
 
@@ -203,6 +204,8 @@ app.delete("/api/day-entries/:id", async (req, res) => {
   res.status(204).end();
 });
 
+=======
+>>>>>>> parent of 2d5da64 (Add day-entry deletion API and UI)
 async function disconnectAndExit() {
   await prisma.$disconnect();
   process.exit(0);
