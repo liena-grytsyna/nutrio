@@ -1,32 +1,36 @@
-# Nutrio
+---
+hide:
+  - toc
+---
 
-Nutrio er en webapplikasjon for å registrere og følge med på kosthold.
+<section class="overview-page">
+  <div class="overview-intro">
+    <p class="overview-kicker">Nutrio documentation</p>
+    <h1>Nutrio</h1>
+    <p class="overview-lead">
+      A small food tracking app for products, meals, calories, and macros.
+    </p>
+    <p class="overview-copy">
+      Choose the guide that matches what you need right now.
+    </p>
+  </div>
 
-## Hva kan brukeren gjøre?
+  <div class="guide-grid">
+    <article class="guide-card guide-card--primary">
+      <h2>User Guide</h2>
+      <p>
+        For using the app: add products, log meals, review totals, and remove
+        mistakes.
+      </p>
+      <a class="md-button md-button--primary" href="user/">Open User Guide</a>
+    </article>
 
-Brukeren kan:
-
-- legge til produkter
-- registrere mat for en dag
-- se kalorier og næringsstoffer
-- slette en feilregistrert matoppføring
-
-## Teknologi
-
-Prosjektet bruker:
-
-- React og TypeScript i frontend
-- Node.js og Express i backend
-- PostgreSQL som database
-- Docker for å kjøre applikasjonen
-- Prometheus og Grafana for overvåking
-
-## Formål
-
-Formålet med Nutrio er å gjøre det enkelt for brukeren å få oversikt over hva de spiser i løpet av en dag.
-
-## Ny funksjon
-
-I eksamensarbeidet legger jeg til en funksjon for å slette en food entry.
-
-Når brukeren klikker på Delete, blir matoppføringen fjernet fra databasen, og oversikten oppdateres.
+    <article class="guide-card">
+      <h2>Developer Guide</h2>
+      <p>
+        For setup, architecture, API details, deployment, and troubleshooting.
+      </p>
+      <a class="md-button" href="developer/">Open Developer Guide</a>
+    </article>
+  </div>
+</section>
