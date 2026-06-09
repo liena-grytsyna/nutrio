@@ -33,7 +33,7 @@ function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry
             aria-label={`Delete ${entry.name} from ${TIME_FORMATTER.format(new Date(entry.eatenAt))}`}
             onClick={() => onDeleteEntry?.(entry.id)}
           >
-            <span aria-hidden="true">&times;</span>
+            Delete
           </button>
         </p>
       </div>
