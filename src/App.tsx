@@ -2,7 +2,6 @@
 import { useState } from "react";
 
 // UI components
-import { Button } from "./components/Button";
 import { BottomNavigation } from "./components/BottomNavigation";
 import { TopCalendar } from "./components/TopCalendar";
 
@@ -30,8 +29,6 @@ const tabs = [
   { id: "add", label: "Add" },
   { id: "products", label: "Products" },
 ] satisfies ReadonlyArray<{ id: AppScreen; label: string }>;
-
-const documentationUrl = "https://liena-grytsyna.github.io/nutrio/";
 
 export default function App() {
   // Active screen (tab)
@@ -61,17 +58,6 @@ export default function App() {
   return (
     <div className={styles["app-shell"]}>
       <div className={styles["app-shell__phone"]}>
-        <div className={styles["app-shell__topbar"]}>
-          <Button
-            href={documentationUrl}
-            rel="noreferrer"
-            target="_blank"
-            variant="secondary"
-          >
-            Docs
-          </Button>
-        </div>
-
         {/* Calendar */}
         <TopCalendar
           dailyCalorieIndicators={nutritionOverview.dailyCalorieIndicators}

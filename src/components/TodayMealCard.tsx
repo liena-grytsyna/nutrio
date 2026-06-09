@@ -13,7 +13,7 @@ type TodayMealCardProps = {
   onToggle: (sectionId: MealSectionId) => void;
 };
 
-function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry?: (entryId: string) => void }) {
+function MealEntryRow({ entry }: { entry: DayEntry }) {
   return (
     <div className={styles.item}>
       <span className={styles["item-status"]} aria-hidden="true" />
@@ -28,9 +28,6 @@ function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry
           <span>{TIME_FORMATTER.format(new Date(entry.eatenAt))}</span>
         </p>
       </div>
-      <button type="button" className={styles["item-delete"]} onClick={() => onDeleteEntry?.(entry.id)}>
-      Delete
-      </button>
     </div>
   );
 }
