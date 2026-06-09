@@ -11,10 +11,9 @@ type TodayMealCardProps = {
   isCollapsed: boolean;
   onAdd: (sectionId: MealSectionId) => void;
   onToggle: (sectionId: MealSectionId) => void;
-  onDeleteEntry?: (dayEntryId: string) => void;
 };
 
-function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry?: (dayEntryId: string) => void; }) {
+function MealEntryRow({ entry }: { entry: DayEntry; }) {
   return (
     <div className={styles.item}>
       <span className={styles["item-status"]} aria-hidden="true" />
@@ -27,14 +26,6 @@ function MealEntryRow({ entry, onDeleteEntry }: { entry: DayEntry; onDeleteEntry
           <span>{entry.calories.toFixed(0)} kcal</span>
           <span className={styles["item-dot"]}>•</span>
           <span>{TIME_FORMATTER.format(new Date(entry.eatenAt))}</span>
-          <button
-            type="button"
-            className={styles["item-delete"]}
-            aria-label={`Delete ${entry.name} from ${TIME_FORMATTER.format(new Date(entry.eatenAt))}`}
-            onClick={() => onDeleteEntry?.(entry.id)}
-          >
-            Delete
-          </button>
         </p>
       </div>
     </div>
@@ -48,7 +39,6 @@ export function TodayMealCard({
   isCollapsed,
   onAdd,
   onToggle,
-  onDeleteEntry,
 }: TodayMealCardProps) {
   const hasEntries = entries.length > 0;
   const totalCalories = entries.reduce((sum, entry) => sum + entry.calories, 0);
@@ -124,7 +114,6 @@ export function TodayMealCard({
             <MealEntryRow
               key={entry.id}
               entry={entry}
-              onDeleteEntry={onDeleteEntry}
             />
           ))}
         </div>

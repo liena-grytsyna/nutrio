@@ -37,15 +37,16 @@
   gap: 14px;
 }
 
-.item {
+.icon {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 20px;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: #7f8799;
 
-  + .item {
-    border-top: 1px solid rgba(96, 111, 145, 0.08);
+  svg {
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -216,16 +217,6 @@
 
 .item-content {
   min-width: 0;
-}
-
-.item-delete {
-  border: 0;
-  background: transparent;
-  color: #e8695f;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0;
 }
 
 .item-name {
