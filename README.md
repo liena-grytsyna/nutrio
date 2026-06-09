@@ -94,24 +94,3 @@ The Vite dev server runs at http://localhost:5173 and proxies API requests to ht
 npm run build
 npx prisma validate
 ```
-
-## Documentation
-
-The MkDocs source lives in `docs/`. Generated output is written to `.mkdocs-site/` and should **not** be committed to `main`.
-
-Install the docs toolchain once:
-
-```bash
-python3 -m venv .venv
-./.venv/bin/pip install -r requirements-docs.txt
-```
-
-Then use:
-
-```bash
-npm run docs:serve
-npm run docs:build
-npm run docs:deploy
-```
-
-`npm run docs:deploy` publishes the documentation to the `gh-pages` branch via `mkdocs gh-deploy --clean`.
