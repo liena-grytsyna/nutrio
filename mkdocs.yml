@@ -1,28 +1,47 @@
-site_name: Nutrio Documentation (Docs)
-site_url: https://liena-grytsyna.github.io/nutrio/docs
+site_name: Nutrio Docs
+site_description: User and developer documentation for Nutrio.
+site_url: https://liena-grytsyna.github.io/nutrio/
 repo_url: https://github.com/liena-grytsyna/nutrio
+repo_name: liena-grytsyna/nutrio
 
-# Source and output directories
 docs_dir: docs
 site_dir: site
 
-# Navigation (relative to docs_dir)
 nav:
   - Home: index.md
-  - User Guide: user-guide.md
-  - System Overview: system-overview.md
-  - API: api.md
-  - Troubleshooting: troubleshooting.md
-  - Developer:
-    - Stylesheets: developer/
+  - User Guide:
+      - Overview: user/index.md
+      - Using Nutrio: user/guide.md
+  - Developer Guide:
+      - Overview: developer/index.md
+      - Quick Start: developer/getting-started.md
+      - Architecture: developer/architecture.md
+      - API Reference: developer/api.md
+      - Deployment: developer/deployment.md
+      - Troubleshooting: developer/troubleshooting.md
 
-# Theme and plugins
 theme:
-  name: mkdocs
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - search
 
 markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - toc:
       permalink: true
