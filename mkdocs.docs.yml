@@ -1,0 +1,28 @@
+site_name: Nutrio Documentation (Docs)
+site_url: https://liena-grytsyna.github.io/nutrio/docs
+repo_url: https://github.com/liena-grytsyna/nutrio
+
+# Source and output directories
+docs_dir: docs
+site_dir: site
+
+# Navigation (relative to docs_dir)
+nav:
+  - Home: index.md
+  - User Guide: user-guide.md
+  - System Overview: system-overview.md
+  - API: api.md
+  - Troubleshooting: troubleshooting.md
+  - Developer:
+    - Stylesheets: developer/
+
+# Theme and plugins
+theme:
+  name: mkdocs
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
