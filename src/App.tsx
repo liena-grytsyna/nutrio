@@ -4,6 +4,7 @@ import { useState } from "react";
 // UI components
 import { BottomNavigation } from "./components/BottomNavigation";
 import { TopCalendar } from "./components/TopCalendar";
+import { Button } from "./components/Button";
 
 // Custom hooks (data logic)
 import { useNutritionOverview } from "./hooks/useNutritionOverview";
