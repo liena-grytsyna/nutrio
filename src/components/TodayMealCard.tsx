@@ -32,10 +32,10 @@ function MealEntryRow({
           <span className={styles["item-dot"]}>•</span>
           <span>{entry.calories.toFixed(0)} kcal</span>
           <span className={styles["item-dot"]}>•</span>
-          <div className={styles["item-delete"]}>
+          <div>
             <button
               type="button"
-              className={styles["item-delete-button"]}
+              className={styles["item-delete"]}
               aria-label={`Delete ${entry.name}`}
               onClick={() => onDelete(entry.id)}
             >Delete
