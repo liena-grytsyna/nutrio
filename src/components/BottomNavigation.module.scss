@@ -1,0 +1,22 @@
+.bottom-navigation {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.bottom-navigation__tab {
+  flex: 1;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.bottom-navigation__tab--active {
+  color: var(--accent-color, #0b84ff);
+  border-bottom: 2px solid var(--accent-color, #0b84ff);
+}

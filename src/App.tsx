@@ -44,6 +44,8 @@ export default function App() {
   const { products, productsLoading, productsError, handleCreateProduct } =
     useProducts();
 
+  const documentationUrl = "https://liena-grytsyna.github.io/nutrio/";
+
   // Nutrition data
   const {
     nutritionOverview,
@@ -60,6 +62,18 @@ export default function App() {
   return (
     <div className={styles["app-shell"]}>
       <div className={styles["app-shell__phone"]}>
+
+         <div className={styles["docs-row"]}>
+           <a
+             className={styles["docs-button"]}
+             href={documentationUrl}
+             target="_blank"
+             rel="noopener noreferrer"
+           >
+             Docs
+           </a>
+         </div>
+
         {/* Calendar */}
         <TopCalendar
           dailyCalorieIndicators={nutritionOverview.dailyCalorieIndicators}

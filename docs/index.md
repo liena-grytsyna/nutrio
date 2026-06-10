@@ -1,0 +1,2 @@
+# Nutrio Documentation
+Welcome to the Nutrio documentation! This site provides comprehensive information about the Nutrio food tracking app, including how to get started, system architecture, API details, and more.
