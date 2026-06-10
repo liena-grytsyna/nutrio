@@ -1,5 +1,5 @@
 site_name: Nutrio Documentation
-site_url: https://github.com/liena-grytsyna/nutrio.git
+site_url: https://liena-grytsyna.github.io/nutrio/
 nav:
   - Home: index.md
   - User Guide: user-guide.md
@@ -9,4 +9,4 @@ nav:
 
 
 theme:
-  name: material
+  name: mkdocs
