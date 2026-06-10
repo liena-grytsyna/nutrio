@@ -1,0 +1,12 @@
+site_name: Nutrio Documentation
+site_url: https://github.com/liena-grytsyna/nutrio.git
+nav:
+  - Home: index.md
+  - User Guide: user-guide.md
+  - System Overview: system-overview.md
+  - API: api.md
+  - Troubleshooting: troubleshooting.md
+
+
+theme:
+  name: material
