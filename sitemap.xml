@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/</loc>
-         <lastmod>2026-06-01</lastmod>
+         <loc>https://github.com/liena-grytsyna/nutrio.git/</loc>
+         <lastmod>2026-06-10</lastmod>
     </url>
     <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/developer/</loc>
-         <lastmod>2026-06-01</lastmod>
+         <loc>https://github.com/liena-grytsyna/nutrio.git/api/</loc>
+         <lastmod>2026-06-10</lastmod>
     </url>
     <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/developer/api/</loc>
-         <lastmod>2026-06-01</lastmod>
+         <loc>https://github.com/liena-grytsyna/nutrio.git/system-overview/</loc>
+         <lastmod>2026-06-10</lastmod>
     </url>
     <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/developer/architecture/</loc>
-         <lastmod>2026-06-01</lastmod>
+         <loc>https://github.com/liena-grytsyna/nutrio.git/troubleshoting/</loc>
+         <lastmod>2026-06-10</lastmod>
     </url>
     <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/developer/deployment/</loc>
-         <lastmod>2026-06-01</lastmod>
-    </url>
-    <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/developer/getting-started/</loc>
-         <lastmod>2026-06-01</lastmod>
-    </url>
-    <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/developer/troubleshooting/</loc>
-         <lastmod>2026-06-01</lastmod>
-    </url>
-    <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/user/</loc>
-         <lastmod>2026-06-01</lastmod>
-    </url>
-    <url>
-         <loc>https://liena-grytsyna.github.io/nutrio/user/guide/</loc>
-         <lastmod>2026-06-01</lastmod>
+         <loc>https://github.com/liena-grytsyna/nutrio.git/user-guide/</loc>
+         <lastmod>2026-06-10</lastmod>
     </url>
 </urlset>

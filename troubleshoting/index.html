@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
-        <link rel="canonical" href="https://github.com/liena-grytsyna/nutrio.git/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Nutrio Documentation</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="canonical" href="https://github.com/liena-grytsyna/nutrio.git/troubleshoting/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Troubleshooting - Nutrio Documentation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
         <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Nutrio Documentation</a>
+                <a class="navbar-brand" href="..">Nutrio Documentation</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,19 +35,19 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="." class="nav-link active" aria-current="page">Home</a>
+                                <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="user-guide/" class="nav-link">User Guide</a>
+                                <a href="../user-guide/" class="nav-link">User Guide</a>
                             </li>
                             <li class="nav-item">
-                                <a href="system-overview/" class="nav-link">System Overview</a>
+                                <a href="../system-overview/" class="nav-link">System Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a href="api/" class="nav-link">API</a>
+                                <a href="../api/" class="nav-link">API</a>
                             </li>
                             <li class="nav-item">
-                                <a href="troubleshooting.md" class="nav-link">Troubleshooting</a>
+                                <a href="../troubleshooting.md" class="nav-link">Troubleshooting</a>
                             </li>
                         </ul>
 
@@ -57,16 +57,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="user-guide/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -84,12 +74,61 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#api-returns-502" class="nav-link">API returns 502</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#data-not-updating" class="nav-link">Data not updating</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#database-connection-error" class="nav-link">Database connection error</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#grafana-shows-down" class="nav-link">Grafana shows DOWN</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="api-returns-502">API returns 502</h2>
+<p>Problem:
+- Backend is not reachable</p>
+<p>Solution:
+- Check if backend container is running
+- Check Nginx configuration
+- Check logs</p>
+<hr />
+<h2 id="data-not-updating">Data not updating</h2>
+<p>Problem:
+- UI does not refresh</p>
+<p>Solution:
+- Reload page
+- Check frontend console</p>
+<hr />
+<h2 id="database-connection-error">Database connection error</h2>
+<p>Problem:
+- Backend cannot connect to database</p>
+<p>Solution:
+- Check DATABASE_URL
+- Check if PostgreSQL is running</p>
+<hr />
+<h2 id="grafana-shows-down">Grafana shows DOWN</h2>
+<p>Problem:
+- Health endpoint is failing</p>
+<p>Solution:
+- Check /api/health
+- Restart backend</p></div>
             </div>
         </div>
 
@@ -97,13 +136,13 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -168,8 +207,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.6.1
-Build Date UTC : 2026-06-10 10:40:20.102040+00:00
--->

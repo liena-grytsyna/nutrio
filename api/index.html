@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
-        <link rel="canonical" href="https://github.com/liena-grytsyna/nutrio.git/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Nutrio Documentation</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="canonical" href="https://github.com/liena-grytsyna/nutrio.git/api/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>API - Nutrio Documentation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
         <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Nutrio Documentation</a>
+                <a class="navbar-brand" href="..">Nutrio Documentation</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,19 +35,19 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="." class="nav-link active" aria-current="page">Home</a>
+                                <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="user-guide/" class="nav-link">User Guide</a>
+                                <a href="../user-guide/" class="nav-link">User Guide</a>
                             </li>
                             <li class="nav-item">
-                                <a href="system-overview/" class="nav-link">System Overview</a>
+                                <a href="../system-overview/" class="nav-link">System Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a href="api/" class="nav-link">API</a>
+                                <a href="./" class="nav-link active" aria-current="page">API</a>
                             </li>
                             <li class="nav-item">
-                                <a href="troubleshooting.md" class="nav-link">Troubleshooting</a>
+                                <a href="../troubleshooting.md" class="nav-link">Troubleshooting</a>
                             </li>
                         </ul>
 
@@ -58,12 +58,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href="../system-overview/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="user-guide/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -84,12 +84,61 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#api-documentation" class="nav-link">API Documentation</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#base-url" class="nav-link">Base URL</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#health-check" class="nav-link">Health check</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#get-nutrition-overview" class="nav-link">Get nutrition overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#create-food-entry" class="nav-link">Create food entry</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#delete-food-entry" class="nav-link">Delete food entry</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h1 id="api-documentation">API Documentation</h1>
+<h2 id="base-url">Base URL</h2>
+<p>/api</p>
+<hr />
+<h2 id="health-check">Health check</h2>
+<p>GET /api/health</p>
+<p>Returns status of backend and database.</p>
+<hr />
+<h2 id="get-nutrition-overview">Get nutrition overview</h2>
+<p>GET /api/nutrition-overview?deviceId=...</p>
+<p>Returns daily summary and entries.</p>
+<hr />
+<h2 id="create-food-entry">Create food entry</h2>
+<p>POST /api/day-entries</p>
+<p>Body:</p>
+<p>{
+  "productId": "...",
+  "amount": 100,
+  "mealType": "breakfast",
+  "deviceId": "..."
+}</p>
+<hr />
+<h2 id="delete-food-entry">Delete food entry</h2>
+<p>DELETE /api/day-entries/:id?deviceId=...</p>
+<p>Deletes a food entry for the current device.</p></div>
             </div>
         </div>
 
@@ -97,13 +146,13 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -168,8 +217,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.6.1
-Build Date UTC : 2026-06-10 10:40:20.102040+00:00
--->
