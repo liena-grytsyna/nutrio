@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/system-overview/">
+        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/docs/developer/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>System Overview - Nutrio Documentation</title>
+        <title>Developer Guide - Nutrio Documentation (Docs)</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Nutrio Documentation</a>
+                <a class="navbar-brand" href="..">Nutrio Documentation (Docs)</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,16 +38,25 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../user-guide/" class="nav-link">User Guide</a>
+                                <a href="../user-guide.md" class="nav-link">User Guide</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">System Overview</a>
+                                <a href="../system-overview.md" class="nav-link">System Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../api/" class="nav-link">API</a>
+                                <a href="../api.md" class="nav-link">API</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../troubleshooting/" class="nav-link">Troubleshooting</a>
+                                <a href="../troubleshooting.md" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item">Stylesheets</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -58,14 +67,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../user-guide/" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="../api/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
+                                <a href="https://github.com/liena-grytsyna/nutrio/edit/master/docs/developer/index.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -85,21 +87,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#system-overview" class="nav-link">System Overview</a>
+            <li class="nav-item" data-bs-level="1"><a href="#developer-guide" class="nav-link">Developer Guide</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#architecture" class="nav-link">Architecture</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#how-it-works" class="nav-link">How it works</a>
+            <li class="nav-item" data-bs-level="2"><a href="#use-it-if-you-want-to" class="nav-link">Use it if you want to</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#device-id" class="nav-link">Device ID</a>
+            <li class="nav-item" data-bs-level="2"><a href="#start-here" class="nav-link">Start here</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#docker" class="nav-link">Docker</a>
+            <li class="nav-item" data-bs-level="2"><a href="#need-the-app-workflow" class="nav-link">Need the app workflow?</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -110,40 +108,24 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="system-overview">System Overview</h1>
-<h2 id="architecture">Architecture</h2>
-<p>Nutrio uses a client-server architecture.</p>
+<h1 id="developer-guide">Developer Guide<a class="headerlink" href="#developer-guide" title="Permanent link">&para;</a></h1>
+<p>This section is for running, inspecting, or deploying Nutrio.</p>
+<h2 id="use-it-if-you-want-to">Use it if you want to<a class="headerlink" href="#use-it-if-you-want-to" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Frontend (React)</li>
-<li>Backend (Node.js + Express)</li>
-<li>Database (PostgreSQL)</li>
+<li>run the project locally</li>
+<li>start the full stack with Docker</li>
+<li>understand how <code>deviceId</code> and nutrition aggregation work</li>
+<li>inspect backend routes and payloads</li>
+<li>publish or debug the application</li>
 </ul>
-<hr />
-<h2 id="how-it-works">How it works</h2>
+<h2 id="start-here">Start here<a class="headerlink" href="#start-here" title="Permanent link">&para;</a></h2>
 <ol>
-<li>User interacts with frontend</li>
-<li>Frontend sends requests to backend API</li>
-<li>Backend processes data</li>
-<li>Data is stored in database</li>
-<li>Response is sent back to frontend</li>
-<li>UI updates automatically</li>
+<li>Read <a href="getting-started/">Quick Start</a>.</li>
+<li>Read <a href="architecture/">Architecture</a>.</li>
+<li>Use <a href="api/">API Reference</a> while implementing or debugging changes.</li>
 </ol>
-<hr />
-<h2 id="device-id">Device ID</h2>
-<p>Each user is identified by a deviceId stored in the browser.</p>
-<p>This ensures:
-- Data is separated per user
-- No login is required</p>
-<hr />
-<h2 id="docker">Docker</h2>
-<p>The application runs in Docker containers:</p>
-<ul>
-<li>frontend</li>
-<li>backend</li>
-<li>database</li>
-<li>nginx</li>
-</ul>
-<p>This ensures consistent environment.</p></div>
+<h2 id="need-the-app-workflow">Need the app workflow?<a class="headerlink" href="#need-the-app-workflow" title="Permanent link">&para;</a></h2>
+<p>If your goal is just to use the app interface, start with <a href="../user/">User Guide</a>.</p></div>
             </div>
         </div>
 

@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
-        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/docs/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Nutrio Documentation (Docs)</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="canonical" href="https://liena-grytsyna.github.io/nutrio/docs/developer/troubleshooting/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Troubleshooting - Nutrio Documentation (Docs)</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
         <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Nutrio Documentation (Docs)</a>
+                <a class="navbar-brand" href="../..">Nutrio Documentation (Docs)</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,26 +35,26 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="." class="nav-link active" aria-current="page">Home</a>
+                                <a href="../.." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="user-guide.md" class="nav-link">User Guide</a>
+                                <a href="../../user-guide.md" class="nav-link">User Guide</a>
                             </li>
                             <li class="nav-item">
-                                <a href="system-overview.md" class="nav-link">System Overview</a>
+                                <a href="../../system-overview.md" class="nav-link">System Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a href="api.md" class="nav-link">API</a>
+                                <a href="../../api.md" class="nav-link">API</a>
                             </li>
                             <li class="nav-item">
-                                <a href="troubleshooting.md" class="nav-link">Troubleshooting</a>
+                                <a href="../../troubleshooting.md" class="nav-link">Troubleshooting</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="developer/" class="dropdown-item">Stylesheets</a>
+    <a href="../" class="dropdown-item">Stylesheets</a>
 </li>
                                 </ul>
                             </li>
@@ -67,7 +67,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a href="https://github.com/liena-grytsyna/nutrio/edit/master/docs/index.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a href="https://github.com/liena-grytsyna/nutrio/edit/master/docs/developer/troubleshooting.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -86,42 +86,64 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#example-fix-for-local-api-startup" class="nav-link">Example fix for local API startup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<section class="overview-page">
-  <div class="overview-intro">
-    <p class="overview-kicker">Nutrio documentation</p>
-    <h1>Nutrio</h1>
-    <p class="overview-lead">
-      A small food tracking app for products, meals, calories, and macros.
-    </p>
-    <p class="overview-copy">
-      Choose the guide that matches what you need right now.
-    </p>
-  </div>
-
-  <div class="guide-grid">
-    <article class="guide-card guide-card--primary">
-      <h2>User Guide</h2>
-      <p>
-        For using the app: add products, log meals, review totals, and remove
-        mistakes.
-      </p>
-      <a class="md-button md-button--primary" href="user/">Open User Guide</a>
-    </article>
-
-    <article class="guide-card">
-      <h2>Developer Guide</h2>
-      <p>
-        For setup, architecture, API details, deployment, and troubleshooting.
-      </p>
-      <a class="md-button" href="developer/">Open Developer Guide</a>
-    </article>
-  </div>
-</section></div>
+<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<p>Common issues in the current Nutrio setup.</p>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DATABASE_URL is required</code></td>
+<td>Export <code>DATABASE_URL</code> before starting the local API</td>
+</tr>
+<tr>
+<td><code>/api/health</code> returns <code>503</code></td>
+<td>PostgreSQL is running and credentials are correct</td>
+</tr>
+<tr>
+<td>Frontend shows <code>502</code> for API calls</td>
+<td>API container is running and passed its health check</td>
+</tr>
+<tr>
+<td>Data is missing in another browser</td>
+<td>Nutrio separates data by browser <code>deviceId</code></td>
+</tr>
+<tr>
+<td>Entries appear on the wrong day</td>
+<td>Client timezone and clock are correct</td>
+</tr>
+<tr>
+<td>Prisma migrations fail</td>
+<td>Database connectivity and migration target are correct</td>
+</tr>
+<tr>
+<td>Product creation returns <code>400</code></td>
+<td>Required nutrition fields are filled with valid numbers</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-fix-for-local-api-startup">Example fix for local API startup<a class="headerlink" href="#example-fix-for-local-api-startup" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">export DATABASE_URL=&quot;postgresql://nutrio:change_me_to_a_strong_password@localhost:5432/nutrio?schema=public&quot;
+npm run api:start
+</code></pre></div>
             </div>
         </div>
 
@@ -129,13 +151,13 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -200,8 +222,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.6.1
-Build Date UTC : 2026-06-10 11:21:05.813702+00:00
--->

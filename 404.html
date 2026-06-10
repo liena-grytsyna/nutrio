@@ -7,14 +7,14 @@
         
         
         
-        <link rel="shortcut icon" href="/nutrio/img/favicon.ico">
-        <title>Nutrio Documentation</title>
-        <link href="/nutrio/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/nutrio/css/fontawesome.min.css" rel="stylesheet">
-        <link href="/nutrio/css/brands.min.css" rel="stylesheet">
-        <link href="/nutrio/css/solid.min.css" rel="stylesheet">
-        <link href="/nutrio/css/v4-font-face.min.css" rel="stylesheet">
-        <link href="/nutrio/css/base.css" rel="stylesheet">
+        <link rel="shortcut icon" href="/nutrio/docs/img/favicon.ico">
+        <title>Nutrio Documentation (Docs)</title>
+        <link href="/nutrio/docs/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/nutrio/docs/css/fontawesome.min.css" rel="stylesheet">
+        <link href="/nutrio/docs/css/brands.min.css" rel="stylesheet">
+        <link href="/nutrio/docs/css/solid.min.css" rel="stylesheet">
+        <link href="/nutrio/docs/css/v4-font-face.min.css" rel="stylesheet">
+        <link href="/nutrio/docs/css/base.css" rel="stylesheet">
         <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
         <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="/nutrio/.">Nutrio Documentation</a>
+                <a class="navbar-brand" href="/nutrio/docs/.">Nutrio Documentation (Docs)</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,19 +35,28 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="/nutrio/." class="nav-link">Home</a>
+                                <a href="/nutrio/docs/." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/nutrio/user-guide/" class="nav-link">User Guide</a>
+                                <a href="/nutrio/docs/user-guide.md" class="nav-link">User Guide</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/nutrio/system-overview/" class="nav-link">System Overview</a>
+                                <a href="/nutrio/docs/system-overview.md" class="nav-link">System Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/nutrio/api/" class="nav-link">API</a>
+                                <a href="/nutrio/docs/api.md" class="nav-link">API</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/nutrio/troubleshooting/" class="nav-link">Troubleshooting</a>
+                                <a href="/nutrio/docs/troubleshooting.md" class="nav-link">Troubleshooting</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="/nutrio/docs/developer/" class="dropdown-item">Stylesheets</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -57,6 +66,9 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/liena-grytsyna/nutrio" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -80,13 +92,13 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="/nutrio/js/bootstrap.bundle.min.js"></script>
+        <script src="/nutrio/docs/js/bootstrap.bundle.min.js"></script>
         <script>
-            var base_url = "/nutrio/",
+            var base_url = "/nutrio/docs/",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="/nutrio/js/base.js"></script>
-        <script src="/nutrio/search/main.js"></script>
+        <script src="/nutrio/docs/js/base.js"></script>
+        <script src="/nutrio/docs/search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
